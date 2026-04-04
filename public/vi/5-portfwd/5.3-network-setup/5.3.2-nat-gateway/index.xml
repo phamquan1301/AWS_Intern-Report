@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Cấu hình Internet &amp; NAT Gateway on AWS System Manager</title>
-    <link>//localhost:1313/vi/5-portfwd/5.3-network-setup/5.3.2-nat-gateway/</link>
+    <link>http://localhost:1313/AWS_Intern-Report/vi/5-portfwd/5.3-network-setup/5.3.2-nat-gateway/</link>
     <description>Recent content in Cấu hình Internet &amp; NAT Gateway on AWS System Manager</description>
     <generator>Hugo</generator>
     <language>vi</language>
-    <atom:link href="//localhost:1313/vi/5-portfwd/5.3-network-setup/5.3.2-nat-gateway/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/AWS_Intern-Report/vi/5-portfwd/5.3-network-setup/5.3.2-nat-gateway/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

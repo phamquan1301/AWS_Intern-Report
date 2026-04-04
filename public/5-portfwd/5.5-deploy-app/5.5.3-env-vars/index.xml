@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Configure Environment Variables on AWS System Manager</title>
-    <link>//localhost:1313/5-portfwd/5.5-deploy-app/5.5.3-env-vars/</link>
+    <link>http://localhost:1313/AWS_Intern-Report/5-portfwd/5.5-deploy-app/5.5.3-env-vars/</link>
     <description>Recent content in Configure Environment Variables on AWS System Manager</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="//localhost:1313/5-portfwd/5.5-deploy-app/5.5.3-env-vars/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/AWS_Intern-Report/5-portfwd/5.5-deploy-app/5.5.3-env-vars/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
