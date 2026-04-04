@@ -1,5 +1,5 @@
 # Đường dẫn gốc của website trên GitHub Pages (ĐỪNG XÓA DÒNG NÀY)
-baseURL = "https://Xenko2005.github.io/AWS_Intern-Report/"
+baseURL = "https://github.com/phamquan1301/AWS_Intern-Report/"
 
 # Change the default theme to be use when building the site with Hugo
 theme = "hugo-theme-learn"
@@ -12,7 +12,7 @@ home = [ "HTML", "RSS", "JSON"]
   # Change default color scheme with a variant one. Can be "red", "blue", "green".
   themeVariant = "workshop"
   # Git hub repo link
-  editURL = "https://github.com/Xenko2005/AWS_Intern-Report"
+  editURL = "https://github.com/phamquan1301/AWS_Intern-Report"
   description = "Tài liệu AWS Intern Report"
   author = "journeyoftheaverageguy@gmail.com"
   showVisitedLinks = true

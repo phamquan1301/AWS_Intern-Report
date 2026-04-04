@@ -9,18 +9,18 @@ chapter : false
 ### Student Information:
 
 <div style="margin-left: 2rem;">
-<p><strong>Full Name:</strong> Phan Quoc Trung</p>
-<p><strong>Phone Number:</strong> 0528165761</p>
-<p><strong>Email:</strong> trungno3345@gmail.com</p>
+<p><strong>Full Name:</strong> Pham Anh Quan</p>
+<p><strong>Phone Number:</strong> 0944488284</p>
+<p><strong>Email:</strong> pquan3278@gmail.com</p>
 <p><strong>University:</strong> FPT University HCMC</p>
-<p><strong>Major:</strong> Artificial Intelligence</p>
-<p><strong>Class:</strong> SE196518</p>
+<p><strong>Major:</strong> Software Engineering</p>
+<p><strong>Class:</strong> SE193130</p>
 <p><strong>Internship Company:</strong> Amazon Web Services VietNam Co., Ltd.</p>
 <p><strong>Internship Position:</strong> FCJ Cloud Intern</p>
 <p><strong>Internship Duration:</strong> From 05/01/2026 to 18/04/2026</p>  
 </div>
 
-![ConnectPrivate](images/Anh_the.jpg?width=15pc) 
+![ConnectPrivate](images/aws_report.jpg?width=15pc) 
 
 ### Report Content
  1. [Workblog](1-introduce/)
