@@ -20,7 +20,7 @@ Sự kiện "Cloud Mastery 2026 - #2" mang đến những kiến thức chuyên 
 
 Phiên đầu tiên giải quyết những bài toán về quản lý hạ tầng thủ công (ClickOps) và đi sâu vào phương pháp quản lý hạ tầng dưới dạng mã nguồn (IaC).
 
-![MCP Demo](/images/z7690434959781_5995c1f23896281068e12c8291828764.jpg)
+![MCP Demo](images/z7690434959781_5995c1f23896281068e12c8291828764.jpg)
 
 **Các điểm chính:**
 * **Hạn chế của ClickOps:** Dễ dẫn đến lỗi do con người, thiếu tính nhất quán và gây khó khăn trong việc cộng tác cũng như mở rộng quy mô.
@@ -35,11 +35,11 @@ Phiên đầu tiên giải quyết những bài toán về quản lý hạ tần
 
 Phiên thứ hai tập trung vào việc giải quyết thách thức trong vận hành container ở quy mô lớn và giới thiệu toàn diện về nền tảng điều phối Kubernetes.
 
-![MCP Demo](/images/z7690435228232_086a56675e6aceba29f20c40dd0784ae.jpg)
-![MCP Demo](/images/z7690434965400_cae89d3f8e93d1f220c7d1f9b6cf3c53.jpg)
-![MCP Demo](/images/z7690434968587_e13530a2c89be891b4b71505947256d4.jpg)
-![MCP Demo](/images/z7690434973622_2f1925766e43a519731b9bdaaee316e6.jpg)
-![MCP Demo](/images/z7690434979666_8f76d527eb5884f65c86517060490543.jpg)
+![MCP Demo](images/z7690435228232_086a56675e6aceba29f20c40dd0784ae.jpg)
+![MCP Demo](images/z7690434965400_cae89d3f8e93d1f220c7d1f9b6cf3c53.jpg)
+![MCP Demo](images/z7690434968587_e13530a2c89be891b4b71505947256d4.jpg)
+![MCP Demo](images/z7690434973622_2f1925766e43a519731b9bdaaee316e6.jpg)
+![MCP Demo](images/z7690434979666_8f76d527eb5884f65c86517060490543.jpg)
 
 **Các điểm chính:**
 * **Giải quyết bài toán mở rộng:** Kubernetes (K8s) giúp tự động hóa quá trình triển khai, mở rộng (Scaling) và tự phục hồi (Self-Healing) cho các ứng dụng container hóa.
@@ -54,9 +54,9 @@ Phiên thứ hai tập trung vào việc giải quyết thách thức trong vậ
 
 Phiên cuối cùng mang đến một góc nhìn mới về việc sử dụng ngôn ngữ lập trình hàm Elixir trên máy ảo BEAM để xây dựng các hệ thống đồng thời và chịu lỗi cực tốt.
 
-![MCP Demo](/images/z7690434656220_0fa9e4ded78c55c5a36cb8a9f541590c.jpg)
-![MCP Demo](/images/z7690434654020_7a1bcabf3cdd9e589b663ad6cfe4e25b.jpg)
-![MCP Demo](/images/z7690434643660_bb9295a9bd21e54f1b0a726defda70d5.jpg)
+![MCP Demo](images/z7690434656220_0fa9e4ded78c55c5a36cb8a9f541590c.jpg)
+![MCP Demo](images/z7690434654020_7a1bcabf3cdd9e589b663ad6cfe4e25b.jpg)
+![MCP Demo](images/z7690434643660_bb9295a9bd21e54f1b0a726defda70d5.jpg)
 
 **Các điểm chính:**
 * **Sức mạnh của BEAM VM:** Elixir kế thừa kiến trúc từ Erlang, cho phép chạy hàng triệu tiến trình (lightweight processes) cực nhẹ, hoạt động độc lập và không chia sẻ bộ nhớ, giúp tối ưu xử lý đồng thời.

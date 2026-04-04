@@ -22,9 +22,9 @@ Sự kiện "Cloud Mastery 2026 - #1 AI From Scratch" đã mang đến một cá
 
 Phiên đầu tiên đã giải quyết các giới hạn của các mô hình LLM độc lập và cách kết nối chúng với thế giới thực bằng các công cụ bên ngoài.
 
-![MCP Demo](/images/z7672910003036_ed196b198e5a6f34e85285e46f6acef3.jpg)
-![MCP Demo](/images/z7672909965679_02a0afa0fc4855bf7e543dbd8d430037.jpg)
-![MCP Demo](/images/z7672910039736_54beec9e84171db16c7545910e9a6f0f.jpg)
+![MCP Demo](images/z7672910003036_ed196b198e5a6f34e85285e46f6acef3.jpg)
+![MCP Demo](images/z7672909965679_02a0afa0fc4855bf7e543dbd8d430037.jpg)
+![MCP Demo](images/z7672910039736_54beec9e84171db16c7545910e9a6f0f.jpg)
 
 **Các điểm chính:**
 * **AI Agent là gì:** AI Agent đặc trưng bởi khả năng suy luận đa bước (multi-step reasoning) để thực thi các luồng công việc phức tạp.
@@ -39,8 +39,8 @@ Phiên đầu tiên đã giải quyết các giới hạn của các mô hình L
 
 Phiên thứ hai tập trung vào "Nghệ thuật giao tiếp với AI" và lý do tại sao kỹ thuật thiết kế Prompt (Prompt Engineering) lại cực kỳ quan trọng đối với việc quản lý chất lượng và chi phí.
 
-![MCP Demo](/images/z7672922380929_2f993a44dd8f090fdf1de88125c166a0.jpg)
-![MCP Demo](/images/z7672909984608_fcc5f42c25152e84cf4fcc9b2b5ed07e.jpg)
+![MCP Demo](images/z7672922380929_2f993a44dd8f090fdf1de88125c166a0.jpg)
+![MCP Demo](images/z7672909984608_fcc5f42c25152e84cf4fcc9b2b5ed07e.jpg)
 
 **Các điểm chính:**
 * **Cái giá của Prompt kém:** Các câu lệnh chung chung dẫn đến kết quả chung chung, gây lãng phí token và làm tăng chi phí. Ví dụ, mô hình Claude Opus 4.6 có giá $5.00 cho 1 triệu token đầu vào và $25.00 cho 1 triệu token đầu ra.
@@ -55,7 +55,7 @@ Phiên thứ hai tập trung vào "Nghệ thuật giao tiếp với AI" và lý 
 
 Phiên cuối cùng trình diễn các ứng dụng thực tế kết hợp giữa Trí tuệ nhân tạo và Internet vạn vật (AIoT).
 
-![MCP Demo](/images/z7672910019188_393fdd830b5a921571353ab19025e0a2.jpg)
+![MCP Demo](images/z7672910019188_393fdd830b5a921571353ab19025e0a2.jpg)
 
 **Các điểm chính:**
 * **Hệ thống quản lý tủ đồ:** Được thiết kế để thay thế các quy trình thủ công dư thừa, hệ thống tự động này cho phép các thành viên câu lạc bộ mượn đồ một cách liền mạch.

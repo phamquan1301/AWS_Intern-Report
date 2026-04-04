@@ -20,7 +20,7 @@ chapter : false
 <p><strong>Internship Duration:</strong> From 05/01/2026 to 18/04/2026</p>  
 </div>
 
-![ConnectPrivate](/images/Anh_the.jpg?width=15pc) 
+![ConnectPrivate](images/Anh_the.jpg?width=15pc) 
 
 ### Report Content
  1. [Workblog](1-introduce/)

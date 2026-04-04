@@ -22,11 +22,11 @@ Sự kiện quy tụ các chuyên gia kiến trúc đám mây và AI để thả
 
 Phiên đầu tiên mở màn với chiến lược chuyển dịch từ "xây dựng ngân hàng" sang "vận hành nền tảng" của GoTymeX, với mục tiêu mang lại kết quả có thể nhân bản và tùy chỉnh cho từng thị trường.
 
-![MCP Demo](/images/z7642514434225_e5c0049a164571b2c5dff1b6b781977b.jpg)
-![MCP Demo](/images/z7642512856250_ced471a157a60f23945de34edaaad1bb.jpg)
-![MCP Demo](/images/z7642512864463_b7ce01fea70935945c9da143b97de85d.jpg)
-![MCP Demo](/images/z7642512868983_cd84e0178c31dd5cccaf834ebe629da3.jpg)
-![MCP Demo](/images/z7642512874019_64df59f80b2f8c6fa04a25814a7d7ac5.jpg)
+![MCP Demo](images/z7642514434225_e5c0049a164571b2c5dff1b6b781977b.jpg)
+![MCP Demo](images/z7642512856250_ced471a157a60f23945de34edaaad1bb.jpg)
+![MCP Demo](images/z7642512864463_b7ce01fea70935945c9da143b97de85d.jpg)
+![MCP Demo](images/z7642512868983_cd84e0178c31dd5cccaf834ebe629da3.jpg)
+![MCP Demo](images/z7642512874019_64df59f80b2f8c6fa04a25814a7d7ac5.jpg)
 
 **Nội dung cốt lõi:**
 * **Mô hình Platform Engineering:** Phân chia thành các lớp chức năng rõ ràng:
@@ -45,13 +45,13 @@ Phiên đầu tiên mở màn với chiến lược chuyển dịch từ "xây d
 
 Phiên thứ hai (diễn ra tại Bitexco, TP.HCM) đi sâu vào việc áp dụng triết lý DevOps vào quy trình phát triển ứng dụng Generative AI.
 
-![MCP Demo](/images/z7642514437847_6881e24e6414a3ef9a58f3bf33892b96.jpg)
-![MCP Demo](/images/z7642514444867_4c00d02ce953abb6d8df7800a6f72393.jpg)
-![MCP Demo](/images/z7642512886902_a04daa19806c6cdd93fdb25a24e84bf2.jpg)
-![MCP Demo](/images/z7642512891608_38e715d657e377bc877c77eab0964ed0.jpg)
-![MCP Demo](/images/z7642512898776_85c31cd93fdf206650b81229d2ae851d.jpg)
-![MCP Demo](/images/z7642512903177_1f6a1b24fb292dab599aef54f0b3b4a4.jpg)
-![MCP Demo](/images/z7642512927086_026148c16b2427cd6aeb6b2ff6bf985d.jpg)
+![MCP Demo](images/z7642514437847_6881e24e6414a3ef9a58f3bf33892b96.jpg)
+![MCP Demo](images/z7642514444867_4c00d02ce953abb6d8df7800a6f72393.jpg)
+![MCP Demo](images/z7642512886902_a04daa19806c6cdd93fdb25a24e84bf2.jpg)
+![MCP Demo](images/z7642512891608_38e715d657e377bc877c77eab0964ed0.jpg)
+![MCP Demo](images/z7642512898776_85c31cd93fdf206650b81229d2ae851d.jpg)
+![MCP Demo](images/z7642512903177_1f6a1b24fb292dab599aef54f0b3b4a4.jpg)
+![MCP Demo](images/z7642512927086_026148c16b2427cd6aeb6b2ff6bf985d.jpg)
 
 **Nội dung cốt lõi:**
 * **Nền tảng DevOps & CI/CD:** DevOps xoay quanh 5 năng lực (CI, CD, IaC, Monitoring, Collaboration). Tự động hóa CI/CD với AWS CodePipeline, CodeBuild, CloudFormation để đưa code từ GitHub lên AWS ECS.
@@ -66,15 +66,15 @@ Phiên thứ hai (diễn ra tại Bitexco, TP.HCM) đi sâu vào việc áp dụ
 
 Phiên thứ ba đánh dấu sự chuyển giao từ Machine Learning truyền thống sang kỷ nguyên của các Mô hình nền tảng (Foundation Models) và Hệ thống Đại lý thông minh (AI Agents).
 
-![MCP Demo](/images/z7642514456387_d6c6c311b9852aeb4270eca38d8fb4b5.jpg)
-![MCP Demo](/images/z7642647579328_7b9e9cb8419d219babd0b5586335a1e5.jpg)
-![MCP Demo](/images/z7642647591188_b436ed0c937182ab9abb55ccb4d3a7a3.jpg)
-![MCP Demo](/images/z7642647591912_71d1624cadc6fa839cec914e5dc5c6ec.jpg)
-![MCP Demo](/images/z7642647598387_4273b9dc6075597f1bc7cd78c4963fec.jpg)
-![MCP Demo](/images/z7642647608977_ff4b7d0b61e3f27fda219f3e9baa3a0c.jpg)
-![MCP Demo](/images/z7642647616524_7b33b904f6e2361340ded9caadad6101.jpg)
-![MCP Demo](/images/z7642647620444_11a47f0908293bf9a9c38adb85c657d1.jpg)
-![MCP Demo](/images/z7642647626389_36d2611b8e17c232025facff63a036da.jpg)
+![MCP Demo](images/z7642514456387_d6c6c311b9852aeb4270eca38d8fb4b5.jpg)
+![MCP Demo](images/z7642647579328_7b9e9cb8419d219babd0b5586335a1e5.jpg)
+![MCP Demo](images/z7642647591188_b436ed0c937182ab9abb55ccb4d3a7a3.jpg)
+![MCP Demo](images/z7642647591912_71d1624cadc6fa839cec914e5dc5c6ec.jpg)
+![MCP Demo](images/z7642647598387_4273b9dc6075597f1bc7cd78c4963fec.jpg)
+![MCP Demo](images/z7642647608977_ff4b7d0b61e3f27fda219f3e9baa3a0c.jpg)
+![MCP Demo](images/z7642647616524_7b33b904f6e2361340ded9caadad6101.jpg)
+![MCP Demo](images/z7642647620444_11a47f0908293bf9a9c38adb85c657d1.jpg)
+![MCP Demo](images/z7642647626389_36d2611b8e17c232025facff63a036da.jpg)
 
 **Nội dung cốt lõi:**
 * **Kỷ nguyên Foundation Models:** Thay vì huấn luyện các mô hình ML cô lập cho từng tác vụ, AI hiện đại sử dụng các mô hình đa nhiệm khổng lồ (như Amazon Nova, Mistral, DeepSeek trên Amazon Bedrock) có thể thích ứng với ít hoặc không cần huấn luyện thêm.
@@ -89,9 +89,9 @@ Phiên thứ ba đánh dấu sự chuyển giao từ Machine Learning truyền t
 
 Phiên cuối cùng tổng kết bức tranh toàn cảnh về cách cấu trúc một ngăn xếp ứng dụng AI và đi sâu vào thuật toán tìm kiếm.
 
-![MCP Demo](/images/z7642647604975_b89107f0986690cc5ca416f4befbc68b.jpg)
-![MCP Demo](/images/z7672978703404_666e22c69395b91ca96e98dd6aeaa85a.jpg)
-![MCP Demo](/images/z7672978717713_ae07ccd07a879c45d2e62936c22cf2c2.jpg)
+![MCP Demo](images/z7642647604975_b89107f0986690cc5ca416f4befbc68b.jpg)
+![MCP Demo](images/z7672978703404_666e22c69395b91ca96e98dd6aeaa85a.jpg)
+![MCP Demo](images/z7672978717713_ae07ccd07a879c45d2e62936c22cf2c2.jpg)
 
 **Nội dung cốt lõi:**
 * **Ngăn xếp Ứng dụng AI (The AI Application Stack):** Kiến trúc phân lớp từ dưới lên trên bao gồm:

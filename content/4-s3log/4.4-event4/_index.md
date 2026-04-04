@@ -20,7 +20,7 @@ The "Cloud Mastery 2026 - #2" event brought in-depth knowledge about cloud infra
 
 The first session addressed the challenges of manual infrastructure management (ClickOps) and delved into the method of managing infrastructure as source code (IaC).
 
-![MCP Demo](/images/z7690434959781_5995c1f23896281068e12c8291828764.jpg)
+![MCP Demo](images/z7690434959781_5995c1f23896281068e12c8291828764.jpg)
 
 **Key Takeaways:**
 * **Limitations of ClickOps:** Prone to human errors, lacks consistency, and causes difficulties in collaboration as well as scaling up.
@@ -35,11 +35,11 @@ The first session addressed the challenges of manual infrastructure management (
 
 The second session focused on solving the challenges of operating containers at scale and provided a comprehensive introduction to the Kubernetes orchestration platform.
 
-![MCP Demo](/images/z7690435228232_086a56675e6aceba29f20c40dd0784ae.jpg)
-![MCP Demo](/images/z7690434965400_cae89d3f8e93d1f220c7d1f9b6cf3c53.jpg)
-![MCP Demo](/images/z7690434968587_e13530a2c89be891b4b71505947256d4.jpg)
-![MCP Demo](/images/z7690434973622_2f1925766e43a519731b9bdaaee316e6.jpg)
-![MCP Demo](/images/z7690434979666_8f76d527eb5884f65c86517060490543.jpg)
+![MCP Demo](images/z7690435228232_086a56675e6aceba29f20c40dd0784ae.jpg)
+![MCP Demo](images/z7690434965400_cae89d3f8e93d1f220c7d1f9b6cf3c53.jpg)
+![MCP Demo](images/z7690434968587_e13530a2c89be891b4b71505947256d4.jpg)
+![MCP Demo](images/z7690434973622_2f1925766e43a519731b9bdaaee316e6.jpg)
+![MCP Demo](images/z7690434979666_8f76d527eb5884f65c86517060490543.jpg)
 
 **Key Takeaways:**
 * **Solving the Scaling Problem:** Kubernetes (K8s) automates the deployment, scaling, and self-healing processes for containerized applications.
@@ -54,9 +54,9 @@ The second session focused on solving the challenges of operating containers at 
 
 The final session brought a new perspective on using the functional programming language Elixir on the BEAM virtual machine to build highly concurrent and fault-tolerant systems.
 
-![MCP Demo](/images/z7690434656220_0fa9e4ded78c55c5a36cb8a9f541590c.jpg)
-![MCP Demo](/images/z7690434654020_7a1bcabf3cdd9e589b663ad6cfe4e25b.jpg)
-![MCP Demo](/images/z7690434643660_bb9295a9bd21e54f1b0a726defda70d5.jpg)
+![MCP Demo](images/z7690434656220_0fa9e4ded78c55c5a36cb8a9f541590c.jpg)
+![MCP Demo](images/z7690434654020_7a1bcabf3cdd9e589b663ad6cfe4e25b.jpg)
+![MCP Demo](images/z7690434643660_bb9295a9bd21e54f1b0a726defda70d5.jpg)
 
 **Key Takeaways:**
 * **The Power of BEAM VM:** Elixir inherits its architecture from Erlang, allowing millions of extremely lightweight processes to run independently without sharing memory, helping to optimize concurrent processing.

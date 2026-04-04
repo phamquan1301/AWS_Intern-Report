@@ -21,7 +21,7 @@ Bạn sẽ cần tạo 3 bucket với định dạng tên sau (thay thế `ACCOU
 * Truy cập trực tiếp qua liên kết: [https://console.aws.amazon.com/s3/](https://console.aws.amazon.com/s3/)
 * Hoặc điều hướng từ menu: **AWS Management Console** → **Services** → **S3**.
 
-<img src="/images/Picture5.jpg" style="width: 100%; height: auto;" alt="Mô tả ảnh">
+<img src="images/Picture5.jpg" style="width: 100%; height: auto;" alt="Mô tả ảnh">
 
 **2. Bắt đầu tạo**
 * Nhấp vào nút **Create bucket**.
@@ -30,7 +30,7 @@ Bạn sẽ cần tạo 3 bucket với định dạng tên sau (thay thế `ACCOU
 * **Bucket name:** Nhập tên bucket (Ví dụ: `rag-data-123456789012-us-east-1`).
 * **AWS Region:** Chọn khu vực đích của bạn (Ví dụ: *US East (N. Virginia) us-east-1*).
 
-<img src="/images/Picture6.jpg" style="width: 100%; height: auto;" alt="Mô tả ảnh">
+<img src="images/Picture6.jpg" style="width: 100%; height: auto;" alt="Mô tả ảnh">
 
 **4. Object Ownership**
 * Giữ tùy chọn mặc định: **ACLs disabled (recommended)**.
@@ -46,7 +46,7 @@ Bạn sẽ cần tạo 3 bucket với định dạng tên sau (thay thế `ACCOU
 **6. Bucket Versioning**
 * Chọn **Enable** (Kích hoạt).
 
-<img src="/images/Picture7.jpg" style="width: 100%; height: auto;" alt="Mô tả ảnh">
+<img src="images/Picture7.jpg" style="width: 100%; height: auto;" alt="Mô tả ảnh">
 
 **7. Tags (Tùy chọn)**
 * Thêm các thẻ đánh dấu nếu muốn (Ví dụ: `Key=Purpose`, `Value=IncidentResponse`).
@@ -61,11 +61,11 @@ Bạn sẽ cần tạo 3 bucket với định dạng tên sau (thay thế `ACCOU
 **10. Hoàn tất**
 * Kéo xuống cuối trang và nhấp vào **Create bucket**.
 
-<img src="/images/Picture8.jpg" style="width: 100%; height: auto;" alt="Mô tả ảnh">
+<img src="images/Picture8.jpg" style="width: 100%; height: auto;" alt="Mô tả ảnh">
 
 **11. Xác minh**
 * Bạn sẽ thấy thông báo tạo thành công và bucket mới sẽ xuất hiện trong danh sách S3 buckets của bạn.
 
 > **Lưu ý quan trọng:** Hãy lặp lại các bước từ 2 đến 11 cho 2 bucket còn lại (`user-report-ACCOUNT_ID-REGION` và `chatbot-image-ACCOUNT_ID-REGION`).
 
-<img src="/images/Picture9.jpg" style="width: 100%; height: auto;" alt="Mô tả ảnh">
+<img src="images/Picture9.jpg" style="width: 100%; height: auto;" alt="Mô tả ảnh">

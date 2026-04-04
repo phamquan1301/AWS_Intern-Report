@@ -21,9 +21,9 @@ The "Cloud Mastery 2026 - #1 AI From Scratch" event delivered a comprehensive ex
 
 This session addressed the limits of standalone LLMs and explored how to connect them to the real world using external tools. 
 
-![MCP Demo](/images/z7672910003036_ed196b198e5a6f34e85285e46f6acef3.jpg)
-![MCP Demo](/images/z7672909965679_02a0afa0fc4855bf7e543dbd8d430037.jpg)
-![MCP Demo](/images/z7672910039736_54beec9e84171db16c7545910e9a6f0f.jpg)
+![MCP Demo](images/z7672910003036_ed196b198e5a6f34e85285e46f6acef3.jpg)
+![MCP Demo](images/z7672909965679_02a0afa0fc4855bf7e543dbd8d430037.jpg)
+![MCP Demo](images/z7672910039736_54beec9e84171db16c7545910e9a6f0f.jpg)
 
 **Key Takeaways:**
 * **What Makes an AI Agent:** AI Agents are characterized by their ability to perform multi-step reasoning to execute complex workflows.
@@ -38,8 +38,8 @@ This session addressed the limits of standalone LLMs and explored how to connect
 
 The second session focused on "The Art of Communicating with AI" and why prompt engineering is critical for cost and quality management.
 
-![MCP Demo](/images/z7672922380929_2f993a44dd8f090fdf1de88125c166a0.jpg)
-![MCP Demo](/images/z7672909984608_fcc5f42c25152e84cf4fcc9b2b5ed07e.jpg)
+![MCP Demo](images/z7672922380929_2f993a44dd8f090fdf1de88125c166a0.jpg)
+![MCP Demo](images/z7672909984608_fcc5f42c25152e84cf4fcc9b2b5ed07e.jpg)
 
 **Key Takeaways:**
 * **The Cost of Poor Prompts:** Generic prompts lead to generic outputs, while wasted tokens result in increased costs. For context, the Claude Opus 4.6 model costs $5.00 per 1M input tokens and $25.00 per 1M output tokens.
@@ -54,7 +54,7 @@ The second session focused on "The Art of Communicating with AI" and why prompt 
 
 The final session demonstrated practical applications combining Artificial Intelligence with the Internet of Things (AIoT).
 
-![MCP Demo](/images/z7672910019188_393fdd830b5a921571353ab19025e0a2.jpg)
+![MCP Demo](images/z7672910019188_393fdd830b5a921571353ab19025e0a2.jpg)
 
 **Key Takeaways:**
 * **Locker Management System:** Designed to replace redundant manual processes, this automated system allows club members to borrow items seamlessly. 

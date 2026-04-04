@@ -19,7 +19,7 @@ You will need to create 3 buckets:
 * Navigate to [https://console.aws.amazon.com/s3/](https://console.aws.amazon.com/s3/)
 * Or: **AWS Management Console** → **Services** → **S3**
 
-<img src="/images/Picture5.jpg" style="width: 100%; height: auto;" alt="Mô tả ảnh">
+<img src="images/Picture5.jpg" style="width: 100%; height: auto;" alt="Mô tả ảnh">
 
 **2. Click on "Create bucket"**
 
@@ -28,7 +28,7 @@ You will need to create 3 buckets:
   * *Example:* `rag-data-123456789012-us-east-1`
 * **AWS Region:** Select your target region (e.g., *US East (N. Virginia) us-east-1*)
 
-<img src="/images/Picture6.jpg" style="width: 100%; height: auto;" alt="Mô tả ảnh">
+<img src="images/Picture6.jpg" style="width: 100%; height: auto;" alt="Mô tả ảnh">
 
 **4. Object Ownership:**
 * Keep default: **ACLs disabled (recommended)**
@@ -44,7 +44,7 @@ You will need to create 3 buckets:
 **6. Bucket Versioning:**
 * Select **"Enable"**
 
-<img src="/images/Picture7.jpg" style="width: 100%; height: auto;" alt="Mô tả ảnh">
+<img src="images/Picture7.jpg" style="width: 100%; height: auto;" alt="Mô tả ảnh">
 
 **7. Tags (optional):**
 * Add tags if desired
@@ -59,7 +59,7 @@ You will need to create 3 buckets:
 
 **10. Click "Create bucket"**
 
-<img src="/images/Picture8.jpg" style="width: 100%; height: auto;" alt="Mô tả ảnh">
+<img src="images/Picture8.jpg" style="width: 100%; height: auto;" alt="Mô tả ảnh">
 
 **11. Verify bucket creation:**
 * You should see a success message
@@ -69,4 +69,4 @@ You will need to create 3 buckets:
 > * `user-report-ACCOUNT_ID-REGION`
 > * `chatbot-image-ACCOUNT_ID-REGION`
 
-<img src="/images/Picture9.jpg" style="width: 100%; height: auto;" alt="Mô tả ảnh">
+<img src="images/Picture9.jpg" style="width: 100%; height: auto;" alt="Mô tả ảnh">
