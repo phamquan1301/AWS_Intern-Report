@@ -1,0 +1,2965 @@
+<!DOCTYPE html>
+<html lang="vi" class="js csstransforms3d">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.154.3">
+    <meta name="description" content="">
+<meta name="author" content="journeyoftheaverageguy@gmail.com">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Tuần 12 Worklog :: AWS System Manager</title>
+
+    
+    <link href="/css/nucleus.css?1775302918" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1775302918" rel="stylesheet">
+    <link href="/css/hybrid.css?1775302918" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1775302918" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1775302918" rel="stylesheet">
+    <link href="/css/auto-complete.css?1775302918" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1775302918" rel="stylesheet">
+    <link href="/css/theme.css?1775302918" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1775302918" rel="stylesheet">
+    
+    <link href="/css/theme-workshop.css?1775302918" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1775302918"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    <style type="text/css">
+     
+    #TableOfContents {
+        max-height: 80vh !important;
+        overflow-y: auto !important;
+         
+        scrollbar-width: thin;
+        scrollbar-color: #778ba5 transparent;
+    }
+
+    #TableOfContents::-webkit-scrollbar {
+        width: 8px !important;
+        display: block !important;
+    }
+
+    #TableOfContents::-webkit-scrollbar-track {
+        background: transparent !important;
+        border-radius: 4px;
+    }
+
+    #TableOfContents::-webkit-scrollbar-thumb {
+        background: #778ba5 !important;
+        border-radius: 4px;
+    }
+
+    #TableOfContents::-webkit-scrollbar-thumb:hover {
+        background: #4881cd !important;
+    }
+
+     
+    .progress {
+        overflow: visible !important;
+    }
+
+    .progress .wrapper {
+        overflow: visible !important;
+    }
+
+     
+    #sidebar {
+        width: 270px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        overflow: hidden !important;
+    }
+
+    #body {
+        margin-left: 280px !important;
+    }
+
+     
+    #sidebar #header-wrapper {
+        flex-shrink: 0 !important;
+    }
+
+    #sidebar .highlightable {
+        flex: 1 !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        height: auto !important;
+         
+        scrollbar-width: thin;
+        scrollbar-color: #778ba5 transparent;
+    }
+
+    #sidebar .highlightable::-webkit-scrollbar {
+        width: 5px !important;
+        display: block !important;
+    }
+
+    #sidebar .highlightable::-webkit-scrollbar-track {
+        background: transparent !important;
+    }
+
+    #sidebar .highlightable::-webkit-scrollbar-thumb {
+        background: #778ba5 !important;
+        border-radius: 4px !important;
+    }
+
+    #sidebar .highlightable::-webkit-scrollbar-thumb:hover {
+        background: #4881cd !important;
+    }
+</style>
+  </head>
+  <body class="" data-url="/vi/1-introduce/1.12-week12/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="/">
+
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#f90;fill-rule:evenodd;}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09,10.85a4.7,4.7,0,0,0,.19,1.48,7.73,7.73,0,0,0,.54,1.19.77.77,0,0,1,.12.38.64.64,0,0,1-.32.49l-1,.7a.83.83,0,0,1-.44.15.69.69,0,0,1-.49-.23,3.8,3.8,0,0,1-.6-.77q-.25-.42-.51-1a6.14,6.14,0,0,1-4.89,2.3,4.54,4.54,0,0,1-3.32-1.19,4.27,4.27,0,0,1-1.22-3.2A4.28,4.28,0,0,1,3.61,7.75,6.06,6.06,0,0,1,7.69,6.46a12.47,12.47,0,0,1,1.76.13q.92.13,1.91.36V5.73a3.65,3.65,0,0,0-.79-2.66A3.81,3.81,0,0,0,7.86,2.3a7.71,7.71,0,0,0-1.79.22,12.78,12.78,0,0,0-1.79.57,4.55,4.55,0,0,1-.58.22l-.26,0q-.35,0-.35-.52V2a1.09,1.09,0,0,1,.12-.58,1.2,1.2,0,0,1,.47-.35A10.88,10.88,0,0,1,5.77.32,10.19,10.19,0,0,1,8.36,0a6,6,0,0,1,4.35,1.35,5.49,5.49,0,0,1,1.38,4.09ZM7.34,13.38a5.36,5.36,0,0,0,1.72-.31A3.63,3.63,0,0,0,10.63,12,2.62,2.62,0,0,0,11.19,11a5.63,5.63,0,0,0,.16-1.44v-.7a14.35,14.35,0,0,0-1.53-.28,12.37,12.37,0,0,0-1.56-.1,3.84,3.84,0,0,0-2.47.67A2.34,2.34,0,0,0,5,11a2.35,2.35,0,0,0,.61,1.76A2.4,2.4,0,0,0,7.34,13.38Zm13.35,1.8a1,1,0,0,1-.64-.16,1.3,1.3,0,0,1-.35-.65L15.81,1.51a3,3,0,0,1-.15-.67.36.36,0,0,1,.41-.41H17.7a1,1,0,0,1,.65.16,1.4,1.4,0,0,1,.33.65l2.79,11,2.59-11A1.17,1.17,0,0,1,24.39.6a1.1,1.1,0,0,1,.67-.16H26.4a1.1,1.1,0,0,1,.67.16,1.17,1.17,0,0,1,.32.65L30,12.39,32.88,1.25A1.39,1.39,0,0,1,33.22.6a1,1,0,0,1,.65-.16h1.54a.36.36,0,0,1,.41.41,1.36,1.36,0,0,1,0,.26,3.64,3.64,0,0,1-.12.41l-4,12.86a1.3,1.3,0,0,1-.35.65,1,1,0,0,1-.64.16H29.25a1,1,0,0,1-.67-.17,1.26,1.26,0,0,1-.32-.67L25.67,3.64,23.11,14.34a1.26,1.26,0,0,1-.32.67,1,1,0,0,1-.67.17Zm21.36.44a11.28,11.28,0,0,1-2.56-.29,7.44,7.44,0,0,1-1.92-.67,1,1,0,0,1-.61-.93v-.84q0-.52.38-.52a.9.9,0,0,1,.31.06l.42.17a8.77,8.77,0,0,0,1.83.58,9.78,9.78,0,0,0,2,.2,4.48,4.48,0,0,0,2.43-.55,1.76,1.76,0,0,0,.86-1.57,1.61,1.61,0,0,0-.45-1.16A4.29,4.29,0,0,0,43,9.22l-2.41-.76A5.15,5.15,0,0,1,38,6.78a3.94,3.94,0,0,1-.83-2.41,3.7,3.7,0,0,1,.45-1.85,4.47,4.47,0,0,1,1.19-1.37A5.27,5.27,0,0,1,40.51.29,7.4,7.4,0,0,1,42.6,0a8.87,8.87,0,0,1,1.12.07q.57.07,1.08.19t.95.26a4.27,4.27,0,0,1,.7.29,1.59,1.59,0,0,1,.49.41.94.94,0,0,1,.15.55v.79q0,.52-.38.52a1.76,1.76,0,0,1-.64-.2,7.74,7.74,0,0,0-3.2-.64,4.37,4.37,0,0,0-2.21.47,1.6,1.6,0,0,0-.79,1.48,1.58,1.58,0,0,0,.49,1.18,4.94,4.94,0,0,0,1.83.92L44.55,7a5.08,5.08,0,0,1,2.57,1.6A3.76,3.76,0,0,1,47.9,11a4.21,4.21,0,0,1-.44,1.93,4.4,4.4,0,0,1-1.21,1.47,5.43,5.43,0,0,1-1.85.93A8.25,8.25,0,0,1,42.05,15.62Z"></path><path class="cls-2" d="M45.19,23.81C39.72,27.85,31.78,30,25,30A36.64,36.64,0,0,1,.22,20.57c-.51-.46-.06-1.09.56-.74A49.78,49.78,0,0,0,25.53,26.4,49.23,49.23,0,0,0,44.4,22.53C45.32,22.14,46.1,23.14,45.19,23.81Z"></path><path class="cls-2" d="M47.47,21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74,3.13-2.2,8.27-1.57,8.86-.83s-.16,5.89-3.09,8.35c-.45.38-.88.18-.68-.32C46.69,25.8,48.17,22.11,47.47,21.21Z"></path></svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1775302918"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1775302918"></script>
+<script type="text/javascript">
+    
+        var baseurl = "\/\/localhost:1313\/\/vi";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1775302918"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/" title="Nhật Ký Công Việc" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/vi/1-introduce/">
+           <b> 1. </b> Nhật Ký Công Việc
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.1-week1/" title="Tuần 1 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/1.1-week1/">
+           <b> 1.1. </b> Tuần 1 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.2-week2/" title="Tuần 2 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/1.2-week2/">
+           <b> 1.2. </b> Tuần 2 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.3-week3/" title="Tuần 3 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/1.3-week3/">
+           <b> 1.3. </b> Tuần 3 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.4-week4/" title="Tuần 4 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/1.4-week4/">
+           <b> 1.4. </b> Tuần 4 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.5-week5/" title="Tuần 5 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/1.5-week5/">
+           <b> 1.5. </b> Tuần 5 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.6-week6/" title="Tuần 6 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/1.6-week6/">
+           <b> 1.6. </b> Tuần 6 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.7-week7/" title="Tuần 7 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/1.7-week7/">
+           <b> 1.7. </b> Tuần 7 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.8-week8/" title="Tuần 8 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/1.8-week8/">
+           <b> 1.8. </b> Tuần 8 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.9-week9/" title="Tuần 9 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/1.9-week9/">
+           <b> 1.9. </b> Tuần 9 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.10-week10/" title="Tuần 10 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/1.10-week10/">
+           <b> 1.10. </b> Tuần 10 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.11-week11/" title="Tuần 11 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/1.11-week11/">
+           <b> 1.11. </b> Tuần 11 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.12-week12/" title="Tuần 12 Worklog" class="dd-item 
+        
+        active
+        
+        ">
+      <a href="/vi/1-introduce/1.12-week12/">
+           <b> 1.12. </b> Tuần 12 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/2-prerequiste/" title="Bản đề xuất" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/2-prerequiste/">
+           <b> 2. </b> Bản đề xuất
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/4-s3log/" title="Các events đã tham gia" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/4-s3log/">
+           <b> 3. </b> Các events đã tham gia
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/4-s3log/4.1-event1/" title="Sự Kiện 1" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/4-s3log/4.1-event1/">
+           <b> 4.1. </b> Sự Kiện 1
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/4-s3log/4.2-event2/" title="Sự Kiện 2" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/4-s3log/4.2-event2/">
+           <b> 3.2. </b> Sự Kiện 2
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/4-s3log/4.3-event3/" title="Sự Kiện 3" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/4-s3log/4.3-event3/">
+           <b> 3.3. </b> Sự Kiện 3
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/4-s3log/4.4-event4/" title="Sự Kiện 4" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/4-s3log/4.4-event4/">
+           <b> 3.4. </b> Sự Kiện 4
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/4-s3log/4.5-event5/" title="Sự Kiện 5" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/4-s3log/4.5-event5/">
+           <b> 3.5. </b> Sự Kiện 5
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/" title="Workshop" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/">
+           <b> 4. </b> Workshop
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.1-introduction/" title="Giới thiệu" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.1-introduction/">
+           <b> 4.1. </b> Giới thiệu
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.2-prerequisites/" title="Điều kiện tiên quyết" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.2-prerequisites/">
+           <b> 4.2. </b> Điều kiện tiên quyết
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.3-network-setup/" title="Thiết lập cơ sở hạ tầng mạng" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.3-network-setup/">
+           <b> 4.3. </b> Thiết lập cơ sở hạ tầng mạng
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.3-network-setup/5.3.1-vpc-subnets/" title="Khởi tạo VPC &amp; Subnets" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.3-network-setup/5.3.1-vpc-subnets/">
+           <b> 4.3.1. </b> Khởi tạo VPC &amp; Subnets
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.3-network-setup/5.3.2-nat-gateway/" title="Cấu hình Internet &amp; NAT Gateway" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.3-network-setup/5.3.2-nat-gateway/">
+           <b> 4.3.2. </b> Cấu hình Internet &amp; NAT Gateway
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.3-network-setup/5.3.3-route-table/" title="Cấu hình Route Table" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.3-network-setup/5.3.3-route-table/">
+           <b> 4.3.3. </b> Cấu hình Route Table
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.4-data-layer/" title="Triển khai tầng dữ liệu" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.4-data-layer/">
+           <b> 4.4. </b> Triển khai tầng dữ liệu
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.4-data-layer/5.4.1-security-groups/" title="Thiết lập AWS Bedrock Knowledge Base" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.4-data-layer/5.4.1-security-groups/">
+           <b> 4.4.1. </b> Thiết lập AWS Bedrock Knowledge Base
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.4-data-layer/5.4.2-rds/" title="Thiết lập Amazon S3 Bucket" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.4-data-layer/5.4.2-rds/">
+           <b> 4.4.2. </b> Thiết lập Amazon S3 Bucket
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.4-data-layer/5.4.3-elasticache/" title="Nhập Dữ liệu từ S3 vào DynamoDB" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.4-data-layer/5.4.3-elasticache/">
+           <b> 4.4.3. </b> Nhập Dữ liệu từ S3 vào DynamoDB
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.5-deploy-app/" title="Triển khai ứng dụng" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.5-deploy-app/">
+           <b> 4.5. </b> Triển khai ứng dụng
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.5-deploy-app/5.5.1-docker/" title="Đóng gói với Docker" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.5-deploy-app/5.5.1-docker/">
+           <b> 4.5.1. </b> Đóng gói với Docker
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.5-deploy-app/5.5.2-beanstalk/" title="Khởi tạo Elastic Beanstalk" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.5-deploy-app/5.5.2-beanstalk/">
+           <b> 4.5.2. </b> Khởi tạo Elastic Beanstalk
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.5-deploy-app/5.5.3-env-vars/" title="Cấu hình biến môi trường" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.5-deploy-app/5.5.3-env-vars/">
+           <b> 4.5.3. </b> Cấu hình biến môi trường
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.6-cicd/" title="Tự động hóa CI/CD" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.6-cicd/">
+           <b> 4.6. </b> Tự động hóa CI/CD
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.6-cicd/5.6.1-codebuild/" title="Tạo dự án Build" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.6-cicd/5.6.1-codebuild/">
+           <b> 4.6.1. </b> Tạo dự án Build
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.6-cicd/5.6.2-codepipeline/" title="Thiết lập CodePipeline" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.6-cicd/5.6.2-codepipeline/">
+           <b> 4.6.2. </b> Thiết lập CodePipeline
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.7-security/" title="Tối ưu hóa &amp; Bảo mật" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.7-security/">
+           <b> 4.7. </b> Tối ưu hóa &amp; Bảo mật
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.7-security/5.7.1-cloudfront/" title="Cấu hình S3 &amp; CloudFront" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.7-security/5.7.1-cloudfront/">
+           <b> 4.7.1. </b> Cấu hình S3 &amp; CloudFront
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.7-security/5.7.2-waf/" title="Thiết lập Tường lửa (WAF)" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.7-security/5.7.2-waf/">
+           <b> 4.7.2. </b> Thiết lập Tường lửa (WAF)
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.8-monitoring/" title="Giám sát &amp; Vận hành" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.8-monitoring/">
+           <b> 4.8. </b> Giám sát &amp; Vận hành
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.8-monitoring/5.8.1-cloudwatch/" title="Giám sát với CloudWatch" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.8-monitoring/5.8.1-cloudwatch/">
+           <b> 4.8.1. </b> Giám sát với CloudWatch
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.9-cleanup/" title="Dọn dẹp tài nguyên" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.9-cleanup/">
+           <b> 4.9. </b> Dọn dẹp tài nguyên
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.9-cleanup/5.9.1-cleanup-steps/" title="Các bước dọn dẹp" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.9-cleanup/5.9.1-cleanup-steps/">
+           <b> 4.9.1. </b> Các bước dọn dẹp
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/6-cleanup/" title="Tự đánh giá" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/6-cleanup/">
+          <b>5. </b>Tự đánh giá
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/7-sharing/" title="Chia sẻ, đóng góp ý kiến" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/7-sharing/">
+          <b>6. </b>Chia sẻ, đóng góp ý kiến
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://www.facebook.com/groups/awsstudygroupfcj/"><i class='fab fa-facebook'></i> AWS Study Group</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="//localhost:1313/1-introduce/1.12-week12/">English</option>
+                    
+                  
+              
+                  
+              
+          
+              
+              
+                  
+              
+                  
+                    
+                    
+                      <option id="vi" value="//localhost:1313/vi/1-introduce/1.12-week12/" selected>Tiếng Việt</option>
+                    
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <left>
+    
+     <b> Workshop</b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7920860&style=0038&nbdigits=9&type=page&initCount=0" title="Migrate" Alt="web counter"   border="0" /></a>  <br>
+     <b> <a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0" title="Total CLoud Journey" Alt="web counter"   border="0"   />
+     
+</left>
+<left>
+    <br>
+    <br>
+        <b> Last Updated </b> <br>
+        <i><font color="orange">04-04-2026</font></i>
+    </left>
+    <left>
+        <br>
+        <br>
+            <b> Team </b> <br>
+           
+            <i> <a href="https://www.facebook.com/groups/660548818043427"  style="color:orange">First Cloud Journey</a> <br>
+                
+               
+        </i>
+        </left>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/vi/'>Báo Cáo Thực Tập</a> > <a href='/vi/1-introduce/'>Nhật Ký Công Việc</a> > Tuần 12 Worklog
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+        <div id="toc-scroll-wrapper"
+            style="max-height: 300px; overflow-y: scroll; overflow-x: hidden; padding-right: 8px;">
+            <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#mục-tiêu-tuần-12">Mục tiêu Tuần 12</a></li>
+        <li><a href="#kế-hoạch-công-việc-trong-tuần">Kế hoạch công việc trong tuần</a></li>
+        <li><a href="#thành-quả-tuần-12">Thành quả Tuần 12</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+    </div>
+</div>
+<style>
+    #toc-scroll-wrapper::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    #toc-scroll-wrapper::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+    }
+
+    #toc-scroll-wrapper::-webkit-scrollbar-thumb {
+        background: #778ba5;
+        border-radius: 4px;
+    }
+
+    #toc-scroll-wrapper::-webkit-scrollbar-thumb:hover {
+        background: #4881cd;
+    }
+
+    #toc-scroll-wrapper {
+        scrollbar-width: thin;
+        scrollbar-color: #778ba5 #f1f1f1;
+    }
+</style>
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Tuần 12 Worklog
+            </h1>
+          
+
+        
+
+
+
+	<h3 id="mục-tiêu-tuần-12">Mục tiêu Tuần 12</h3>
+<ul>
+<li>Vượt ra khỏi phần căn bản Tuần 11 và thành thạo các khả năng nâng cao của Amazon SageMaker cho hệ thống ML production.</li>
+<li>Hiểu cách thiết kế và chạy distributed training job có thể mở rộng cho các mô hình deep learning lớn.</li>
+<li>Nắm vững các mẫu SageMaker MLOps: Pipeline, Model Registry, tích hợp CI/CD và trigger retraining tự động.</li>
+<li>Thành thạo chiến lược endpoint scaling: chính sách auto-scaling, multi-model endpoint và inference recommender.</li>
+<li>Hiểu SageMaker Clarify cho phát hiện bias và giải thích mô hình (SHAP value).</li>
+<li>Học cách tối ưu chi phí inference bằng SageMaker Neo compiler và Graviton instance.</li>
+</ul>
+<hr>
+<h3 id="kế-hoạch-công-việc-trong-tuần">Kế hoạch công việc trong tuần</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Ngày</th>
+          <th>Công việc</th>
+          <th>Ngày bắt đầu</th>
+          <th>Ngày hoàn thành</th>
+          <th>Tài liệu tham khảo</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td>Nghiên cứu chuyên sâu distributed training trong SageMaker: data parallelism với SMDDP, model parallelism với SMP, và huấn luyện trên cluster EC2 multi-GPU/multi-node.</td>
+          <td>03/23/2026</td>
+          <td>03/23/2026</td>
+          <td><a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>Xây dựng SageMaker Pipeline hoàn chỉnh: ProcessingStep → TrainingStep → EvaluationStep → ConditionStep → RegisterModelStep → DeployStep với cổng phê duyệt và theo dõi metadata lần chạy.</td>
+          <td>03/24/2026</td>
+          <td>03/24/2026</td>
+          <td><a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>Cấu hình SageMaker Model Registry: versioning mô hình, luồng phê duyệt thủ công và tự động, chia sẻ mô hình cross-account và tích hợp EventBridge để tự động kích hoạt pipeline triển khai.</td>
+          <td>03/25/2026</td>
+          <td>03/25/2026</td>
+          <td><a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td>Triển khai chiến lược endpoint scaling: chính sách Application Auto Scaling, multi-model endpoint (MME) cho hosting mô hình tiết kiệm chi phí và SageMaker Inference Recommender.</td>
+          <td>03/26/2026</td>
+          <td>03/26/2026</td>
+          <td><a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></td>
+      </tr>
+      <tr>
+          <td>5</td>
+          <td>Khám phá SageMaker Clarify: phát hiện bias trước huấn luyện trên dataset, bias metric sau huấn luyện (DPL, DImpact), feature importance dựa trên SHAP và tích hợp với Model Monitor để theo dõi explainability drift.</td>
+          <td>03/27/2026</td>
+          <td>03/27/2026</td>
+          <td><a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></td>
+      </tr>
+      <tr>
+          <td>6</td>
+          <td>Khảo sát tối ưu chi phí inference: SageMaker Neo compilation và tối ưu phần cứng, Graviton instance cho inference, và so sánh cost-per-inference qua các cấu hình triển khai.</td>
+          <td>03/28/2026</td>
+          <td>03/28/2026</td>
+          <td><a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="thành-quả-tuần-12">Thành quả Tuần 12</h3>
+<h5 id="distributed-training-quy-mô-lớn">Distributed Training Quy mô Lớn</h5>
+<p>Huấn luyện mô hình lớn trên một instance duy nhất nhanh chóng trở thành nút thắt. SageMaker cung cấp hai chiến lược song song bổ trợ nhau:</p>
+<p><strong>Data Parallelism (SageMaker Distributed Data Parallel — SMDDP):</strong></p>
+<p>Mỗi worker node giữ một bản sao đầy đủ của mô hình nhưng xử lý một tập con (shard) khác nhau của dữ liệu huấn luyện. Sau mỗi backward pass, gradient được tổng hợp qua tất cả worker bằng <strong>AllReduce</strong> trước bước optimizer:</p>
+<pre tabindex="0"><code>Node 1: Batch A → Forward → Backward → Gradient A ─┐
+Node 2: Batch B → Forward → Backward → Gradient B ─┤─► AllReduce ─► Gradient Trung bình ─► Cập nhật Trọng số
+Node 3: Batch C → Forward → Backward → Gradient C ─┘
+</code></pre><ul>
+<li>SMDDP dùng thuật toán AllReduce tối ưu (vượt trội Horovod 25% trên fabric mạng AWS).</li>
+<li>Phù hợp nhất: mô hình vừa với bộ nhớ GPU đơn, nhưng dữ liệu huấn luyện quá lớn cho một máy.</li>
+<li>Kích hoạt: thêm <code>distribution={'smdistributed': {'dataparallel': {'enabled': True}}}</code> vào SageMaker Estimator.</li>
+</ul>
+<p><strong>Model Parallelism (SageMaker Model Parallel — SMP):</strong></p>
+<p>Chia tách chính mô hình qua nhiều GPU — cần thiết cho mô hình quá lớn để vừa trong một GPU đơn (ví dụ: LLM với hàng tỷ tham số):</p>
+<table>
+  <thead>
+      <tr>
+          <th>Chiến lược</th>
+          <th>Mô tả</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Tensor Parallelism</strong></td>
+          <td>Chia ma trận trọng số layer riêng lẻ qua GPU</td>
+      </tr>
+      <tr>
+          <td><strong>Pipeline Parallelism</strong></td>
+          <td>Chia layer mô hình thành stage; mỗi GPU xử lý một stage</td>
+      </tr>
+      <tr>
+          <td><strong>Optimized Sharding (ZeRO)</strong></td>
+          <td>Chia optimizer state, gradient và tham số qua GPU</td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li>SMP v2 hỗ trợ Hugging Face Transformers và PyTorch FSDP một cách tự nhiên.</li>
+<li>Cho phép huấn luyện mô hình 70B+ tham số trên instance <code>p4d.24xlarge</code> (8x A100 GPU) hoặc <code>p5.48xlarge</code> (8x H100 GPU).</li>
+</ul>
+<h5 id="sagemaker-pipelines--tự-động-hóa-mlops">SageMaker Pipelines — Tự động hóa MLOps</h5>
+<p>SageMaker Pipeline production là DAG các bước liên kết tự động hóa toàn bộ luồng công việc ML từ dữ liệu thô đến mô hình đã triển khai:</p>
+<pre tabindex="0"><code>S3 Dữ liệu Thô
+    │
+    ▼
+ProcessingStep (Data Wrangler / SKLearn script)
+    │  Đầu ra: train.csv, validation.csv, test.csv
+    ▼
+TrainingStep (XGBoost / PyTorch Training Job)
+    │  Đầu ra: model.tar.gz
+    ▼
+EvaluationStep (Processing Job: tính chỉ số trên test set)
+    │  Đầu ra: evaluation.json { &#34;f1&#34;: 0.93, &#34;auc&#34;: 0.97 }
+    ▼
+ConditionStep (nếu F1 &gt;= 0.90)
+    ├── [Đúng]  → RegisterModelStep (Model Registry — PendingApproval)
+    │               └── [Được duyệt] → DeployStep (SageMaker Endpoint)
+    └── [Sai]   → FailStep (thông báo nhóm qua SNS)
+</code></pre><p><strong>Thuộc tính Thực thi Pipeline:</strong></p>
+<ul>
+<li>Pipeline được <strong>kiểm soát phiên bản</strong> — mỗi lần chạy tạo bản ghi thực thi bất biến với metadata (tham số, chỉ số, lineage artifact).</li>
+<li><strong>Caching</strong>: các bước có artifact đầu vào không thay đổi bị bỏ qua khi chạy lại, tăng tốc đáng kể thử nghiệm lặp lại.</li>
+<li><strong>Tham số</strong>: có thể cấu hình lúc thực thi (<code>TrainingInstanceType</code>, <code>ModelApprovalStatus</code>, <code>F1Threshold</code>) mà không sửa định nghĩa pipeline.</li>
+<li><strong>Tích hợp CI/CD</strong>: pipeline có thể được kích hoạt bởi CodePipeline khi commit repository hoặc qua lịch EventBridge cho retraining tự động.</li>
+</ul>
+<h5 id="sagemaker-model-registry--quản-trị-mô-hình">SageMaker Model Registry — Quản trị Mô hình</h5>
+<p>Model Registry cung cấp catalog tập trung của tất cả phiên bản mô hình đã huấn luyện, cho phép quản trị và triển khai có kiểm soát:</p>
+<p><strong>Model Package Group:</strong></p>
+<ul>
+<li>Mỗi model package group tương ứng với một use case (ví dụ: <code>FraudDetectionModel</code>, <code>ChurnPredictionModel</code>).</li>
+<li>Nhiều phiên bản mô hình nằm trong cùng một group, mỗi phiên bản có metadata, chỉ số và tham chiếu artifact.</li>
+</ul>
+<p><strong>Luồng Phê duyệt:</strong></p>
+<ul>
+<li>Phiên bản mô hình mới đăng ký với trạng thái <code>PendingManualApproval</code>.</li>
+<li>Người đánh giá (data scientist, ML engineer) đánh giá chỉ số trong Model Registry UI và đặt trạng thái thành <code>Approved</code> hoặc <code>Rejected</code>.</li>
+<li><strong>Phê duyệt tự động</strong>: Lambda function kích hoạt bởi EventBridge rule đánh giá chỉ số mô hình theo chương trình và tự phê duyệt mô hình đáp ứng ngưỡng chất lượng (ví dụ: F1 &gt; 0.90).</li>
+</ul>
+<p><strong>Triển khai Cross-Account:</strong></p>
+<pre tabindex="0"><code>Account A (Dev)               Account B (Staging)        Account C (Prod)
+  ↓ Đăng ký mô hình           ↓ Lấy mô hình đã duyệt    ↓ Lấy mô hình đã duyệt
+  SageMaker Registry  →→→ Cross-account IAM role  →→→ SageMaker Endpoint
+</code></pre><p>Model Registry hỗ trợ chia sẻ mô hình cross-account qua resource-based policy — mẫu quan trọng cho nhóm ML platform quản lý mô hình qua ranh giới đơn vị tổ chức.</p>
+<h5 id="chiến-lược-endpoint-scaling">Chiến lược Endpoint Scaling</h5>
+<p><strong>Application Auto Scaling:</strong></p>
+<p>SageMaker endpoint tích hợp tự nhiên với Application Auto Scaling:</p>
+<ul>
+<li><strong>Target Tracking</strong>: duy trì <code>SageMakerVariantInvocationsPerInstance</code> ở giá trị mục tiêu (ví dụ: 1000 lời gọi/phút/instance). Auto Scaling tự động thêm hoặc xóa instance.</li>
+<li><strong>Step Scaling</strong>: định nghĩa các bước scaling rời rạc kích hoạt khi chỉ số vượt ngưỡng cụ thể (scale-out tích cực, scale-in thận trọng).</li>
+<li><strong>Scheduled Scaling</strong>: pre-scale cho spike traffic đã biết (ví dụ: scale lên 10 instance lúc 08:00 thứ Hai, giảm về 2 lúc 22:00).</li>
+</ul>
+<p><strong>Multi-Model Endpoint (MME):</strong></p>
+<p>Host hàng nghìn mô hình trên một endpoint duy nhất, giảm đáng kể chi phí hosting cho kịch bản multi-tenant hoặc mô hình theo người dùng:</p>
+<ul>
+<li>Mô hình lưu trong S3 và được nạp vào bộ nhớ container theo nhu cầu (loại bỏ LRU khi bộ nhớ đầy).</li>
+<li>Một endpoint <code>ml.m5.xlarge</code> đơn có thể phục vụ hàng nghìn mô hình không đồng thời hot.</li>
+<li>Tính phí: trả cho một endpoint instance thay vì N endpoint riêng lẻ.</li>
+<li>Framework được hỗ trợ: MXNet, PyTorch, TensorFlow, scikit-learn, XGBoost (qua container SageMaker dựng sẵn).</li>
+</ul>
+<p><strong>SageMaker Inference Recommender:</strong></p>
+<ul>
+<li>Công cụ benchmark tự động: kiểm thử mô hình trên tập hợp loại instance và batch size có thể cấu hình.</li>
+<li>Đầu ra là bảng khuyến nghị xếp hạng: <code>(instance_type, cost_per_hour, latency_p99, throughput)</code>.</li>
+<li>Loại bỏ đoán mò trong lựa chọn instance — đặc biệt có giá trị khi di chuyển từ on-premises sang cloud inference.</li>
+</ul>
+<h5 id="sagemaker-clarify--phát-hiện-bias-và-giải-thích-mô-hình">SageMaker Clarify — Phát hiện Bias và Giải thích Mô hình</h5>
+<p>AI có trách nhiệm đòi hỏi mô hình không chỉ chính xác mà còn công bằng và có thể giải thích:</p>
+<p><strong>Phát hiện Bias Trước Huấn luyện:</strong></p>
+<p>Clarify phân tích dataset huấn luyện trước khi huấn luyện mô hình để phát hiện bias thống kê trong bản thân dữ liệu:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Chỉ số</th>
+          <th>Đo lường</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Class Imbalance (CI)</strong></td>
+          <td>Liệu phân phối nhãn có cân bằng qua các nhóm nhạy cảm không</td>
+      </tr>
+      <tr>
+          <td><strong>Difference in Proportions of Labels (DPL)</strong></td>
+          <td>Mức độ tỷ lệ nhãn khác nhau giữa nhóm đặc quyền và không đặc quyền</td>
+      </tr>
+      <tr>
+          <td><strong>Kullback-Leibler Divergence (KL)</strong></td>
+          <td>Khoảng cách thống kê giữa phân phối nhãn qua các nhóm</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Bias Metric Sau Huấn luyện:</strong></p>
+<p>Sau khi huấn luyện, Clarify đánh giá dự đoán của mô hình để tìm bias:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Chỉ số</th>
+          <th>Đo lường</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>DPPL</strong></td>
+          <td>Sự chênh lệch tỷ lệ dự đoán dương giữa các nhóm</td>
+      </tr>
+      <tr>
+          <td><strong>DImpact</strong></td>
+          <td>Bất bình đẳng trong kết quả dương so với nhóm tham chiếu</td>
+      </tr>
+      <tr>
+          <td><strong>Accuracy Difference</strong></td>
+          <td>Liệu mô hình có chính xác như nhau qua các nhóm nhân khẩu học không</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Giải thích Mô hình (SHAP):</strong></p>
+<p>SageMaker Clarify dùng <strong>SHAP (SHapley Additive exPlanations)</strong> để giải thích dự đoán cá nhân:</p>
+<ul>
+<li>Mỗi feature nhận SHAP value chỉ ra đóng góp (dương hoặc âm) của nó vào một dự đoán cụ thể.</li>
+<li>Biểu đồ thác nước SHAP hiển thị: <code>E[f(x)] + đóng_góp_feature_1 + đóng_góp_feature_2 + ... = f(x)</code>.</li>
+<li>Feature importance toàn cục: tổng hợp SHAP value qua test set để hiểu feature nào tổng thể điều khiển mô hình.</li>
+</ul>
+<p><strong>Tích hợp với Model Monitor:</strong></p>
+<ul>
+<li>Clarify có thể chạy như scheduled Model Monitor job trên live endpoint, phát hiện liệu tầm quan trọng tương đối của feature (explainability) có drift theo thời gian không — dấu hiệu cảnh báo sớm về sự lỗi thời của mô hình.</li>
+</ul>
+<h5 id="tối-ưu-chi-phí-inference">Tối ưu Chi phí Inference</h5>
+<p><strong>SageMaker Neo — Model Compilation:</strong></p>
+<p>Neo biên dịch mô hình đã huấn luyện cho phần cứng mục tiêu cụ thể (kiến trúc CPU/GPU) để loại bỏ overhead framework:</p>
+<ul>
+<li>Chuyển đổi mô hình từ TensorFlow, PyTorch, MXNet, XGBoost, sklearn thành binary tối ưu bằng LLVM-based compilation.</li>
+<li>Tăng tốc điển hình: <strong>độ trễ thấp hơn 25–40%</strong> và <strong>throughput đến gấp 2x</strong> so với mô hình chưa biên dịch.</li>
+<li>Phần cứng mục tiêu: <code>ml_c5</code>, <code>ml_m5</code>, <code>ml_g4dn</code>, AWS Inferentia (INF1/INF2), ARM Graviton.</li>
+</ul>
+<p><strong>AWS Inferentia (Instance Inf1 / Inf2):</strong></p>
+<ul>
+<li>Silicon tùy chỉnh AWS được thiết kế riêng cho ML inference.</li>
+<li><code>inf2.xlarge</code> cung cấp 2x AWS Neuron Core; chi phí khoảng 40% thấp hơn mỗi inference so với instance GPU <code>g4dn.xlarge</code> tương đương cho mô hình Transformer.</li>
+<li>Yêu cầu biên dịch mô hình với <strong>AWS Neuron SDK</strong> (wrapper PyTorch Neuron / TensorFlow Neuron).</li>
+</ul>
+<p><strong>Inference Dựa trên Graviton:</strong></p>
+<ul>
+<li>Instance <code>ml.m7g</code>, <code>ml.c7g</code> dùng bộ vi xử lý AWS Graviton3.</li>
+<li>Tốt hơn đến 40% price-performance cho mô hình inference CPU-bound (XGBoost, sklearn, mạng nơ-ron nhỏ) so với x86 tương đương.</li>
+</ul>
+<p><strong>So sánh Cost-Per-Inference (ví dụ, mô hình XGBoost):</strong></p>
+<table>
+  <thead>
+      <tr>
+          <th>Cấu hình</th>
+          <th>Instance</th>
+          <th>Chi phí/giờ</th>
+          <th>Throughput (req/s)</th>
+          <th>Chi phí 1M request</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Tiêu chuẩn</td>
+          <td>ml.m5.xlarge</td>
+          <td>$0.23</td>
+          <td>850</td>
+          <td>$0.075</td>
+      </tr>
+      <tr>
+          <td>Neo-compiled</td>
+          <td>ml.m5.xlarge</td>
+          <td>$0.23</td>
+          <td>1.190</td>
+          <td>$0.054</td>
+      </tr>
+      <tr>
+          <td>Graviton</td>
+          <td>ml.m7g.xlarge</td>
+          <td>$0.17</td>
+          <td>1.050</td>
+          <td>$0.045</td>
+      </tr>
+      <tr>
+          <td>Multi-Model</td>
+          <td>ml.m5.xlarge (dùng chung)</td>
+          <td>$0.023*</td>
+          <td>850</td>
+          <td>$0.0075*</td>
+      </tr>
+  </tbody>
+</table>
+<p>*Chi phí multi-model phân bổ qua 10 mô hình đang host đồng thời.</p>
+<h5 id="thực-hành">Thực hành</h5>
+<ul>
+<li>Khởi chạy PyTorch training job multi-node trên 2x <code>ml.p3.8xlarge</code> instance bằng SageMaker Distributed Data Parallel; giám sát GPU utilization và AllReduce throughput qua CloudWatch.</li>
+<li>Xây dựng SageMaker Pipeline 6 bước với ConditionStep chặn đăng ký mô hình khi F1 ≥ 0.90; kích hoạt pipeline từ CodePipeline khi simulate commit repository code mô hình.</li>
+<li>Đăng ký 3 phiên bản mô hình vào Model Registry, cấu hình phê duyệt tự động qua Lambda evaluator function và xác minh EventBridge kích hoạt pipeline triển khai khi được phê duyệt.</li>
+<li>Triển khai Multi-Model Endpoint hosting 50 mô hình XGBoost riêng lẻ (một mô hình mỗi phân khúc khách hàng); đo độ trễ cold-load so với warm-cache mỗi lần gọi mô hình.</li>
+<li>Chạy SageMaker Clarify trên mô hình phân loại nhị phân: xác định bias DPL 12% trên feature <code>age_group</code> và tạo báo cáo SHAP global importance — 3 feature hàng đầu chiếm 78% variance dự đoán.</li>
+<li>Biên dịch mô hình XGBoost với SageMaker Neo nhắm mục tiêu <code>ml_m5</code>; benchmark giảm 38% độ trễ và cải thiện 40% throughput so với phiên bản chưa biên dịch.</li>
+</ul>
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/vi/1-introduce/1.11-week11/" title="Tuần 11 Worklog"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/vi/2-prerequiste/" title="Bản đề xuất" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1775302918"></script>
+    <script src="/js/perfect-scrollbar.min.js?1775302918"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1775302918"></script>
+    <script src="/js/jquery.sticky.js?1775302918"></script>
+    <script src="/js/featherlight.min.js?1775302918"></script>
+    <script src="/js/highlight.pack.js?1775302918"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1775302918"></script>
+    <script src="/js/learn.js?1775302918"></script>
+    <script src="/js/hugo-learn.js?1775302918"></script>
+
+    <link href="/mermaid/mermaid.css?1775302918" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1775302918"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-158079754-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>

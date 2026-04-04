@@ -1,0 +1,2917 @@
+<!DOCTYPE html>
+<html lang="vi" class="js csstransforms3d">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.154.3">
+    <meta name="description" content="">
+<meta name="author" content="journeyoftheaverageguy@gmail.com">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Tuần 6 Worklog :: AWS System Manager</title>
+
+    
+    <link href="/css/nucleus.css?1775302918" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1775302918" rel="stylesheet">
+    <link href="/css/hybrid.css?1775302918" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1775302918" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1775302918" rel="stylesheet">
+    <link href="/css/auto-complete.css?1775302918" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1775302918" rel="stylesheet">
+    <link href="/css/theme.css?1775302918" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1775302918" rel="stylesheet">
+    
+    <link href="/css/theme-workshop.css?1775302918" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1775302918"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    <style type="text/css">
+     
+    #TableOfContents {
+        max-height: 80vh !important;
+        overflow-y: auto !important;
+         
+        scrollbar-width: thin;
+        scrollbar-color: #778ba5 transparent;
+    }
+
+    #TableOfContents::-webkit-scrollbar {
+        width: 8px !important;
+        display: block !important;
+    }
+
+    #TableOfContents::-webkit-scrollbar-track {
+        background: transparent !important;
+        border-radius: 4px;
+    }
+
+    #TableOfContents::-webkit-scrollbar-thumb {
+        background: #778ba5 !important;
+        border-radius: 4px;
+    }
+
+    #TableOfContents::-webkit-scrollbar-thumb:hover {
+        background: #4881cd !important;
+    }
+
+     
+    .progress {
+        overflow: visible !important;
+    }
+
+    .progress .wrapper {
+        overflow: visible !important;
+    }
+
+     
+    #sidebar {
+        width: 270px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        overflow: hidden !important;
+    }
+
+    #body {
+        margin-left: 280px !important;
+    }
+
+     
+    #sidebar #header-wrapper {
+        flex-shrink: 0 !important;
+    }
+
+    #sidebar .highlightable {
+        flex: 1 !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        height: auto !important;
+         
+        scrollbar-width: thin;
+        scrollbar-color: #778ba5 transparent;
+    }
+
+    #sidebar .highlightable::-webkit-scrollbar {
+        width: 5px !important;
+        display: block !important;
+    }
+
+    #sidebar .highlightable::-webkit-scrollbar-track {
+        background: transparent !important;
+    }
+
+    #sidebar .highlightable::-webkit-scrollbar-thumb {
+        background: #778ba5 !important;
+        border-radius: 4px !important;
+    }
+
+    #sidebar .highlightable::-webkit-scrollbar-thumb:hover {
+        background: #4881cd !important;
+    }
+</style>
+  </head>
+  <body class="" data-url="/vi/1-introduce/1.6-week6/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="/">
+
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#f90;fill-rule:evenodd;}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09,10.85a4.7,4.7,0,0,0,.19,1.48,7.73,7.73,0,0,0,.54,1.19.77.77,0,0,1,.12.38.64.64,0,0,1-.32.49l-1,.7a.83.83,0,0,1-.44.15.69.69,0,0,1-.49-.23,3.8,3.8,0,0,1-.6-.77q-.25-.42-.51-1a6.14,6.14,0,0,1-4.89,2.3,4.54,4.54,0,0,1-3.32-1.19,4.27,4.27,0,0,1-1.22-3.2A4.28,4.28,0,0,1,3.61,7.75,6.06,6.06,0,0,1,7.69,6.46a12.47,12.47,0,0,1,1.76.13q.92.13,1.91.36V5.73a3.65,3.65,0,0,0-.79-2.66A3.81,3.81,0,0,0,7.86,2.3a7.71,7.71,0,0,0-1.79.22,12.78,12.78,0,0,0-1.79.57,4.55,4.55,0,0,1-.58.22l-.26,0q-.35,0-.35-.52V2a1.09,1.09,0,0,1,.12-.58,1.2,1.2,0,0,1,.47-.35A10.88,10.88,0,0,1,5.77.32,10.19,10.19,0,0,1,8.36,0a6,6,0,0,1,4.35,1.35,5.49,5.49,0,0,1,1.38,4.09ZM7.34,13.38a5.36,5.36,0,0,0,1.72-.31A3.63,3.63,0,0,0,10.63,12,2.62,2.62,0,0,0,11.19,11a5.63,5.63,0,0,0,.16-1.44v-.7a14.35,14.35,0,0,0-1.53-.28,12.37,12.37,0,0,0-1.56-.1,3.84,3.84,0,0,0-2.47.67A2.34,2.34,0,0,0,5,11a2.35,2.35,0,0,0,.61,1.76A2.4,2.4,0,0,0,7.34,13.38Zm13.35,1.8a1,1,0,0,1-.64-.16,1.3,1.3,0,0,1-.35-.65L15.81,1.51a3,3,0,0,1-.15-.67.36.36,0,0,1,.41-.41H17.7a1,1,0,0,1,.65.16,1.4,1.4,0,0,1,.33.65l2.79,11,2.59-11A1.17,1.17,0,0,1,24.39.6a1.1,1.1,0,0,1,.67-.16H26.4a1.1,1.1,0,0,1,.67.16,1.17,1.17,0,0,1,.32.65L30,12.39,32.88,1.25A1.39,1.39,0,0,1,33.22.6a1,1,0,0,1,.65-.16h1.54a.36.36,0,0,1,.41.41,1.36,1.36,0,0,1,0,.26,3.64,3.64,0,0,1-.12.41l-4,12.86a1.3,1.3,0,0,1-.35.65,1,1,0,0,1-.64.16H29.25a1,1,0,0,1-.67-.17,1.26,1.26,0,0,1-.32-.67L25.67,3.64,23.11,14.34a1.26,1.26,0,0,1-.32.67,1,1,0,0,1-.67.17Zm21.36.44a11.28,11.28,0,0,1-2.56-.29,7.44,7.44,0,0,1-1.92-.67,1,1,0,0,1-.61-.93v-.84q0-.52.38-.52a.9.9,0,0,1,.31.06l.42.17a8.77,8.77,0,0,0,1.83.58,9.78,9.78,0,0,0,2,.2,4.48,4.48,0,0,0,2.43-.55,1.76,1.76,0,0,0,.86-1.57,1.61,1.61,0,0,0-.45-1.16A4.29,4.29,0,0,0,43,9.22l-2.41-.76A5.15,5.15,0,0,1,38,6.78a3.94,3.94,0,0,1-.83-2.41,3.7,3.7,0,0,1,.45-1.85,4.47,4.47,0,0,1,1.19-1.37A5.27,5.27,0,0,1,40.51.29,7.4,7.4,0,0,1,42.6,0a8.87,8.87,0,0,1,1.12.07q.57.07,1.08.19t.95.26a4.27,4.27,0,0,1,.7.29,1.59,1.59,0,0,1,.49.41.94.94,0,0,1,.15.55v.79q0,.52-.38.52a1.76,1.76,0,0,1-.64-.2,7.74,7.74,0,0,0-3.2-.64,4.37,4.37,0,0,0-2.21.47,1.6,1.6,0,0,0-.79,1.48,1.58,1.58,0,0,0,.49,1.18,4.94,4.94,0,0,0,1.83.92L44.55,7a5.08,5.08,0,0,1,2.57,1.6A3.76,3.76,0,0,1,47.9,11a4.21,4.21,0,0,1-.44,1.93,4.4,4.4,0,0,1-1.21,1.47,5.43,5.43,0,0,1-1.85.93A8.25,8.25,0,0,1,42.05,15.62Z"></path><path class="cls-2" d="M45.19,23.81C39.72,27.85,31.78,30,25,30A36.64,36.64,0,0,1,.22,20.57c-.51-.46-.06-1.09.56-.74A49.78,49.78,0,0,0,25.53,26.4,49.23,49.23,0,0,0,44.4,22.53C45.32,22.14,46.1,23.14,45.19,23.81Z"></path><path class="cls-2" d="M47.47,21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74,3.13-2.2,8.27-1.57,8.86-.83s-.16,5.89-3.09,8.35c-.45.38-.88.18-.68-.32C46.69,25.8,48.17,22.11,47.47,21.21Z"></path></svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1775302918"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1775302918"></script>
+<script type="text/javascript">
+    
+        var baseurl = "\/\/localhost:1313\/\/vi";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1775302918"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/" title="Nhật Ký Công Việc" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/vi/1-introduce/">
+           <b> 1. </b> Nhật Ký Công Việc
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.1-week1/" title="Tuần 1 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/1.1-week1/">
+           <b> 1.1. </b> Tuần 1 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.2-week2/" title="Tuần 2 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/1.2-week2/">
+           <b> 1.2. </b> Tuần 2 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.3-week3/" title="Tuần 3 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/1.3-week3/">
+           <b> 1.3. </b> Tuần 3 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.4-week4/" title="Tuần 4 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/1.4-week4/">
+           <b> 1.4. </b> Tuần 4 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.5-week5/" title="Tuần 5 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/1.5-week5/">
+           <b> 1.5. </b> Tuần 5 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.6-week6/" title="Tuần 6 Worklog" class="dd-item 
+        
+        active
+        
+        ">
+      <a href="/vi/1-introduce/1.6-week6/">
+           <b> 1.6. </b> Tuần 6 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.7-week7/" title="Tuần 7 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/1.7-week7/">
+           <b> 1.7. </b> Tuần 7 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.8-week8/" title="Tuần 8 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/1.8-week8/">
+           <b> 1.8. </b> Tuần 8 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.9-week9/" title="Tuần 9 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/1.9-week9/">
+           <b> 1.9. </b> Tuần 9 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.10-week10/" title="Tuần 10 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/1.10-week10/">
+           <b> 1.10. </b> Tuần 10 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.11-week11/" title="Tuần 11 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/1.11-week11/">
+           <b> 1.11. </b> Tuần 11 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.12-week12/" title="Tuần 12 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/1.12-week12/">
+           <b> 1.12. </b> Tuần 12 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/2-prerequiste/" title="Bản đề xuất" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/2-prerequiste/">
+           <b> 2. </b> Bản đề xuất
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/4-s3log/" title="Các events đã tham gia" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/4-s3log/">
+           <b> 3. </b> Các events đã tham gia
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/4-s3log/4.1-event1/" title="Sự Kiện 1" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/4-s3log/4.1-event1/">
+           <b> 4.1. </b> Sự Kiện 1
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/4-s3log/4.2-event2/" title="Sự Kiện 2" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/4-s3log/4.2-event2/">
+           <b> 3.2. </b> Sự Kiện 2
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/4-s3log/4.3-event3/" title="Sự Kiện 3" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/4-s3log/4.3-event3/">
+           <b> 3.3. </b> Sự Kiện 3
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/4-s3log/4.4-event4/" title="Sự Kiện 4" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/4-s3log/4.4-event4/">
+           <b> 3.4. </b> Sự Kiện 4
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/4-s3log/4.5-event5/" title="Sự Kiện 5" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/4-s3log/4.5-event5/">
+           <b> 3.5. </b> Sự Kiện 5
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/" title="Workshop" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/">
+           <b> 4. </b> Workshop
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.1-introduction/" title="Giới thiệu" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.1-introduction/">
+           <b> 4.1. </b> Giới thiệu
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.2-prerequisites/" title="Điều kiện tiên quyết" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.2-prerequisites/">
+           <b> 4.2. </b> Điều kiện tiên quyết
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.3-network-setup/" title="Thiết lập cơ sở hạ tầng mạng" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.3-network-setup/">
+           <b> 4.3. </b> Thiết lập cơ sở hạ tầng mạng
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.3-network-setup/5.3.1-vpc-subnets/" title="Khởi tạo VPC &amp; Subnets" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.3-network-setup/5.3.1-vpc-subnets/">
+           <b> 4.3.1. </b> Khởi tạo VPC &amp; Subnets
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.3-network-setup/5.3.2-nat-gateway/" title="Cấu hình Internet &amp; NAT Gateway" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.3-network-setup/5.3.2-nat-gateway/">
+           <b> 4.3.2. </b> Cấu hình Internet &amp; NAT Gateway
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.3-network-setup/5.3.3-route-table/" title="Cấu hình Route Table" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.3-network-setup/5.3.3-route-table/">
+           <b> 4.3.3. </b> Cấu hình Route Table
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.4-data-layer/" title="Triển khai tầng dữ liệu" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.4-data-layer/">
+           <b> 4.4. </b> Triển khai tầng dữ liệu
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.4-data-layer/5.4.1-security-groups/" title="Thiết lập AWS Bedrock Knowledge Base" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.4-data-layer/5.4.1-security-groups/">
+           <b> 4.4.1. </b> Thiết lập AWS Bedrock Knowledge Base
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.4-data-layer/5.4.2-rds/" title="Thiết lập Amazon S3 Bucket" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.4-data-layer/5.4.2-rds/">
+           <b> 4.4.2. </b> Thiết lập Amazon S3 Bucket
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.4-data-layer/5.4.3-elasticache/" title="Nhập Dữ liệu từ S3 vào DynamoDB" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.4-data-layer/5.4.3-elasticache/">
+           <b> 4.4.3. </b> Nhập Dữ liệu từ S3 vào DynamoDB
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.5-deploy-app/" title="Triển khai ứng dụng" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.5-deploy-app/">
+           <b> 4.5. </b> Triển khai ứng dụng
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.5-deploy-app/5.5.1-docker/" title="Đóng gói với Docker" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.5-deploy-app/5.5.1-docker/">
+           <b> 4.5.1. </b> Đóng gói với Docker
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.5-deploy-app/5.5.2-beanstalk/" title="Khởi tạo Elastic Beanstalk" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.5-deploy-app/5.5.2-beanstalk/">
+           <b> 4.5.2. </b> Khởi tạo Elastic Beanstalk
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.5-deploy-app/5.5.3-env-vars/" title="Cấu hình biến môi trường" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.5-deploy-app/5.5.3-env-vars/">
+           <b> 4.5.3. </b> Cấu hình biến môi trường
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.6-cicd/" title="Tự động hóa CI/CD" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.6-cicd/">
+           <b> 4.6. </b> Tự động hóa CI/CD
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.6-cicd/5.6.1-codebuild/" title="Tạo dự án Build" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.6-cicd/5.6.1-codebuild/">
+           <b> 4.6.1. </b> Tạo dự án Build
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.6-cicd/5.6.2-codepipeline/" title="Thiết lập CodePipeline" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.6-cicd/5.6.2-codepipeline/">
+           <b> 4.6.2. </b> Thiết lập CodePipeline
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.7-security/" title="Tối ưu hóa &amp; Bảo mật" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.7-security/">
+           <b> 4.7. </b> Tối ưu hóa &amp; Bảo mật
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.7-security/5.7.1-cloudfront/" title="Cấu hình S3 &amp; CloudFront" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.7-security/5.7.1-cloudfront/">
+           <b> 4.7.1. </b> Cấu hình S3 &amp; CloudFront
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.7-security/5.7.2-waf/" title="Thiết lập Tường lửa (WAF)" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.7-security/5.7.2-waf/">
+           <b> 4.7.2. </b> Thiết lập Tường lửa (WAF)
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.8-monitoring/" title="Giám sát &amp; Vận hành" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.8-monitoring/">
+           <b> 4.8. </b> Giám sát &amp; Vận hành
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.8-monitoring/5.8.1-cloudwatch/" title="Giám sát với CloudWatch" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.8-monitoring/5.8.1-cloudwatch/">
+           <b> 4.8.1. </b> Giám sát với CloudWatch
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.9-cleanup/" title="Dọn dẹp tài nguyên" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.9-cleanup/">
+           <b> 4.9. </b> Dọn dẹp tài nguyên
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.9-cleanup/5.9.1-cleanup-steps/" title="Các bước dọn dẹp" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.9-cleanup/5.9.1-cleanup-steps/">
+           <b> 4.9.1. </b> Các bước dọn dẹp
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/6-cleanup/" title="Tự đánh giá" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/6-cleanup/">
+          <b>5. </b>Tự đánh giá
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/7-sharing/" title="Chia sẻ, đóng góp ý kiến" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/7-sharing/">
+          <b>6. </b>Chia sẻ, đóng góp ý kiến
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://www.facebook.com/groups/awsstudygroupfcj/"><i class='fab fa-facebook'></i> AWS Study Group</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="//localhost:1313/1-introduce/1.6-week6/">English</option>
+                    
+                  
+              
+                  
+              
+          
+              
+              
+                  
+              
+                  
+                    
+                    
+                      <option id="vi" value="//localhost:1313/vi/1-introduce/1.6-week6/" selected>Tiếng Việt</option>
+                    
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <left>
+    
+     <b> Workshop</b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7920860&style=0038&nbdigits=9&type=page&initCount=0" title="Migrate" Alt="web counter"   border="0" /></a>  <br>
+     <b> <a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0" title="Total CLoud Journey" Alt="web counter"   border="0"   />
+     
+</left>
+<left>
+    <br>
+    <br>
+        <b> Last Updated </b> <br>
+        <i><font color="orange">04-04-2026</font></i>
+    </left>
+    <left>
+        <br>
+        <br>
+            <b> Team </b> <br>
+           
+            <i> <a href="https://www.facebook.com/groups/660548818043427"  style="color:orange">First Cloud Journey</a> <br>
+                
+               
+        </i>
+        </left>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/vi/'>Báo Cáo Thực Tập</a> > <a href='/vi/1-introduce/'>Nhật Ký Công Việc</a> > Tuần 6 Worklog
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+        <div id="toc-scroll-wrapper"
+            style="max-height: 300px; overflow-y: scroll; overflow-x: hidden; padding-right: 8px;">
+            <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#mục-tiêu-tuần-6">Mục tiêu Tuần 6</a></li>
+        <li><a href="#kế-hoạch-công-việc-trong-tuần">Kế hoạch công việc trong tuần</a></li>
+        <li><a href="#thành-quả-tuần-6">Thành quả Tuần 6</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+    </div>
+</div>
+<style>
+    #toc-scroll-wrapper::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    #toc-scroll-wrapper::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+    }
+
+    #toc-scroll-wrapper::-webkit-scrollbar-thumb {
+        background: #778ba5;
+        border-radius: 4px;
+    }
+
+    #toc-scroll-wrapper::-webkit-scrollbar-thumb:hover {
+        background: #4881cd;
+    }
+
+    #toc-scroll-wrapper {
+        scrollbar-width: thin;
+        scrollbar-color: #778ba5 #f1f1f1;
+    }
+</style>
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Tuần 6 Worklog
+            </h1>
+          
+
+        
+
+
+
+	<h3 id="mục-tiêu-tuần-6">Mục tiêu Tuần 6</h3>
+<ul>
+<li>Nắm vững các khái niệm cơ bản về Cơ sở dữ liệu và phân biệt rõ RDBMS với NoSQL.</li>
+<li>Phân biệt hai loại hệ thống xử lý dữ liệu OLTP và OLAP, xác định loại ứng dụng phù hợp với từng hệ thống.</li>
+<li>Hiểu rõ cấu trúc và vai trò của Primary Key, Foreign Key, Index, Partition, Buffer và DB Log.</li>
+<li>Tìm hiểu các dịch vụ cơ sở dữ liệu trên AWS như Amazon RDS, Aurora, Redshift và ElastiCache.</li>
+<li>Biết cách tối ưu, phục hồi, mở rộng và bảo mật cơ sở dữ liệu trên nền tảng AWS.</li>
+</ul>
+<hr>
+<h3 id="kế-hoạch-công-việc-trong-tuần">Kế hoạch công việc trong tuần</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Ngày</th>
+          <th>Công việc</th>
+          <th>Ngày bắt đầu</th>
+          <th>Ngày hoàn thành</th>
+          <th>Tài liệu tham khảo</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td>Ôn tập các khái niệm nền tảng về cơ sở dữ liệu: Database, Session, Primary/Foreign Key, Index, Partition, Buffer, Execution Plan và DB Log.</td>
+          <td>02/09/2026</td>
+          <td>02/09/2026</td>
+          <td><a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>Tìm hiểu RDBMS (mô hình quan hệ, SQL) và các loại NoSQL — Document, Key-Value, Wide-column, Graph — cùng các trường hợp sử dụng tương ứng.</td>
+          <td>02/10/2026</td>
+          <td>02/10/2026</td>
+          <td><a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>So sánh OLTP và OLAP, xác định loại ứng dụng phù hợp với từng mô hình và tìm hiểu vai trò của Data Warehouse trong pipeline phân tích dữ liệu.</td>
+          <td>02/11/2026</td>
+          <td>02/11/2026</td>
+          <td><a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td>Tìm hiểu chuyên sâu Amazon RDS: kiến trúc managed, backup tự động, Read Replica, Multi-AZ failover, auto scaling storage và các tùy chọn mã hóa.</td>
+          <td>02/12/2026</td>
+          <td>02/12/2026</td>
+          <td><a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></td>
+      </tr>
+      <tr>
+          <td>5</td>
+          <td>Khám phá Amazon Aurora: kiến trúc đọc/ghi hiệu năng cao, Backtrack, Clone, Global Database và khả năng ghi đa node Multi-Master.</td>
+          <td>02/13/2026</td>
+          <td>02/13/2026</td>
+          <td><a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></td>
+      </tr>
+      <tr>
+          <td>6</td>
+          <td>Tổng quan Amazon Redshift và Amazon ElastiCache — vai trò của từng dịch vụ trong phân tích OLAP và caching in-memory cho các ứng dụng yêu cầu hiệu năng cao.</td>
+          <td>02/14/2026</td>
+          <td>02/14/2026</td>
+          <td><a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="thành-quả-tuần-6">Thành quả Tuần 6</h3>
+<h5 id="các-khái-niệm-cơ-bản-về-cơ-sở-dữ-liệu">Các khái niệm cơ bản về Cơ sở dữ liệu</h5>
+<p><strong>Cơ sở dữ liệu (Database)</strong> là hệ thống thông tin có cấu trúc hoặc bán cấu trúc, được lưu trữ trên thiết bị vật lý, thiết kế để phục vụ truy cập đồng thời từ nhiều ứng dụng. Các thành phần then chốt bao gồm:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Khái niệm</th>
+          <th>Mô tả</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Session</strong></td>
+          <td>Khoảng thời gian từ khi thiết lập kết nối với hệ thống cơ sở dữ liệu cho đến khi ngắt kết nối.</td>
+      </tr>
+      <tr>
+          <td><strong>Primary Key</strong></td>
+          <td>Cột (hoặc tổ hợp cột) xác định duy nhất mỗi bản ghi trong bảng.</td>
+      </tr>
+      <tr>
+          <td><strong>Foreign Key</strong></td>
+          <td>Cột tham chiếu đến Primary Key của bảng khác, đảm bảo toàn vẹn tham chiếu giữa các quan hệ.</td>
+      </tr>
+      <tr>
+          <td><strong>Index</strong></td>
+          <td>Cấu trúc dữ liệu tăng tốc truy vấn đọc, nhưng tiêu tốn thêm bộ nhớ và làm chậm thao tác ghi.</td>
+      </tr>
+      <tr>
+          <td><strong>Partition</strong></td>
+          <td>Chia bảng lớn thành các phân đoạn nhỏ hơn để cải thiện hiệu năng truy vấn trên tập con dữ liệu.</td>
+      </tr>
+      <tr>
+          <td><strong>Execution Plan</strong></td>
+          <td>Kế hoạch thực thi truy vấn do query optimizer tạo ra, chọn con đường hiệu quả nhất để xử lý câu lệnh SQL.</td>
+      </tr>
+      <tr>
+          <td><strong>DB Log</strong></td>
+          <td>Bản ghi trước khi ghi (write-ahead log) lưu lại toàn bộ thay đổi, dùng để phục hồi sau sự cố và đồng bộ giữa primary và replica.</td>
+      </tr>
+      <tr>
+          <td><strong>Buffer</strong></td>
+          <td>Vùng bộ nhớ tạm lưu trữ các khối dữ liệu vừa đọc hoặc vừa ghi trước khi flush xuống đĩa, giảm thiểu độ trễ I/O.</td>
+      </tr>
+  </tbody>
+</table>
+<h5 id="rdbms--nosql">RDBMS &amp; NoSQL</h5>
+<p><strong>RDBMS (Hệ quản trị Cơ sở dữ liệu Quan hệ):</strong></p>
+<ul>
+<li>Tổ chức dữ liệu thành các bảng với hàng và cột; mối quan hệ giữa các thực thể được biểu diễn qua khóa chính và khóa ngoại.</li>
+<li>Sử dụng <strong>SQL</strong> làm ngôn ngữ chuẩn để truy vấn và thao tác dữ liệu.</li>
+<li>Đảm bảo thuộc tính <strong>ACID</strong> — Atomicity, Consistency, Isolation, Durability — phù hợp với các ứng dụng đòi hỏi tính nhất quán cao.</li>
+</ul>
+<p><strong>NoSQL (Not Only SQL):</strong></p>
+<ul>
+<li>Thoát khỏi mô hình bảng cứng nhắc, thay vào đó sử dụng cấu trúc dữ liệu linh hoạt, tùy chọn schema.</li>
+<li>Các kiểu NoSQL phổ biến:</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th>Loại</th>
+          <th>Ví dụ</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Dạng Document</td>
+          <td>MongoDB</td>
+      </tr>
+      <tr>
+          <td>Dạng Key-Value</td>
+          <td>Redis, DynamoDB</td>
+      </tr>
+      <tr>
+          <td>Dạng Wide-column</td>
+          <td>Cassandra</td>
+      </tr>
+      <tr>
+          <td>Dạng Graph</td>
+          <td>Neo4j</td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li>Phù hợp nhất cho các ứng dụng big data, dữ liệu phi cấu trúc, hoặc cần mở rộng ngang linh hoạt.</li>
+</ul>
+<h5 id="oltp-vs-olap">OLTP vs. OLAP</h5>
+<table>
+  <thead>
+      <tr>
+          <th>Đặc điểm</th>
+          <th>OLTP</th>
+          <th>OLAP</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Mục đích</strong></td>
+          <td>Xử lý giao dịch thời gian thực</td>
+          <td>Phân tích dữ liệu lịch sử tổng hợp</td>
+      </tr>
+      <tr>
+          <td><strong>Hồ sơ dữ liệu</strong></td>
+          <td>Cập nhật thường xuyên, hướng hàng</td>
+          <td>Đọc nhiều, tổng hợp, hướng cột</td>
+      </tr>
+      <tr>
+          <td><strong>Ứng dụng điển hình</strong></td>
+          <td>Ngân hàng, thương mại điện tử, đặt vé</td>
+          <td>BI, báo cáo, phân tích dữ liệu</td>
+      </tr>
+      <tr>
+          <td><strong>Tối ưu hóa</strong></td>
+          <td>Thông lượng giao dịch và đồng thời</td>
+          <td>Thời gian phản hồi truy vấn phức tạp</td>
+      </tr>
+      <tr>
+          <td><strong>Dịch vụ AWS</strong></td>
+          <td>RDS, Aurora</td>
+          <td>Redshift, Athena, QuickSight</td>
+      </tr>
+  </tbody>
+</table>
+<h5 id="amazon-rds-relational-database-service">Amazon RDS (Relational Database Service)</h5>
+<p>Dịch vụ cơ sở dữ liệu quan hệ được quản lý hoàn toàn, giải phóng khỏi gánh nặng vận hành như cài đặt, vá lỗi và quản lý hạ tầng:</p>
+<ul>
+<li><strong>Engine được hỗ trợ:</strong> Aurora, MySQL, PostgreSQL, MariaDB, Oracle và SQL Server.</li>
+<li><strong>Các tính năng chính:</strong>
+<ul>
+<li><strong>Backup tự động</strong> — sao lưu liên tục DB và log với cửa sổ giữ tối đa 35 ngày.</li>
+<li><strong>Read Replica</strong> — phân tải công việc đọc nặng (ví dụ: báo cáo) khỏi instance chính.</li>
+<li><strong>Multi-AZ deployment</strong> — replica đồng bộ ở AZ khác, tự động chuyển đổi khi primary gặp sự cố.</li>
+<li><strong>Mã hóa</strong> — bảo vệ dữ liệu khi lưu trữ (AES-256) và khi truyền tải (TLS).</li>
+<li><strong>Auto Scaling</strong> — tự động điều chỉnh dung lượng lưu trữ và kích thước instance theo nhu cầu thực tế.</li>
+<li><strong>Bảo mật mạng</strong> — kiểm soát truy cập qua Security Group và Network ACL.</li>
+</ul>
+</li>
+<li>Chủ yếu phục vụ khối lượng công việc <strong>OLTP</strong> đòi hỏi tính nhất quán mạnh và bảo đảm giao dịch.</li>
+</ul>
+<h5 id="amazon-aurora">Amazon Aurora</h5>
+<p>Engine cơ sở dữ liệu quan hệ được xây dựng đặc biệt cho đám mây, tối ưu hiệu năng và độ khả dụng, tương thích hoàn toàn với MySQL và PostgreSQL:</p>
+<ul>
+<li>Kế thừa toàn bộ tính năng của RDS, đồng thời mở rộng thêm:
+<ul>
+<li><strong>Backtrack</strong> — tua ngược cơ sở dữ liệu về một thời điểm chính xác mà không cần khôi phục từ snapshot.</li>
+<li><strong>Clone</strong> — tạo bản sao độc lập gần như tức thì với chi phí lưu trữ bổ sung tối thiểu.</li>
+<li><strong>Global Database</strong> — trải rộng nhiều AWS region với một primary writer và tối đa 16 read replica mỗi region.</li>
+<li><strong>Multi-Master</strong> — cho phép ghi đồng thời từ nhiều node, loại bỏ điểm nghẽn single-writer.</li>
+</ul>
+</li>
+<li>Dữ liệu được phân tán qua <strong>ba Availability Zone</strong> với nhân bản 6 chiều, đảm bảo độ bền cao và phục hồi tự động liền mạch.</li>
+</ul>
+<h5 id="amazon-redshift">Amazon Redshift</h5>
+<p>Dịch vụ <strong>Data Warehouse</strong> được quản lý hoàn toàn bởi AWS, xây dựng trên nền PostgreSQL mở rộng đặc biệt cho phân tích OLAP quy mô lớn:</p>
+<ul>
+<li>Sử dụng kiến trúc <strong>Massively Parallel Processing (MPP)</strong>:
+<ul>
+<li><strong>Leader Node</strong> — phân tích và điều phối thực thi truy vấn trên các compute node.</li>
+<li><strong>Compute Node</strong> — lưu trữ dữ liệu dạng cột và thực thi song song các phân mảnh truy vấn.</li>
+</ul>
+</li>
+<li><strong>Columnar storage</strong> giúp chỉ đọc đúng các cột được tham chiếu trong truy vấn, giảm đáng kể I/O cho các câu truy vấn phân tích.</li>
+<li>Các tính năng bổ sung:
+<ul>
+<li>Kết nối qua <strong>SQL, JDBC và ODBC</strong> chuẩn công nghiệp.</li>
+<li><strong>Redshift Spectrum</strong> — chạy truy vấn SQL trực tiếp trên file dữ liệu trong Amazon S3 mà không cần nạp vào cluster.</li>
+<li><strong>Pause/Resume</strong> (chế độ transient cluster) — dừng cluster khi không dùng để tránh chi phí compute không cần thiết.</li>
+</ul>
+</li>
+</ul>
+<h5 id="amazon-elasticache">Amazon ElastiCache</h5>
+<p>Dịch vụ caching in-memory được quản lý hoàn toàn, giúp giảm tải đáng kể cho cơ sở dữ liệu bên dưới và cải thiện thời gian phản hồi cho dữ liệu được truy cập thường xuyên:</p>
+<ul>
+<li>Hỗ trợ hai engine caching: <strong>Redis</strong> và <strong>Memcached</strong>.</li>
+<li>AWS tự động xử lý việc cung cấp node, vá lỗi, phát hiện lỗi và thay thế node bị hỏng.</li>
+<li><strong>Redis</strong> thường được ưu tiên hơn nhờ bộ tính năng phong phú:
+<ul>
+<li>Nhân bản và phân cụm độ khả dụng cao.</li>
+<li>Dữ liệu được duy trì qua các lần khởi động lại.</li>
+<li>Hỗ trợ nhắn tin Pub/Sub và scripting Lua.</li>
+</ul>
+</li>
+<li>Logic vô hiệu hóa cache ở tầng ứng dụng cần được thiết kế cẩn thận để ngăn phục vụ dữ liệu cũ sau khi cơ sở dữ liệu được cập nhật.</li>
+</ul>
+<h5 id="thực-hành">Thực hành</h5>
+<ul>
+<li>Điều hướng trong AWS Management Console để xem các instance EC2 đang chạy và kiểm tra trạng thái dịch vụ.</li>
+<li>Tạo và quản lý EC2 key pair phục vụ truy cập SSH bảo mật.</li>
+<li>Kiểm tra cấu hình các dịch vụ AWS đang hoạt động.</li>
+<li>Củng cố khả năng phối hợp giữa AWS Management Console và AWS CLI để quản lý tài nguyên song song trên cả hai giao diện đồ họa lẫn lập trình.</li>
+</ul>
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/vi/1-introduce/1.5-week5/" title="Tuần 5 Worklog"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/vi/1-introduce/1.7-week7/" title="Tuần 7 Worklog" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1775302918"></script>
+    <script src="/js/perfect-scrollbar.min.js?1775302918"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1775302918"></script>
+    <script src="/js/jquery.sticky.js?1775302918"></script>
+    <script src="/js/featherlight.min.js?1775302918"></script>
+    <script src="/js/highlight.pack.js?1775302918"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1775302918"></script>
+    <script src="/js/learn.js?1775302918"></script>
+    <script src="/js/hugo-learn.js?1775302918"></script>
+
+    <link href="/mermaid/mermaid.css?1775302918" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1775302918"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-158079754-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>

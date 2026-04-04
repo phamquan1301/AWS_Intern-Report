@@ -1,0 +1,2858 @@
+<!DOCTYPE html>
+<html lang="vi" class="js csstransforms3d">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.154.3">
+    <meta name="description" content="">
+<meta name="author" content="journeyoftheaverageguy@gmail.com">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Tuần 9 Worklog :: AWS System Manager</title>
+
+    
+    <link href="/css/nucleus.css?1775302918" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1775302918" rel="stylesheet">
+    <link href="/css/hybrid.css?1775302918" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1775302918" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1775302918" rel="stylesheet">
+    <link href="/css/auto-complete.css?1775302918" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1775302918" rel="stylesheet">
+    <link href="/css/theme.css?1775302918" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1775302918" rel="stylesheet">
+    
+    <link href="/css/theme-workshop.css?1775302918" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1775302918"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    <style type="text/css">
+     
+    #TableOfContents {
+        max-height: 80vh !important;
+        overflow-y: auto !important;
+         
+        scrollbar-width: thin;
+        scrollbar-color: #778ba5 transparent;
+    }
+
+    #TableOfContents::-webkit-scrollbar {
+        width: 8px !important;
+        display: block !important;
+    }
+
+    #TableOfContents::-webkit-scrollbar-track {
+        background: transparent !important;
+        border-radius: 4px;
+    }
+
+    #TableOfContents::-webkit-scrollbar-thumb {
+        background: #778ba5 !important;
+        border-radius: 4px;
+    }
+
+    #TableOfContents::-webkit-scrollbar-thumb:hover {
+        background: #4881cd !important;
+    }
+
+     
+    .progress {
+        overflow: visible !important;
+    }
+
+    .progress .wrapper {
+        overflow: visible !important;
+    }
+
+     
+    #sidebar {
+        width: 270px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        overflow: hidden !important;
+    }
+
+    #body {
+        margin-left: 280px !important;
+    }
+
+     
+    #sidebar #header-wrapper {
+        flex-shrink: 0 !important;
+    }
+
+    #sidebar .highlightable {
+        flex: 1 !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        height: auto !important;
+         
+        scrollbar-width: thin;
+        scrollbar-color: #778ba5 transparent;
+    }
+
+    #sidebar .highlightable::-webkit-scrollbar {
+        width: 5px !important;
+        display: block !important;
+    }
+
+    #sidebar .highlightable::-webkit-scrollbar-track {
+        background: transparent !important;
+    }
+
+    #sidebar .highlightable::-webkit-scrollbar-thumb {
+        background: #778ba5 !important;
+        border-radius: 4px !important;
+    }
+
+    #sidebar .highlightable::-webkit-scrollbar-thumb:hover {
+        background: #4881cd !important;
+    }
+</style>
+  </head>
+  <body class="" data-url="/vi/1-introduce/1.9-week9/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="/">
+
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#f90;fill-rule:evenodd;}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09,10.85a4.7,4.7,0,0,0,.19,1.48,7.73,7.73,0,0,0,.54,1.19.77.77,0,0,1,.12.38.64.64,0,0,1-.32.49l-1,.7a.83.83,0,0,1-.44.15.69.69,0,0,1-.49-.23,3.8,3.8,0,0,1-.6-.77q-.25-.42-.51-1a6.14,6.14,0,0,1-4.89,2.3,4.54,4.54,0,0,1-3.32-1.19,4.27,4.27,0,0,1-1.22-3.2A4.28,4.28,0,0,1,3.61,7.75,6.06,6.06,0,0,1,7.69,6.46a12.47,12.47,0,0,1,1.76.13q.92.13,1.91.36V5.73a3.65,3.65,0,0,0-.79-2.66A3.81,3.81,0,0,0,7.86,2.3a7.71,7.71,0,0,0-1.79.22,12.78,12.78,0,0,0-1.79.57,4.55,4.55,0,0,1-.58.22l-.26,0q-.35,0-.35-.52V2a1.09,1.09,0,0,1,.12-.58,1.2,1.2,0,0,1,.47-.35A10.88,10.88,0,0,1,5.77.32,10.19,10.19,0,0,1,8.36,0a6,6,0,0,1,4.35,1.35,5.49,5.49,0,0,1,1.38,4.09ZM7.34,13.38a5.36,5.36,0,0,0,1.72-.31A3.63,3.63,0,0,0,10.63,12,2.62,2.62,0,0,0,11.19,11a5.63,5.63,0,0,0,.16-1.44v-.7a14.35,14.35,0,0,0-1.53-.28,12.37,12.37,0,0,0-1.56-.1,3.84,3.84,0,0,0-2.47.67A2.34,2.34,0,0,0,5,11a2.35,2.35,0,0,0,.61,1.76A2.4,2.4,0,0,0,7.34,13.38Zm13.35,1.8a1,1,0,0,1-.64-.16,1.3,1.3,0,0,1-.35-.65L15.81,1.51a3,3,0,0,1-.15-.67.36.36,0,0,1,.41-.41H17.7a1,1,0,0,1,.65.16,1.4,1.4,0,0,1,.33.65l2.79,11,2.59-11A1.17,1.17,0,0,1,24.39.6a1.1,1.1,0,0,1,.67-.16H26.4a1.1,1.1,0,0,1,.67.16,1.17,1.17,0,0,1,.32.65L30,12.39,32.88,1.25A1.39,1.39,0,0,1,33.22.6a1,1,0,0,1,.65-.16h1.54a.36.36,0,0,1,.41.41,1.36,1.36,0,0,1,0,.26,3.64,3.64,0,0,1-.12.41l-4,12.86a1.3,1.3,0,0,1-.35.65,1,1,0,0,1-.64.16H29.25a1,1,0,0,1-.67-.17,1.26,1.26,0,0,1-.32-.67L25.67,3.64,23.11,14.34a1.26,1.26,0,0,1-.32.67,1,1,0,0,1-.67.17Zm21.36.44a11.28,11.28,0,0,1-2.56-.29,7.44,7.44,0,0,1-1.92-.67,1,1,0,0,1-.61-.93v-.84q0-.52.38-.52a.9.9,0,0,1,.31.06l.42.17a8.77,8.77,0,0,0,1.83.58,9.78,9.78,0,0,0,2,.2,4.48,4.48,0,0,0,2.43-.55,1.76,1.76,0,0,0,.86-1.57,1.61,1.61,0,0,0-.45-1.16A4.29,4.29,0,0,0,43,9.22l-2.41-.76A5.15,5.15,0,0,1,38,6.78a3.94,3.94,0,0,1-.83-2.41,3.7,3.7,0,0,1,.45-1.85,4.47,4.47,0,0,1,1.19-1.37A5.27,5.27,0,0,1,40.51.29,7.4,7.4,0,0,1,42.6,0a8.87,8.87,0,0,1,1.12.07q.57.07,1.08.19t.95.26a4.27,4.27,0,0,1,.7.29,1.59,1.59,0,0,1,.49.41.94.94,0,0,1,.15.55v.79q0,.52-.38.52a1.76,1.76,0,0,1-.64-.2,7.74,7.74,0,0,0-3.2-.64,4.37,4.37,0,0,0-2.21.47,1.6,1.6,0,0,0-.79,1.48,1.58,1.58,0,0,0,.49,1.18,4.94,4.94,0,0,0,1.83.92L44.55,7a5.08,5.08,0,0,1,2.57,1.6A3.76,3.76,0,0,1,47.9,11a4.21,4.21,0,0,1-.44,1.93,4.4,4.4,0,0,1-1.21,1.47,5.43,5.43,0,0,1-1.85.93A8.25,8.25,0,0,1,42.05,15.62Z"></path><path class="cls-2" d="M45.19,23.81C39.72,27.85,31.78,30,25,30A36.64,36.64,0,0,1,.22,20.57c-.51-.46-.06-1.09.56-.74A49.78,49.78,0,0,0,25.53,26.4,49.23,49.23,0,0,0,44.4,22.53C45.32,22.14,46.1,23.14,45.19,23.81Z"></path><path class="cls-2" d="M47.47,21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74,3.13-2.2,8.27-1.57,8.86-.83s-.16,5.89-3.09,8.35c-.45.38-.88.18-.68-.32C46.69,25.8,48.17,22.11,47.47,21.21Z"></path></svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1775302918"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1775302918"></script>
+<script type="text/javascript">
+    
+        var baseurl = "\/\/localhost:1313\/\/vi";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1775302918"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/" title="Nhật Ký Công Việc" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/vi/1-introduce/">
+           <b> 1. </b> Nhật Ký Công Việc
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.1-week1/" title="Tuần 1 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/1.1-week1/">
+           <b> 1.1. </b> Tuần 1 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.2-week2/" title="Tuần 2 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/1.2-week2/">
+           <b> 1.2. </b> Tuần 2 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.3-week3/" title="Tuần 3 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/1.3-week3/">
+           <b> 1.3. </b> Tuần 3 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.4-week4/" title="Tuần 4 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/1.4-week4/">
+           <b> 1.4. </b> Tuần 4 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.5-week5/" title="Tuần 5 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/1.5-week5/">
+           <b> 1.5. </b> Tuần 5 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.6-week6/" title="Tuần 6 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/1.6-week6/">
+           <b> 1.6. </b> Tuần 6 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.7-week7/" title="Tuần 7 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/1.7-week7/">
+           <b> 1.7. </b> Tuần 7 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.8-week8/" title="Tuần 8 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/1.8-week8/">
+           <b> 1.8. </b> Tuần 8 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.9-week9/" title="Tuần 9 Worklog" class="dd-item 
+        
+        active
+        
+        ">
+      <a href="/vi/1-introduce/1.9-week9/">
+           <b> 1.9. </b> Tuần 9 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.10-week10/" title="Tuần 10 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/1.10-week10/">
+           <b> 1.10. </b> Tuần 10 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.11-week11/" title="Tuần 11 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/1.11-week11/">
+           <b> 1.11. </b> Tuần 11 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-introduce/1.12-week12/" title="Tuần 12 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-introduce/1.12-week12/">
+           <b> 1.12. </b> Tuần 12 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/2-prerequiste/" title="Bản đề xuất" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/2-prerequiste/">
+           <b> 2. </b> Bản đề xuất
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/4-s3log/" title="Các events đã tham gia" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/4-s3log/">
+           <b> 3. </b> Các events đã tham gia
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/4-s3log/4.1-event1/" title="Sự Kiện 1" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/4-s3log/4.1-event1/">
+           <b> 4.1. </b> Sự Kiện 1
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/4-s3log/4.2-event2/" title="Sự Kiện 2" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/4-s3log/4.2-event2/">
+           <b> 3.2. </b> Sự Kiện 2
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/4-s3log/4.3-event3/" title="Sự Kiện 3" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/4-s3log/4.3-event3/">
+           <b> 3.3. </b> Sự Kiện 3
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/4-s3log/4.4-event4/" title="Sự Kiện 4" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/4-s3log/4.4-event4/">
+           <b> 3.4. </b> Sự Kiện 4
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/4-s3log/4.5-event5/" title="Sự Kiện 5" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/4-s3log/4.5-event5/">
+           <b> 3.5. </b> Sự Kiện 5
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/" title="Workshop" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/">
+           <b> 4. </b> Workshop
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.1-introduction/" title="Giới thiệu" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.1-introduction/">
+           <b> 4.1. </b> Giới thiệu
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.2-prerequisites/" title="Điều kiện tiên quyết" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.2-prerequisites/">
+           <b> 4.2. </b> Điều kiện tiên quyết
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.3-network-setup/" title="Thiết lập cơ sở hạ tầng mạng" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.3-network-setup/">
+           <b> 4.3. </b> Thiết lập cơ sở hạ tầng mạng
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.3-network-setup/5.3.1-vpc-subnets/" title="Khởi tạo VPC &amp; Subnets" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.3-network-setup/5.3.1-vpc-subnets/">
+           <b> 4.3.1. </b> Khởi tạo VPC &amp; Subnets
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.3-network-setup/5.3.2-nat-gateway/" title="Cấu hình Internet &amp; NAT Gateway" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.3-network-setup/5.3.2-nat-gateway/">
+           <b> 4.3.2. </b> Cấu hình Internet &amp; NAT Gateway
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.3-network-setup/5.3.3-route-table/" title="Cấu hình Route Table" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.3-network-setup/5.3.3-route-table/">
+           <b> 4.3.3. </b> Cấu hình Route Table
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.4-data-layer/" title="Triển khai tầng dữ liệu" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.4-data-layer/">
+           <b> 4.4. </b> Triển khai tầng dữ liệu
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.4-data-layer/5.4.1-security-groups/" title="Thiết lập AWS Bedrock Knowledge Base" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.4-data-layer/5.4.1-security-groups/">
+           <b> 4.4.1. </b> Thiết lập AWS Bedrock Knowledge Base
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.4-data-layer/5.4.2-rds/" title="Thiết lập Amazon S3 Bucket" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.4-data-layer/5.4.2-rds/">
+           <b> 4.4.2. </b> Thiết lập Amazon S3 Bucket
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.4-data-layer/5.4.3-elasticache/" title="Nhập Dữ liệu từ S3 vào DynamoDB" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.4-data-layer/5.4.3-elasticache/">
+           <b> 4.4.3. </b> Nhập Dữ liệu từ S3 vào DynamoDB
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.5-deploy-app/" title="Triển khai ứng dụng" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.5-deploy-app/">
+           <b> 4.5. </b> Triển khai ứng dụng
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.5-deploy-app/5.5.1-docker/" title="Đóng gói với Docker" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.5-deploy-app/5.5.1-docker/">
+           <b> 4.5.1. </b> Đóng gói với Docker
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.5-deploy-app/5.5.2-beanstalk/" title="Khởi tạo Elastic Beanstalk" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.5-deploy-app/5.5.2-beanstalk/">
+           <b> 4.5.2. </b> Khởi tạo Elastic Beanstalk
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.5-deploy-app/5.5.3-env-vars/" title="Cấu hình biến môi trường" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.5-deploy-app/5.5.3-env-vars/">
+           <b> 4.5.3. </b> Cấu hình biến môi trường
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.6-cicd/" title="Tự động hóa CI/CD" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.6-cicd/">
+           <b> 4.6. </b> Tự động hóa CI/CD
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.6-cicd/5.6.1-codebuild/" title="Tạo dự án Build" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.6-cicd/5.6.1-codebuild/">
+           <b> 4.6.1. </b> Tạo dự án Build
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.6-cicd/5.6.2-codepipeline/" title="Thiết lập CodePipeline" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.6-cicd/5.6.2-codepipeline/">
+           <b> 4.6.2. </b> Thiết lập CodePipeline
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.7-security/" title="Tối ưu hóa &amp; Bảo mật" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.7-security/">
+           <b> 4.7. </b> Tối ưu hóa &amp; Bảo mật
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.7-security/5.7.1-cloudfront/" title="Cấu hình S3 &amp; CloudFront" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.7-security/5.7.1-cloudfront/">
+           <b> 4.7.1. </b> Cấu hình S3 &amp; CloudFront
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.7-security/5.7.2-waf/" title="Thiết lập Tường lửa (WAF)" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.7-security/5.7.2-waf/">
+           <b> 4.7.2. </b> Thiết lập Tường lửa (WAF)
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.8-monitoring/" title="Giám sát &amp; Vận hành" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.8-monitoring/">
+           <b> 4.8. </b> Giám sát &amp; Vận hành
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.8-monitoring/5.8.1-cloudwatch/" title="Giám sát với CloudWatch" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.8-monitoring/5.8.1-cloudwatch/">
+           <b> 4.8.1. </b> Giám sát với CloudWatch
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.9-cleanup/" title="Dọn dẹp tài nguyên" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.9-cleanup/">
+           <b> 4.9. </b> Dọn dẹp tài nguyên
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-portfwd/5.9-cleanup/5.9.1-cleanup-steps/" title="Các bước dọn dẹp" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/5-portfwd/5.9-cleanup/5.9.1-cleanup-steps/">
+           <b> 4.9.1. </b> Các bước dọn dẹp
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/6-cleanup/" title="Tự đánh giá" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/6-cleanup/">
+          <b>5. </b>Tự đánh giá
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/7-sharing/" title="Chia sẻ, đóng góp ý kiến" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/7-sharing/">
+          <b>6. </b>Chia sẻ, đóng góp ý kiến
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://www.facebook.com/groups/awsstudygroupfcj/"><i class='fab fa-facebook'></i> AWS Study Group</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="//localhost:1313/1-introduce/1.9-week9/">English</option>
+                    
+                  
+              
+                  
+              
+          
+              
+              
+                  
+              
+                  
+                    
+                    
+                      <option id="vi" value="//localhost:1313/vi/1-introduce/1.9-week9/" selected>Tiếng Việt</option>
+                    
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <left>
+    
+     <b> Workshop</b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7920860&style=0038&nbdigits=9&type=page&initCount=0" title="Migrate" Alt="web counter"   border="0" /></a>  <br>
+     <b> <a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0" title="Total CLoud Journey" Alt="web counter"   border="0"   />
+     
+</left>
+<left>
+    <br>
+    <br>
+        <b> Last Updated </b> <br>
+        <i><font color="orange">04-04-2026</font></i>
+    </left>
+    <left>
+        <br>
+        <br>
+            <b> Team </b> <br>
+           
+            <i> <a href="https://www.facebook.com/groups/660548818043427"  style="color:orange">First Cloud Journey</a> <br>
+                
+               
+        </i>
+        </left>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/vi/'>Báo Cáo Thực Tập</a> > <a href='/vi/1-introduce/'>Nhật Ký Công Việc</a> > Tuần 9 Worklog
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+        <div id="toc-scroll-wrapper"
+            style="max-height: 300px; overflow-y: scroll; overflow-x: hidden; padding-right: 8px;">
+            <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#mục-tiêu-tuần-9">Mục tiêu Tuần 9</a></li>
+        <li><a href="#kế-hoạch-công-việc-trong-tuần">Kế hoạch công việc trong tuần</a></li>
+        <li><a href="#thành-quả-tuần-9">Thành quả Tuần 9</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+    </div>
+</div>
+<style>
+    #toc-scroll-wrapper::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    #toc-scroll-wrapper::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+    }
+
+    #toc-scroll-wrapper::-webkit-scrollbar-thumb {
+        background: #778ba5;
+        border-radius: 4px;
+    }
+
+    #toc-scroll-wrapper::-webkit-scrollbar-thumb:hover {
+        background: #4881cd;
+    }
+
+    #toc-scroll-wrapper {
+        scrollbar-width: thin;
+        scrollbar-color: #778ba5 #f1f1f1;
+    }
+</style>
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Tuần 9 Worklog
+            </h1>
+          
+
+        
+
+
+
+	<h3 id="mục-tiêu-tuần-9">Mục tiêu Tuần 9</h3>
+<ul>
+<li>Chuyển từ kiến thức lý thuyết sang triển khai thực tế các khái niệm data engineering trên AWS.</li>
+<li>Thiết kế và xây dựng kiến trúc Data Lake hoàn chỉnh trên Amazon S3 với các zone lưu trữ phân lớp hợp lý.</li>
+<li>Triển khai pipeline ETL end-to-end bằng AWS Glue để thu thập, biến đổi và publish dữ liệu.</li>
+<li>Cấu hình và sử dụng Amazon Athena để truy vấn dữ liệu đã biến đổi hiệu quả với phân vùng và định dạng cột.</li>
+<li>Xây dựng pipeline thu thập dữ liệu thời gian thực bằng Amazon Kinesis Data Firehose.</li>
+<li>Giám sát, bảo mật và quản trị Data Lake bằng AWS Lake Formation, IAM và CloudWatch.</li>
+</ul>
+<hr>
+<h3 id="kế-hoạch-công-việc-trong-tuần">Kế hoạch công việc trong tuần</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Ngày</th>
+          <th>Công việc</th>
+          <th>Ngày bắt đầu</th>
+          <th>Ngày hoàn thành</th>
+          <th>Tài liệu tham khảo</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td>Thiết kế S3 Data Lake 3 zone (raw, curated, consumption), cấu hình bucket policy, lifecycle rule, S3 Intelligent-Tiering và bật mã hóa phía server bằng KMS.</td>
+          <td>03/02/2026</td>
+          <td>03/02/2026</td>
+          <td><a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>Xây dựng và chạy AWS Glue Crawler trên dữ liệu vùng raw, kiểm chứng schema inference trong Glue Data Catalog và giải quyết các vấn đề phân vùng động cho dataset phân vùng theo ngày lớn.</td>
+          <td>03/03/2026</td>
+          <td>03/03/2026</td>
+          <td><a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>Viết Glue ETL job nhiều bước: đọc CSV từ raw zone, áp dụng đổi tên cột, ép kiểu, loại trùng lặp và phân vùng theo ngày, sau đó ghi Parquet vào curated zone.</td>
+          <td>03/04/2026</td>
+          <td>03/04/2026</td>
+          <td><a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td>Thiết lập pipeline thu thập thời gian thực bằng Kinesis Data Firehose: cấu hình Python producer script, biến đổi record bằng Lambda inline và deliver file Parquet nén vào S3.</td>
+          <td>03/05/2026</td>
+          <td>03/05/2026</td>
+          <td><a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></td>
+      </tr>
+      <tr>
+          <td>5</td>
+          <td>Triển khai AWS Lake Formation: đăng ký S3 Data Lake, cấp quyền theo cột và theo hàng cho IAM role, kiểm chứng kiểm soát truy cập từ Athena trên nhiều danh tính người dùng khác nhau.</td>
+          <td>03/06/2026</td>
+          <td>03/06/2026</td>
+          <td><a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></td>
+      </tr>
+      <tr>
+          <td>6</td>
+          <td>Tinh chỉnh hiệu năng truy vấn Athena: áp dụng partition pruning, viết lại truy vấn dùng columnar projection, phân tích execution plan với EXPLAIN, thiết lập workgroup cost control và tái sử dụng kết quả truy vấn.</td>
+          <td>03/07/2026</td>
+          <td>03/07/2026</td>
+          <td><a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="thành-quả-tuần-9">Thành quả Tuần 9</h3>
+<h5 id="thiết-kế-s3-data-lake--kiến-trúc-ba-zone">Thiết kế S3 Data Lake — Kiến trúc Ba Zone</h5>
+<p>Một Data Lake trên S3 có cấu trúc tốt được tổ chức thành ba zone lưu trữ logic, mỗi zone phục vụ một mục đích riêng biệt trong vòng đời dữ liệu:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Zone</th>
+          <th>Mục đích</th>
+          <th>Trạng thái dữ liệu</th>
+          <th>Định dạng điển hình</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Raw Zone</strong></td>
+          <td>Vùng tiếp nhận tất cả dữ liệu đến đúng như gốc</td>
+          <td>Chưa xử lý, bất biến</td>
+          <td>CSV, JSON, log, nhị phân</td>
+      </tr>
+      <tr>
+          <td><strong>Curated Zone</strong></td>
+          <td>Dữ liệu đã làm sạch, kiểm chứng và biến đổi sẵn sàng cho analytics</td>
+          <td>Đã xử lý, phân vùng</td>
+          <td>Parquet, ORC</td>
+      </tr>
+      <tr>
+          <td><strong>Consumption Zone</strong></td>
+          <td>Dataset tổng hợp hoặc theo domain được tối ưu cho từng use case</td>
+          <td>Tối ưu truy vấn</td>
+          <td>Parquet (phân vùng theo khóa nghiệp vụ)</td>
+      </tr>
+  </tbody>
+</table>
+<p>Các cấu hình S3 chính áp dụng cho Data Lake:</p>
+<ul>
+<li><strong>Bucket policy</strong>: hạn chế quyền ghi trực tiếp vào raw zone chỉ cho các role thu thập được ủy quyền; ngăn consumer bỏ qua curated layer.</li>
+<li><strong>S3 Lifecycle Rule</strong>: tự động chuyển object trong raw zone sang S3-IA sau 30 ngày và Glacier sau 90 ngày để giảm thiểu chi phí lưu trữ dài hạn.</li>
+<li><strong>S3 Intelligent-Tiering</strong>: áp dụng cho curated zone nơi access pattern khó đoán, tự động chuyển object giữa tầng truy cập thường xuyên và không thường xuyên.</li>
+<li><strong>Mã hóa</strong>: tất cả zone được mã hóa khi lưu trữ bằng <strong>SSE-KMS</strong> với Customer Managed Key, cho phép chính sách xoay key riêng theo từng zone.</li>
+<li><strong>Versioning</strong>: bật trên raw zone để cung cấp cơ chế phục hồi khi ghi đè hoặc xóa nhầm.</li>
+</ul>
+<h5 id="aws-glue--xây-dựng-pipeline-etl">AWS Glue — Xây dựng Pipeline ETL</h5>
+<p><strong>Cấu hình Crawler:</strong></p>
+<p>Chạy Glue Crawler trên raw zone cho phép phát hiện tự động các thay đổi cấu trúc file mà không cần cập nhật schema thủ công:</p>
+<ul>
+<li>Crawler suy luận partition key tương thích Hive từ S3 prefix (ví dụ: <code>s3://bucket/raw/sales/year=2026/month=03/</code>).</li>
+<li><strong>Partition projection</strong>: cấu hình trực tiếp trong Glue Data Catalog để tránh chạy lại crawler khi có partition mới — giảm đáng kể độ trễ làm mới catalog cho dữ liệu đến với tần suất cao.</li>
+<li><strong>Exclusion pattern</strong>: cấu hình để bỏ qua file ẩn, marker <code>_SUCCESS</code> và file upload chưa hoàn chỉnh.</li>
+</ul>
+<p><strong>ETL Job — Biến đổi CSV sang Parquet:</strong></p>
+<p>Glue ETL job thực hiện các bước biến đổi sau bằng DynamicFrame API:</p>
+<ol>
+<li><strong>Đọc</strong>: nạp CSV thô từ S3 dùng <code>create_dynamic_frame.from_catalog()</code>.</li>
+<li><strong>Ánh xạ</strong>: đổi tên cột sang snake_case, ép kiểu timestamp dạng chuỗi thành kiểu <code>timestamp</code>, chuyển số dạng chuỗi sang <code>double</code>.</li>
+<li><strong>Lọc</strong>: loại bỏ bản ghi có primary key null hoặc ngày không hợp lệ bằng <code>Filter.apply()</code>.</li>
+<li><strong>Loại trùng lặp</strong>: dùng <code>toDF().dropDuplicates(['id', 'event_date'])</code> để xóa bản sao hoàn toàn.</li>
+<li><strong>Phân vùng lại</strong>: repartition theo ngày để căn chỉnh độ chi tiết file đầu ra với pattern truy vấn downstream.</li>
+<li><strong>Ghi</strong>: xuất Parquet với nén Snappy vào curated zone, phân vùng theo <code>year/month/day</code>.</li>
+</ol>
+<p><strong>Job Bookmark</strong>: bật để theo dõi các object S3 đã xử lý, đảm bảo các lần chạy tăng dần chỉ xử lý dữ liệu mới thay vì reprocess toàn bộ dataset.</p>
+<h5 id="thu-thập-thời-gian-thực-với-kinesis-data-firehose">Thu thập Thời gian Thực với Kinesis Data Firehose</h5>
+<p>Pipeline thu thập sự kiện thời gian thực được xây dựng để xử lý luồng dữ liệu liên tục:</p>
+<p><strong>Kiến trúc:</strong></p>
+<pre tabindex="0"><code>Python Producer (Boto3)
+    │  Gọi API PutRecord
+    ▼
+Kinesis Data Firehose Delivery Stream
+    │  Buffer: 60s / 5MB
+    ├─► Lambda Transform (JSON → NDJSON, bổ sung trường)
+    │
+    ▼
+S3 Raw Zone (phân vùng theo thời gian delivery: yyyy/MM/dd/HH)
+    │
+    ▼
+Glue Crawler (kích hoạt theo lịch) → cập nhật Data Catalog
+    │
+    ▼
+Athena (có thể truy vấn trong vài phút sau khi thu thập)
+</code></pre><p><strong>Các cấu hình chính:</strong></p>
+<ul>
+<li><strong>Buffer hint</strong>: đặt 60 giây buffer interval với ngưỡng kích thước 5 MB — đạt điều kiện nào trước sẽ kích hoạt S3 PUT.</li>
+<li><strong>Lambda transform</strong>: function inline làm giàu record với <code>processing_timestamp</code> và chuyển JSON array thành newline-delimited JSON (NDJSON) tương thích Glue.</li>
+<li><strong>Error logging</strong>: record biến đổi thất bại chuyển hướng đến S3 prefix riêng để kiểm tra dead-letter thủ công.</li>
+<li><strong>Nén</strong>: Firehose cấu hình nén GZIP giảm khoảng 70% dung lượng lưu trữ S3.</li>
+</ul>
+<h5 id="aws-lake-formation--kiểm-soát-truy-cập-tinh-tế">AWS Lake Formation — Kiểm soát Truy cập Tinh tế</h5>
+<p>AWS Lake Formation nằm trên Glue Data Catalog và IAM để cung cấp kiểm soát truy cập theo kiểu database trên dữ liệu dựa trên S3:</p>
+<ul>
+<li><strong>Đăng ký Data Lake</strong>: S3 location đăng ký với Lake Formation để ủy quyền quyết định truy cập ra khỏi bucket policy S3 thô.</li>
+<li><strong>Quyền theo bảng</strong>: cấp <code>SELECT</code> trên các Glue table cụ thể cho IAM role analyst, đồng thời hạn chế hoàn toàn truy cập vào raw zone table.</li>
+<li><strong>Bảo mật theo cột</strong>: ẩn các cột PII (ví dụ: <code>email</code>, <code>phone_number</code>) từ curated zone cho role analyst không có đặc quyền — cột đơn giản không xuất hiện trong kết quả truy vấn Athena.</li>
+<li><strong>Lọc theo hàng (RLS)</strong>: áp dụng biểu thức filter dữ liệu (ví dụ: <code>region = 'VN'</code>) theo IAM principal, đảm bảo analyst chỉ thấy hàng liên quan đến domain nghiệp vụ của họ.</li>
+<li><strong>Kiểm soát truy cập dựa trên tag (TBAC)</strong>: phân loại bảng bằng Lake Formation tag (ví dụ: <code>sensitivity=PII</code>, <code>domain=finance</code>) và cấp quyền ở cấp tag thay vì từng bảng — cho phép quản lý chính sách có thể mở rộng khi thêm bảng mới.</li>
+</ul>
+<h5 id="amazon-athena--tối-ưu-truy-vấn-trong-thực-tế">Amazon Athena — Tối ưu Truy vấn Trong Thực tế</h5>
+<p>Vượt ra ngoài truy vấn cơ bản, một số kỹ thuật tối ưu được áp dụng và đo benchmark:</p>
+<p><strong>Partition Pruning:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- Trước: quét toàn bộ bảng (quét tất cả năm)
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> sales <span style="color:#66d9ef">WHERE</span> <span style="color:#66d9ef">CAST</span>(event_date <span style="color:#66d9ef">AS</span> DATE) <span style="color:#f92672">=</span> DATE <span style="color:#e6db74">&#39;2026-03-01&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- Sau: nhận biết partition (chỉ quét year=2026/month=03/day=01)
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> sales <span style="color:#66d9ef">WHERE</span> <span style="color:#66d9ef">year</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;2026&#39;</span> <span style="color:#66d9ef">AND</span> <span style="color:#66d9ef">month</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;03&#39;</span> <span style="color:#66d9ef">AND</span> <span style="color:#66d9ef">day</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;01&#39;</span>;
+</span></span></code></pre></div><p>Kết quả: lượng dữ liệu quét giảm từ <strong>18 GB → 420 MB</strong> (giảm 98%).</p>
+<p><strong>Columnar Projection:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- Chỉ chọn cột cần thiết — Parquet chỉ đọc các chunk cột đó
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> order_id, total_amount, customer_id
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> sales
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> <span style="color:#66d9ef">year</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;2026&#39;</span> <span style="color:#66d9ef">AND</span> status<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;completed&#39;</span>;
+</span></span></code></pre></div><p><strong>Tái sử dụng kết quả truy vấn</strong>: bật trong cài đặt Athena Workgroup — truy vấn giống nhau trong cửa sổ 60 phút trả về kết quả cache tức thời với zero chi phí quét bổ sung.</p>
+<p><strong>Cost control workgroup</strong>: cấu hình giới hạn quét dữ liệu 1 GB mỗi truy vấn và ngân sách quét hàng tháng theo workgroup với cảnh báo SNS, ngăn các truy vấn không kiểm soát phát sinh chi phí ngoài dự kiến.</p>
+<h5 id="chất-lượng-dữ-liệu-và-giám-sát">Chất lượng Dữ liệu và Giám sát</h5>
+<p><strong>AWS Glue Data Quality (quy tắc DQDL):</strong></p>
+<ul>
+<li>Định nghĩa các quy tắc như <code>ColumnValues &quot;order_id&quot; matches &quot;[A-Z]{3}-[0-9]{6}&quot;</code> và <code>Completeness &quot;email&quot; &gt;= 0.95</code> để gắn cờ các record không đạt kiểm tra chất lượng.</li>
+<li>Record thất bại được cách ly vào S3 prefix riêng để xem xét thủ công.</li>
+</ul>
+<p><strong>Giám sát CloudWatch:</strong></p>
+<ul>
+<li>Các chỉ số Glue Job (thời gian thực thi, DPU hour, số record ghi) theo dõi qua CloudWatch dashboard.</li>
+<li>Tỷ lệ thành công delivery Firehose và chỉ số <code>DeliveryToS3.Success</code> được giám sát với cảnh báo khi &lt; 99%.</li>
+<li>Thời gian thực thi truy vấn Athena và dữ liệu quét theo workgroup theo dõi để phân bổ chi phí theo nhóm.</li>
+</ul>
+<h5 id="thực-hành">Thực hành</h5>
+<ul>
+<li>Xây dựng cấu trúc S3 Data Lake 3 zone đầy đủ với quy ước đặt tên theo phong cách Terraform và áp dụng chính sách lifecycle và mã hóa.</li>
+<li>Chạy Glue Crawler và gỡ lỗi các vấn đề schema inference cho file JSON lồng nhau bằng custom classifier.</li>
+<li>Viết và chạy Glue ETL job end-to-end: 4,2 triệu bản ghi CSV thô xử lý thành 890 MB Parquet trong dưới 6 phút với 5 G.1X DPU.</li>
+<li>Triển khai Kinesis Firehose stream với Lambda transform; xác minh độ trễ end-to-end từ sự kiện producer đến record có thể truy vấn trong Athena dưới 90 giây.</li>
+<li>Cấu hình column-level masking của Lake Formation và kiểm chứng với IAM role thử nghiệm rằng các cột bị hạn chế không xuất hiện trong kết quả Athena.</li>
+<li>Đo benchmark hiệu năng truy vấn Athena trước và sau khi phân vùng và chuyển đổi Parquet; đạt mức giảm chi phí 97% trên cùng một truy vấn phân tích.</li>
+</ul>
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/vi/1-introduce/1.8-week8/" title="Tuần 8 Worklog"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/vi/1-introduce/1.10-week10/" title="Tuần 10 Worklog" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1775302918"></script>
+    <script src="/js/perfect-scrollbar.min.js?1775302918"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1775302918"></script>
+    <script src="/js/jquery.sticky.js?1775302918"></script>
+    <script src="/js/featherlight.min.js?1775302918"></script>
+    <script src="/js/highlight.pack.js?1775302918"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1775302918"></script>
+    <script src="/js/learn.js?1775302918"></script>
+    <script src="/js/hugo-learn.js?1775302918"></script>
+
+    <link href="/mermaid/mermaid.css?1775302918" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1775302918"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-158079754-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>

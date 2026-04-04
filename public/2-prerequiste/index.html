@@ -1,0 +1,2892 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.154.3">
+    <meta name="description" content="">
+<meta name="author" content="journeyoftheaverageguy@gmail.com">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Proposal :: AWS System Manager</title>
+
+    
+    <link href="/css/nucleus.css?1775306294" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1775306294" rel="stylesheet">
+    <link href="/css/hybrid.css?1775306294" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1775306294" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1775306294" rel="stylesheet">
+    <link href="/css/auto-complete.css?1775306294" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1775306294" rel="stylesheet">
+    <link href="/css/theme.css?1775306294" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1775306294" rel="stylesheet">
+    
+    <link href="/css/theme-workshop.css?1775306294" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1775306294"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    <style type="text/css">
+     
+    #TableOfContents {
+        max-height: 80vh !important;
+        overflow-y: auto !important;
+         
+        scrollbar-width: thin;
+        scrollbar-color: #778ba5 transparent;
+    }
+
+    #TableOfContents::-webkit-scrollbar {
+        width: 8px !important;
+        display: block !important;
+    }
+
+    #TableOfContents::-webkit-scrollbar-track {
+        background: transparent !important;
+        border-radius: 4px;
+    }
+
+    #TableOfContents::-webkit-scrollbar-thumb {
+        background: #778ba5 !important;
+        border-radius: 4px;
+    }
+
+    #TableOfContents::-webkit-scrollbar-thumb:hover {
+        background: #4881cd !important;
+    }
+
+     
+    .progress {
+        overflow: visible !important;
+    }
+
+    .progress .wrapper {
+        overflow: visible !important;
+    }
+
+     
+    #sidebar {
+        width: 270px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        overflow: hidden !important;
+    }
+
+    #body {
+        margin-left: 280px !important;
+    }
+
+     
+    #sidebar #header-wrapper {
+        flex-shrink: 0 !important;
+    }
+
+    #sidebar .highlightable {
+        flex: 1 !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        height: auto !important;
+         
+        scrollbar-width: thin;
+        scrollbar-color: #778ba5 transparent;
+    }
+
+    #sidebar .highlightable::-webkit-scrollbar {
+        width: 5px !important;
+        display: block !important;
+    }
+
+    #sidebar .highlightable::-webkit-scrollbar-track {
+        background: transparent !important;
+    }
+
+    #sidebar .highlightable::-webkit-scrollbar-thumb {
+        background: #778ba5 !important;
+        border-radius: 4px !important;
+    }
+
+    #sidebar .highlightable::-webkit-scrollbar-thumb:hover {
+        background: #4881cd !important;
+    }
+</style>
+  </head>
+  <body class="" data-url="/2-prerequiste/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="/">
+
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#f90;fill-rule:evenodd;}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09,10.85a4.7,4.7,0,0,0,.19,1.48,7.73,7.73,0,0,0,.54,1.19.77.77,0,0,1,.12.38.64.64,0,0,1-.32.49l-1,.7a.83.83,0,0,1-.44.15.69.69,0,0,1-.49-.23,3.8,3.8,0,0,1-.6-.77q-.25-.42-.51-1a6.14,6.14,0,0,1-4.89,2.3,4.54,4.54,0,0,1-3.32-1.19,4.27,4.27,0,0,1-1.22-3.2A4.28,4.28,0,0,1,3.61,7.75,6.06,6.06,0,0,1,7.69,6.46a12.47,12.47,0,0,1,1.76.13q.92.13,1.91.36V5.73a3.65,3.65,0,0,0-.79-2.66A3.81,3.81,0,0,0,7.86,2.3a7.71,7.71,0,0,0-1.79.22,12.78,12.78,0,0,0-1.79.57,4.55,4.55,0,0,1-.58.22l-.26,0q-.35,0-.35-.52V2a1.09,1.09,0,0,1,.12-.58,1.2,1.2,0,0,1,.47-.35A10.88,10.88,0,0,1,5.77.32,10.19,10.19,0,0,1,8.36,0a6,6,0,0,1,4.35,1.35,5.49,5.49,0,0,1,1.38,4.09ZM7.34,13.38a5.36,5.36,0,0,0,1.72-.31A3.63,3.63,0,0,0,10.63,12,2.62,2.62,0,0,0,11.19,11a5.63,5.63,0,0,0,.16-1.44v-.7a14.35,14.35,0,0,0-1.53-.28,12.37,12.37,0,0,0-1.56-.1,3.84,3.84,0,0,0-2.47.67A2.34,2.34,0,0,0,5,11a2.35,2.35,0,0,0,.61,1.76A2.4,2.4,0,0,0,7.34,13.38Zm13.35,1.8a1,1,0,0,1-.64-.16,1.3,1.3,0,0,1-.35-.65L15.81,1.51a3,3,0,0,1-.15-.67.36.36,0,0,1,.41-.41H17.7a1,1,0,0,1,.65.16,1.4,1.4,0,0,1,.33.65l2.79,11,2.59-11A1.17,1.17,0,0,1,24.39.6a1.1,1.1,0,0,1,.67-.16H26.4a1.1,1.1,0,0,1,.67.16,1.17,1.17,0,0,1,.32.65L30,12.39,32.88,1.25A1.39,1.39,0,0,1,33.22.6a1,1,0,0,1,.65-.16h1.54a.36.36,0,0,1,.41.41,1.36,1.36,0,0,1,0,.26,3.64,3.64,0,0,1-.12.41l-4,12.86a1.3,1.3,0,0,1-.35.65,1,1,0,0,1-.64.16H29.25a1,1,0,0,1-.67-.17,1.26,1.26,0,0,1-.32-.67L25.67,3.64,23.11,14.34a1.26,1.26,0,0,1-.32.67,1,1,0,0,1-.67.17Zm21.36.44a11.28,11.28,0,0,1-2.56-.29,7.44,7.44,0,0,1-1.92-.67,1,1,0,0,1-.61-.93v-.84q0-.52.38-.52a.9.9,0,0,1,.31.06l.42.17a8.77,8.77,0,0,0,1.83.58,9.78,9.78,0,0,0,2,.2,4.48,4.48,0,0,0,2.43-.55,1.76,1.76,0,0,0,.86-1.57,1.61,1.61,0,0,0-.45-1.16A4.29,4.29,0,0,0,43,9.22l-2.41-.76A5.15,5.15,0,0,1,38,6.78a3.94,3.94,0,0,1-.83-2.41,3.7,3.7,0,0,1,.45-1.85,4.47,4.47,0,0,1,1.19-1.37A5.27,5.27,0,0,1,40.51.29,7.4,7.4,0,0,1,42.6,0a8.87,8.87,0,0,1,1.12.07q.57.07,1.08.19t.95.26a4.27,4.27,0,0,1,.7.29,1.59,1.59,0,0,1,.49.41.94.94,0,0,1,.15.55v.79q0,.52-.38.52a1.76,1.76,0,0,1-.64-.2,7.74,7.74,0,0,0-3.2-.64,4.37,4.37,0,0,0-2.21.47,1.6,1.6,0,0,0-.79,1.48,1.58,1.58,0,0,0,.49,1.18,4.94,4.94,0,0,0,1.83.92L44.55,7a5.08,5.08,0,0,1,2.57,1.6A3.76,3.76,0,0,1,47.9,11a4.21,4.21,0,0,1-.44,1.93,4.4,4.4,0,0,1-1.21,1.47,5.43,5.43,0,0,1-1.85.93A8.25,8.25,0,0,1,42.05,15.62Z"></path><path class="cls-2" d="M45.19,23.81C39.72,27.85,31.78,30,25,30A36.64,36.64,0,0,1,.22,20.57c-.51-.46-.06-1.09.56-.74A49.78,49.78,0,0,0,25.53,26.4,49.23,49.23,0,0,0,44.4,22.53C45.32,22.14,46.1,23.14,45.19,23.81Z"></path><path class="cls-2" d="M47.47,21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74,3.13-2.2,8.27-1.57,8.86-.83s-.16,5.89-3.09,8.35c-.45.38-.88.18-.68-.32C46.69,25.8,48.17,22.11,47.47,21.21Z"></path></svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1775306294"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1775306294"></script>
+<script type="text/javascript">
+    
+        var baseurl = "\/\/localhost:1313\/";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1775306294"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/1-introduce/" title="Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/1-introduce/">
+           <b> 1. </b> Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/1-introduce/1.1-week1/" title="Week 1 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/1-introduce/1.1-week1/">
+           <b> 1.1. </b> Week 1 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/1-introduce/1.2-week2/" title="Week 2 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/1-introduce/1.2-week2/">
+           <b> 1.2. </b> Week 2 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/1-introduce/1.3-week3/" title="Week 3 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/1-introduce/1.3-week3/">
+           <b> 1.3. </b> Week 3 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/1-introduce/1.4-week4/" title="Week 4 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/1-introduce/1.4-week4/">
+           <b> 1.4. </b> Week 4 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/1-introduce/1.5-week5/" title="Week 5 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/1-introduce/1.5-week5/">
+           <b> 1.5. </b> Week 5 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/1-introduce/1.6-week6/" title="Week 6 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/1-introduce/1.6-week6/">
+           <b> 1.6. </b> Week 6 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/1-introduce/1.7-week7/" title="Week 7 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/1-introduce/1.7-week7/">
+           <b> 1.7. </b> Week 7 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/1-introduce/1.8-week8/" title="Week 8 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/1-introduce/1.8-week8/">
+           <b> 1.8. </b> Week 8 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/1-introduce/1.9-week9/" title="Week 9 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/1-introduce/1.9-week9/">
+           <b> 1.9. </b> Week 9 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/1-introduce/1.10-week10/" title="Week 10 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/1-introduce/1.10-week10/">
+           <b> 1.10. </b> Week 10 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/1-introduce/1.11-week11/" title="Week 11 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/1-introduce/1.11-week11/">
+           <b> 1.11. </b> Week 11 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/1-introduce/1.12-week12/" title="Week 12 Worklog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/1-introduce/1.12-week12/">
+           <b> 1.12. </b> Week 12 Worklog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-prerequiste/" title="Proposal" class="dd-item 
+        
+        active
+        
+        ">
+      <a href="/2-prerequiste/">
+           <b> 2. </b> Proposal
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/4-s3log/" title="Events Participated" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/4-s3log/">
+           <b> 3. </b> Events Participated
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/4-s3log/4.1-event1/" title="Event 1" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/4-s3log/4.1-event1/">
+           <b> 4.1. </b> Event 1
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/4-s3log/4.2-event2/" title="Event 2" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/4-s3log/4.2-event2/">
+           <b> 3.2. </b> Event 2
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/4-s3log/4.3-event3/" title="Event 3" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/4-s3log/4.3-event3/">
+           <b> 3.3. </b> Event 3
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/4-s3log/4.4-event4/" title="Event 4" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/4-s3log/4.4-event4/">
+           <b> 3.4. </b> Event 4
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/4-s3log/4.5-event5/" title="Event 5" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/4-s3log/4.5-event5/">
+           <b> 3.5. </b> Event 5
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-portfwd/" title="Workshop" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-portfwd/">
+           <b> 4. </b> Workshop
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-portfwd/5.1-introduction/" title="Introduction" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-portfwd/5.1-introduction/">
+           <b> 4.1. </b> Introduction
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-portfwd/5.2-prerequisites/" title="Prerequisites" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-portfwd/5.2-prerequisites/">
+           <b> 4.2. </b> Prerequisites
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-portfwd/5.3-network-setup/" title="Network Infrastructure Setup" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-portfwd/5.3-network-setup/">
+           <b> 4.3. </b> Network Infrastructure Setup
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-portfwd/5.3-network-setup/5.3.1-vpc-subnets/" title="Initialize VPC &amp; Subnets" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-portfwd/5.3-network-setup/5.3.1-vpc-subnets/">
+           <b> 4.3.1. </b> Initialize VPC &amp; Subnets
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-portfwd/5.3-network-setup/5.3.2-nat-gateway/" title="Configure Internet &amp; NAT Gateway" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-portfwd/5.3-network-setup/5.3.2-nat-gateway/">
+           <b> 4.3.2. </b> Configure Internet &amp; NAT Gateway
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-portfwd/5.3-network-setup/5.3.3-route-table/" title="Configure Route Table" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-portfwd/5.3-network-setup/5.3.3-route-table/">
+           <b> 4.3.3. </b> Configure Route Table
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-portfwd/5.4-data-layer/" title="Deploy Data Layer" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-portfwd/5.4-data-layer/">
+           <b> 4.4. </b> Deploy Data Layer
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-portfwd/5.4-data-layer/5.4.1-security-groups/" title="Setup S3 bucket" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-portfwd/5.4-data-layer/5.4.1-security-groups/">
+           <b> 4.4.1. </b> Setup S3 bucket
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-portfwd/5.4-data-layer/5.4.2-rds/" title="Import Data from S3 to DynamoDB" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-portfwd/5.4-data-layer/5.4.2-rds/">
+           <b> 4.4.2. </b> Import Data from S3 to DynamoDB
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-portfwd/5.4-data-layer/5.4.3-elasticache/" title="Bedrock Knowledge Base" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-portfwd/5.4-data-layer/5.4.3-elasticache/">
+           <b> 4.4.3. </b> Bedrock Knowledge Base
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-portfwd/5.5-deploy-app/" title="Deploy Application" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-portfwd/5.5-deploy-app/">
+           <b> 4.5. </b> Deploy Application
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-portfwd/5.5-deploy-app/5.5.1-docker/" title="Package with Docker" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-portfwd/5.5-deploy-app/5.5.1-docker/">
+           <b> 4.5.1. </b> Package with Docker
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-portfwd/5.5-deploy-app/5.5.2-beanstalk/" title="Initialize Elastic Beanstalk" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-portfwd/5.5-deploy-app/5.5.2-beanstalk/">
+           <b> 4.5.2. </b> Initialize Elastic Beanstalk
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-portfwd/5.5-deploy-app/5.5.3-env-vars/" title="Configure Environment Variables" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-portfwd/5.5-deploy-app/5.5.3-env-vars/">
+           <b> 4.5.3. </b> Configure Environment Variables
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-portfwd/5.6-cicd/" title="Automate CI/CD" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-portfwd/5.6-cicd/">
+           <b> 4.6. </b> Automate CI/CD
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-portfwd/5.6-cicd/5.6.1-codebuild/" title="Create Build Project" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-portfwd/5.6-cicd/5.6.1-codebuild/">
+           <b> 4.6.1. </b> Create Build Project
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-portfwd/5.6-cicd/5.6.2-codepipeline/" title="Setup CodePipeline" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-portfwd/5.6-cicd/5.6.2-codepipeline/">
+           <b> 4.6.2. </b> Setup CodePipeline
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-portfwd/5.7-security/" title="Optimization &amp; Security" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-portfwd/5.7-security/">
+           <b> 4.7. </b> Optimization &amp; Security
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-portfwd/5.7-security/5.7.1-cloudfront/" title="Configure S3 &amp; CloudFront" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-portfwd/5.7-security/5.7.1-cloudfront/">
+           <b> 4.7.1. </b> Configure S3 &amp; CloudFront
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-portfwd/5.7-security/5.7.2-waf/" title="Setup Firewall (WAF)" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-portfwd/5.7-security/5.7.2-waf/">
+           <b> 4.7.2. </b> Setup Firewall (WAF)
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-portfwd/5.8-monitoring/" title="Monitoring &amp; Operations" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-portfwd/5.8-monitoring/">
+           <b> 4.8. </b> Monitoring &amp; Operations
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-portfwd/5.8-monitoring/5.8.1-cloudwatch/" title="Monitor with CloudWatch" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-portfwd/5.8-monitoring/5.8.1-cloudwatch/">
+           <b> 4.8.1. </b> Monitor with CloudWatch
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-portfwd/5.9-cleanup/" title="Clean up resources" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-portfwd/5.9-cleanup/">
+           <b> 4.9. </b> Clean up resources
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-portfwd/5.9-cleanup/5.9.1-cleanup-steps/" title="Clean up resources" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-portfwd/5.9-cleanup/5.9.1-cleanup-steps/">
+           <b> 4.9.1. </b> Clean up resources
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/6-cleanup/" title="Self-Assessment" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/6-cleanup/">
+          <b>5. </b>Self-Assessment
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/7-sharing/" title="Sharing and Feedback" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/7-sharing/">
+          <b>6. </b>Sharing and Feedback
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://www.facebook.com/groups/awsstudygroupfcj/"><i class='fab fa-facebook'></i> AWS Study Group</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="//localhost:1313/2-prerequiste/" selected>English</option>
+                    
+                  
+              
+                  
+              
+          
+              
+              
+                  
+              
+                  
+                    
+                    
+                      <option id="vi" value="//localhost:1313/vi/2-prerequiste/">Tiếng Việt</option>
+                    
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <left>
+    
+     <b> Workshop</b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7920860&style=0038&nbdigits=9&type=page&initCount=0" title="Migrate" Alt="web counter"   border="0" /></a>  <br>
+     <b> <a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0" title="Total CLoud Journey" Alt="web counter"   border="0"   />
+     
+</left>
+<left>
+    <br>
+    <br>
+        <b> Last Updated </b> <br>
+        <i><font color="orange">04-04-2026</font></i>
+    </left>
+    <left>
+        <br>
+        <br>
+            <b> Team </b> <br>
+           
+            <i> <a href="https://www.facebook.com/groups/660548818043427"  style="color:orange">First Cloud Journey</a> <br>
+                
+               
+        </i>
+        </left>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            <a href='/'>Internship Report</a> > Proposal
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+        <div id="toc-scroll-wrapper"
+            style="max-height: 300px; overflow-y: scroll; overflow-x: hidden; padding-right: 8px;">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-executive-summary">1. Executive Summary</a></li>
+    <li><a href="#2-problem-statement">2. Problem Statement</a></li>
+    <li><a href="#3-solution-architecture">3. Solution Architecture</a></li>
+    <li><a href="#4-technical-implementation">4. Technical Implementation</a></li>
+    <li><a href="#5-roadmap--milestones">5. Roadmap &amp; Milestones</a></li>
+    <li><a href="#6-budget-estimation">6. Budget Estimation</a></li>
+    <li><a href="#7-risk-assessment--mitigation">7. Risk Assessment &amp; Mitigation</a></li>
+    <li><a href="#8-expected-outcomes">8. Expected Outcomes</a></li>
+    <li><a href="#9-conclusion">9. Conclusion</a></li>
+  </ul>
+</nav>
+        </div>
+    </div>
+</div>
+<style>
+    #toc-scroll-wrapper::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    #toc-scroll-wrapper::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+    }
+
+    #toc-scroll-wrapper::-webkit-scrollbar-thumb {
+        background: #778ba5;
+        border-radius: 4px;
+    }
+
+    #toc-scroll-wrapper::-webkit-scrollbar-thumb:hover {
+        background: #4881cd;
+    }
+
+    #toc-scroll-wrapper {
+        scrollbar-width: thin;
+        scrollbar-color: #778ba5 #f1f1f1;
+    }
+</style>
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Proposal
+            </h1>
+          
+
+        
+
+
+
+	<h2 id="1-executive-summary">1. Executive Summary</h2>
+<p><strong>AnTiScaQ</strong> is an integrated threat intelligence platform designed to protect users by verifying the reputation and risk level of phone numbers, emails, and domains. The system automates the entire OSINT (Open Source Intelligence) workflow from data scraping, crowdsourced reporting, threat scoring. This is an <strong>in-house project</strong> developed by the team, focusing on an <strong>MVP with optimized costs under $50/month</strong> in the initial phase, utilizing Lambda, API Gateway, and DynamoDB to ensure high performance during traffic spikes and keep operating costs minimal.</p>
+<h2 id="2-problem-statement">2. Problem Statement</h2>
+<p><strong>Current Issues</strong></p>
+<ul>
+<li>Users rely on manual Google searches or fragmented databases to check suspicious numbers or links, causing time waste and high exposure to fraud.</li>
+<li>Threat intelligence data gathering is <strong>not integrated</strong> and highly manual.</li>
+<li>No <strong>automated verification workflows</strong> to cross-check reported scams.</li>
+<li>High costs for enterprise threat intelligence feeds (e.g., Recorded Future, VirusTotal).</li>
+<li>Weak reporting mechanisms, <strong>not real-time</strong> when new phishing campaigns launch.</li>
+</ul>
+<p><strong>Proposed Solution</strong>
+The system uses <strong>AWS Serverless Architecture</strong> to optimize costs and handle variable traffic:</p>
+<ul>
+<li><strong>Compute:</strong> AWS Lambda (pay-per-use, utilizing Python for scraping and Node.js for APIs).</li>
+<li><strong>API:</strong> API Gateway REST API.</li>
+<li><strong>Database:</strong> DynamoDB (on-demand billing for lightning-fast lookups).</li>
+<li><strong>Cache:</strong> ElastiCache Redis (cache.t3.micro) - optional for phase 2 to cache popular scam domains.</li>
+<li><strong>Authentication:</strong> AWS Cognito (free tier &lt;50K MAU) for API key management and admin access.</li>
+<li><strong>Storage:</strong> S3 for scraping logs and evidence, CloudFront CDN.</li>
+<li><strong>CI/CD:</strong> GitHub Actions for automated deployment.</li>
+<li><strong>Monitoring:</strong> CloudWatch (free tier).</li>
+<li><strong>Security:</strong> Route 53, WAF (cost-optimized rules to prevent API abuse), IAM Roles.</li>
+</ul>
+<p><strong>Key Features</strong></p>
+<ul>
+<li><strong>Single Sign-On</strong> (Google, Microsoft 365) for admins and contributors.</li>
+<li><strong>Detailed RBAC</strong> (Admin, Moderator, API Consumer, Public User).</li>
+<li><strong>Real-time lookup API</strong> for domains, emails, and phone numbers.</li>
+<li><strong>Approval workflows</strong> for user-submitted scam reports to prevent false positives.</li>
+<li><strong>Web portal</strong> (Next.js) for public search and crowdsourced reporting.</li>
+</ul>
+<p><strong>Benefits</strong></p>
+<ul>
+<li>Save <strong>70%</strong> of manual checking and data aggregation time.</li>
+<li>Reduce <strong>90%</strong> of false positive threat classifications.</li>
+<li>Cost only <strong>below $50/month</strong> for initial scale (90% cheaper than commercial Threat Intel feeds).</li>
+<li><strong>In-house development</strong> - no external data licensing or outsourcing costs.</li>
+</ul>
+<h2 id="3-solution-architecture">3. Solution Architecture</h2>
+<p><strong>AWS Services Used</strong></p>
+<ul>
+<li><strong>AWS Lambda:</strong> Backend API logic (Node.js 20.x) &amp; automated web scrapers (Python).</li>
+<li><strong>API Gateway:</strong> REST API endpoints, request validation, rate limiting.</li>
+<li><strong>Amazon DynamoDB:</strong> NoSQL database (on-demand billing) for threat records.</li>
+<li><strong>AWS Cognito:</strong> Authentication, SSO, API Keys, JWT tokens.</li>
+<li><strong>Amazon S3:</strong> Raw data storage (scraping logs, screenshot evidence).</li>
+<li><strong>CloudFront:</strong> CDN for static Next.js assets and S3.</li>
+<li><strong>Route 53:</strong> DNS management.</li>
+<li><strong>AWS WAF</strong> (optional Phase 2): API protection against botnets.</li>
+<li><strong>CloudWatch:</strong> Logs, monitoring (free tier).</li>
+<li><strong>Secrets Manager:</strong> API keys for third-party integrations and proxy credentials.</li>
+</ul>
+<p><strong>Component Design</strong></p>
+<ul>
+<li><strong>Authentication Layer:</strong> Cognito User Pools with JWT (RS256); Lambda authorizer for API Gateway to validate API keys.</li>
+<li><strong>API Layer:</strong> AWS Lambda functions deployed via GitHub Actions; API Gateway REST API with rate limiting (e.g., 10 requests/second per free tier user).</li>
+<li><strong>Business Logic (Lambda Functions):</strong> * Threat lookups (Read from DynamoDB/Cache).
+<ul>
+<li>Data Aggregation (Python scrapers pulling from public blacklists).</li>
+<li>Report management (CRUD for user-submitted scams).</li>
+<li>Email notifications (SES free tier for threat alerts).</li>
+</ul>
+</li>
+<li><strong>Data Layer - DynamoDB Tables:</strong>
+<ul>
+<li><code>Users</code> - GSI on email</li>
+<li><code>ThreatIntel</code> - GSI on <code>indicator_type</code> (phone/email/domain) + <code>risk_score</code></li>
+<li><code>ScamReports</code> - GSI on <code>target_indicator</code> + <code>date</code></li>
+<li><code>ScrapingLogs</code> - GSI on <code>source</code> + <code>status</code></li>
+</ul>
+</li>
+<li><strong>Storage Layer:</strong> S3 Standard for evidence (&lt;30 days); S3 Lifecycle → Glacier Deep Archive (&gt;90 days) for historical logs.</li>
+<li><strong>Frontend:</strong> Next.js 14 (React 18) + TypeScript - Static export; Material-UI components; Hosted on CloudFront + S3.</li>
+<li><strong>CI/CD Pipeline:</strong> GitHub Actions workflow to build Lambda packages, deploy via AWS CLI, and sync frontend to S3.</li>
+</ul>
+<h2 id="4-technical-implementation">4. Technical Implementation</h2>
+<p><strong>Phase 1: MVP Core (Month 1-2)</strong></p>
+<ul>
+<li><strong>Month 1:</strong> AWS setup (Cognito, DynamoDB, S3, Lambda). Authentication UI. Threat CRUD APIs and admin dashboard.</li>
+<li><strong>Month 2:</strong> Public lookup APIs. Next.js web portal MVP. Manual report submission workflow. Basic trending dashboard.</li>
+</ul>
+<p><strong>Phase 2: Automation &amp; Data Aggregation (Month 3-4)</strong></p>
+<ul>
+<li><strong>Month 3:</strong> Python web scraping engine (Lambda) to automate blacklist data collection. Reputation scoring logic.</li>
+<li><strong>Month 4:</strong> Email notifications (SES) for subscribed alerts. Audit logging. Evidence upload to S3.</li>
+</ul>
+<p><strong>Phase 3: Advanced Features (Month 5-6)</strong></p>
+<ul>
+<li>AI/ML Risk Scoring module (predictive analysis based on patterns).</li>
+<li>Advanced threat analytics dashboard.</li>
+<li>Security hardening (WAF integration).</li>
+<li>Load testing for high-volume lookup queries.</li>
+<li>Public API documentation launch.</li>
+</ul>
+<p><strong>Tech Stack</strong></p>
+<ul>
+<li><strong>Backend:</strong> Node.js 20.x, Python 3.11 (Scraping), AWS Lambda.</li>
+<li><strong>Database:</strong> DynamoDB (single-table design pattern).</li>
+<li><strong>Frontend:</strong> Next.js 14, React 18, TypeScript, Material-UI v5.</li>
+<li><strong>Infrastructure as Code:</strong> AWS SAM / Serverless Framework.</li>
+<li><strong>CI/CD:</strong> GitHub Actions.</li>
+</ul>
+<h2 id="5-roadmap--milestones">5. Roadmap &amp; Milestones</h2>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">Month</th>
+          <th style="text-align: left">Phase</th>
+          <th style="text-align: left">Key Deliverables</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">1-2</td>
+          <td style="text-align: left">MVP Core</td>
+          <td style="text-align: left">Auth, Threat Database, Public Search Portal, Manual Reporting</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">3-4</td>
+          <td style="text-align: left">Automation</td>
+          <td style="text-align: left">Python Scraping Engine, API Keys, Alert Notifications</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">5-6</td>
+          <td style="text-align: left">Advanced &amp; Launch</td>
+          <td style="text-align: left">AI Scoring, Advanced Analytics, Security Hardening, API Go-Live</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="6-budget-estimation">6. Budget Estimation</h2>
+<p><strong>Monthly AWS Costs (Phase 1: ~5,000 API lookups/day)</strong>
+<em>Serverless Architecture - Cost Optimized</em></p>
+<ul>
+<li><strong>AWS Lambda:</strong> 150K invocations -&gt; $0 (Within free tier)</li>
+<li><strong>API Gateway:</strong> 150K requests -&gt; $0.15</li>
+<li><strong>DynamoDB:</strong> On-demand, 5GB storage, 1M reads, 500K writes -&gt; $3.50</li>
+<li><strong>S3 Storage &amp; Requests:</strong> 20GB data -&gt; $0.60</li>
+<li><strong>S3 Glacier (archive):</strong> 10GB logs -&gt; $0.10</li>
+<li><strong>CloudFront:</strong> 10GB transfer, 200K requests -&gt; $1.00</li>
+<li><strong>Route 53:</strong> 1 hosted zone -&gt; $0.90</li>
+<li><strong>CloudWatch &amp; Cognito:</strong> -&gt; $0 (Within free tier)</li>
+<li><strong>Secrets Manager &amp; SES:</strong> -&gt; $0.85</li>
+<li><strong>Data Transfer &amp; Contingency:</strong> -&gt; $1.20</li>
+<li><strong>TOTAL AWS/MONTH (Phase 1): ~$8.30</strong></li>
+</ul>
+<p><strong>Costs When Scaling to Phase 2 (Automation + Caching)</strong></p>
+<ul>
+<li><strong>Lambda + API Gateway:</strong> 300K requests -&gt; $0.30</li>
+<li><strong>DynamoDB:</strong> 10GB, 2M reads -&gt; $9.50</li>
+<li><strong>S3 + CloudFront:</strong> 40GB storage -&gt; $2.50</li>
+<li><strong>ElastiCache Redis (optional):</strong> cache.t3.micro -&gt; $12.50</li>
+<li><strong>AWS WAF (optional):</strong> Basic protection -&gt; $7.00</li>
+<li><strong>Misc + Contingency:</strong> -&gt; $5.60</li>
+<li><strong>TOTAL (Phase 2, with cache/WAF): ~$37.40</strong> <em>(~$17.90 without cache/WAF)</em></li>
+</ul>
+<p><strong>Costs When Scaling to Phase 3 (High Volume APIs)</strong></p>
+<ul>
+<li><strong>TOTAL (Phase 3 - 750k+ lookups, larger cache, WAF rules): ~$87.50 / month</strong></li>
+</ul>
+<p><strong>ROI Analysis (In-house project)</strong></p>
+<ul>
+<li><strong>Initial Investment:</strong> Setup &amp; Dev tools (<del>$42) + AWS Dev environment (</del>$30) = <strong>~$72</strong></li>
+<li><strong>First Year Operating Costs:</strong> Phase 1 (6 months) + Phase 2 (6 months) = <strong>~$210</strong></li>
+<li><strong>Total Year 1 Cost:</strong> <strong>~$282</strong></li>
+<li><strong>Savings:</strong> Commercial Threat Intel APIs easily cost $10,000 - $30,000/year. Building this aggregator in-house saves thousands of dollars annually while providing a proprietary dataset.</li>
+</ul>
+<h2 id="7-risk-assessment--mitigation">7. Risk Assessment &amp; Mitigation</h2>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">Risk</th>
+          <th style="text-align: left">Impact</th>
+          <th style="text-align: left">Probability</th>
+          <th style="text-align: left">Mitigation</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><strong>Scraper IP Blocking</strong></td>
+          <td style="text-align: left">High</td>
+          <td style="text-align: left">High</td>
+          <td style="text-align: left">Use rotating proxy pools (Secrets Manager) and randomize scraping intervals.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>False Positives</strong></td>
+          <td style="text-align: left">High</td>
+          <td style="text-align: left">Medium</td>
+          <td style="text-align: left">Implement multi-source validation and manual approval workflows for high-profile domains.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>DynamoDB costs spike</strong></td>
+          <td style="text-align: left">Medium</td>
+          <td style="text-align: left">Low</td>
+          <td style="text-align: left">On-demand billing, CloudWatch alarms at $30 threshold. Batch writes via SQS.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>Lambda time limits</strong></td>
+          <td style="text-align: left">Low</td>
+          <td style="text-align: left">Medium</td>
+          <td style="text-align: left">Break heavy Python scraping jobs into smaller chunks; optimize bundle sizes.</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="8-expected-outcomes">8. Expected Outcomes</h2>
+<p><strong>Technical Improvements</strong></p>
+<ul>
+<li><strong>90%</strong> of OSINT data collection automated via Python scrapers.</li>
+<li>Real-time threat dashboard with data &lt; 5 seconds old.</li>
+<li><strong>&lt; 1s</strong> API lookup response time (P95) with DynamoDB/Redis.</li>
+<li>Infinite scalability during widespread phishing campaigns (traffic spikes).</li>
+</ul>
+<p><strong>Business Value</strong></p>
+<ul>
+<li>Security team reduces <strong>60%</strong> manual investigation workload.</li>
+<li>Community protection increases with easy self-service lookups.</li>
+<li><strong>100%</strong> audit trail for reported indicators.</li>
+<li>Cost savings of <strong>$10,000+/year</strong> vs commercial alternatives.</li>
+<li>Operating cost only <strong>$8-12/month</strong> for initial scale.</li>
+</ul>
+<p><strong>Long-term Vision</strong></p>
+<ul>
+<li>Scale to handle millions of queries per month.</li>
+<li>Integrate AI/ML (AWS Bedrock) for predictive domain generation algorithm (DGA) detection.</li>
+<li>Potential SaaS product offering API keys to B2B clients.</li>
+</ul>
+<h2 id="9-conclusion">9. Conclusion</h2>
+<p>The <strong>AnTiScaQ</strong> Platform with <strong>Serverless Architecture</strong> provides:</p>
+<ul>
+<li>✅ <strong>Ultra-low cost:</strong> Only $8-12/month for Phase 1.</li>
+<li>✅ <strong>No upfront cost:</strong> ~$72 setup, leveraging existing in-house team.</li>
+<li>✅ <strong>Massive ROI:</strong> Eliminates the need for expensive third-party Threat Intel feeds.</li>
+<li>✅ <strong>Scalable:</strong> Pay-as-you-go, automatically handles massive traffic spikes when new scams go viral.</li>
+<li>✅ <strong>Zero maintenance:</strong> Serverless = no server management.</li>
+<li>✅ <strong>Fast development:</strong> 6 months MVP → production.</li>
+</ul>
+<p>This is an <strong>ideal solution</strong> for building a robust, high-performance cybersecurity tool without massive upfront infrastructure investments.</p>
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/1-introduce/1.12-week12/" title="Week 12 Worklog"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/4-s3log/" title="Events Participated" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1775306294"></script>
+    <script src="/js/perfect-scrollbar.min.js?1775306294"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1775306294"></script>
+    <script src="/js/jquery.sticky.js?1775306294"></script>
+    <script src="/js/featherlight.min.js?1775306294"></script>
+    <script src="/js/highlight.pack.js?1775306294"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1775306294"></script>
+    <script src="/js/learn.js?1775306294"></script>
+    <script src="/js/hugo-learn.js?1775306294"></script>
+
+    <link href="/mermaid/mermaid.css?1775306294" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1775306294"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-158079754-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>
