@@ -20,7 +20,7 @@ chapter : false
 <p><strong>Thời Gian Thực Tập:</strong> Từ 05/01/2026 đến 18/04/2026</p>  
 </div>
 
-![ConnectPrivate](/AWS_Intern-Report/images/aws_report.jpg?width=15rem) 
+![ConnectPrivate](/AWS_Intern-Report/images/aws_report.jpg?width=60rem) 
 
 ### Nội Dung Báo Cáo
  1. [Workblog](1-introduce/)
