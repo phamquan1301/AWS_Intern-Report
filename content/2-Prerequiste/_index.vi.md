@@ -47,13 +47,13 @@ pre : " <b> 2. </b> "
 
 
 **Lợi ích**
-* Phát hiện sớm các dấu hiệu lừa đảo từ nhiều nguồn dữ liệu (phone, domain, nội dung)  
-* Cung cấp cảnh báo rủi ro rõ ràng, dễ hiểu  
-* Tiết kiệm thời gian nhờ kiểm tra tự động  
-* Tận dụng dữ liệu cộng đồng để tăng độ chính xác  
-* Bảo vệ người dùng khi duyệt web  
-* Nâng cao nhận thức và kỹ năng phòng tránh scam                                                                                                         
-* Cải thiện bảo mật: Thông qua giám sát liên tục và cảnh báo thời gian thực.
+- Phát hiện sớm các dấu hiệu lừa đảo từ nhiều nguồn dữ liệu (phone, domain, nội dung)  
+- Cung cấp cảnh báo rủi ro rõ ràng, dễ hiểu  
+- Tiết kiệm thời gian nhờ kiểm tra tự động  
+- Tận dụng dữ liệu cộng đồng để tăng độ chính xác  
+- Bảo vệ người dùng khi duyệt web  
+- Nâng cao nhận thức và kỹ năng phòng tránh scam                                                                                                         
+- Cải thiện bảo mật: Thông qua giám sát liên tục và cảnh báo thời gian thực.
 
 ## 3. Kiến trúc giải pháp
 
@@ -81,7 +81,7 @@ pre : " <b> 2. </b> "
 
 **Thiết kế thành phần**
 
-* **1. Lớp Thu Thập Dữ Liệu & Phát Hiện**
+**1. Lớp Thu Thập Dữ Liệu & Phát Hiện**
 - Thu thập dữ liệu từ nhiều nguồn:
   - Input người dùng (phone, domain, email content)
   - Dữ liệu cộng đồng (report, feedback)
@@ -89,38 +89,38 @@ pre : " <b> 2. </b> "
 - Backend (Spring Boot trên Elastic Beanstalk) đóng vai trò tiếp nhận và chuẩn hóa dữ liệu
 - Trigger các tác vụ phân tích khi có dữ liệu mới
 
-* **2. Lớp Xử Lý Sự Kiện**
+**2. Lớp Xử Lý Sự Kiện**
 - API Gateway tiếp nhận request từ client và định tuyến đến backend
 - Backend xử lý validation, business logic và phân loại request
 - Các tác vụ bất đồng bộ được đẩy sang AWS Lambda (AI analysis, content processing)
 - Event-driven xử lý thông qua SNS (notification) hoặc internal service
 
-* **3. Lớp Điều Phối & Xử Lý Nghiệp Vụ (Orchestration)**
+**3. Lớp Điều Phối & Xử Lý Nghiệp Vụ (Orchestration)**
 - Backend (Spring Boot) đóng vai trò điều phối chính:
   - Gọi Lambda để phân tích nội dung, kiểm tra ngôn từ vi phạm tiêu chuẩn cộng đồng (AI)
   - Tổng hợp dữ liệu từ nhiều nguồn (RDS, DynamoDB, API ngoài)
   - Tính toán risk score và phân loại mức độ rủi ro
 - Quản lý flow xử lý từ input → phân tích → trả kết quả
 
-* **4. Lớp Xử Lý Dữ Liệu & Lưu Trữ**
+**4. Lớp Xử Lý Dữ Liệu & Lưu Trữ**
 - Amazon RDS (MySQL): Lưu dữ liệu chính (user, report, domain, history, ...)
 - Amazon DynamoDB: Lưu dữ liệu nhanh (OTP)
 - Amazon S3: Lưu trữ file (ảnh, tài liệu)
 - Lambda hỗ trợ xử lý dữ liệu (ETL nhẹ, preprocessing cho AI)
 
-* **5. Lớp AI & Phân Tích**
+**5. Lớp AI & Phân Tích**
 - Amazon Bedrock cung cấp mô hình AI:
   - Phân tích nội dung email, số điện thoại, tên miền
   - Giải thích mức độ rủi ro
   - Chatbot tư vấn phòng tránh lừa đảo
 - Lambda đóng vai trò trung gian gọi Bedrock và xử lý kết quả
 
-* **6. Lớp Trình Bày & Tương Tác Người Dùng**
+**6. Lớp Trình Bày & Tương Tác Người Dùng**
 - Frontend (React) được deploy qua S3 + CloudFront
 - Giao tiếp với backend qua API Gateway
 - Xác thực người dùng qua AWS Cognito (JWT)
 
-* **7. Lớp Bảo Mật & Giám Sát**
+**7. Lớp Bảo Mật & Giám Sát**
 - **Authentication:** AWS Cognito (SSO, JWT)
 - **Security:** WAF, IAM, ACM (SSL), Route 53 (DNS)
 - **Monitoring:** CloudWatch (logs, metrics), SNS (alert)
@@ -129,7 +129,7 @@ pre : " <b> 2. </b> "
 
 ## 4. Triển khai kỹ thuật
 
-* **Step 1:** Hạ tầng & Thiết lập nền tảng
+**Step 1:** Hạ tầng & Thiết lập nền tảng
 - Thiết lập **VPC**:
   - Tạo **Public Subnet** (cho Load Balancer, Internet access)
   - Tạo **Private Subnet** (cho RDS)
@@ -146,7 +146,7 @@ pre : " <b> 2. </b> "
 - Xây dựng API cơ bản (Auth, Threat CRUD, Report)
 - Xây dựng Admin Dashboard (backend APIs)
 
-* **Step 2:** API & Web Portal MVP
+**Step 2:** API & Web Portal MVP
 - Xây dựng **Public Lookup APIs**:
   - Check phone, domain, content
 - Triển khai frontend:
@@ -156,7 +156,7 @@ pre : " <b> 2. </b> "
   - Dashboard thống kê cơ bản
 - Cấu hình **Route 53** để mapping domain
 
-* **Step 3:** Xử lý dữ liệu & Logic cốt lõi
+**Step 3:** Xử lý dữ liệu & Logic cốt lõi
 - Tích hợp **WHOIS API** để kiểm tra domain
 - Xây dựng hệ thống:
   - Risk scoring (rule-based + cộng đồng)
@@ -166,7 +166,7 @@ pre : " <b> 2. </b> "
   - Chatbot tư vấn
 - Xử lý bất đồng bộ (async processing)
 
-* **Step 4:** Hoàn thiện hệ thống & Frontend nâng cao
+**Step 4:** Hoàn thiện hệ thống & Frontend nâng cao
 - Hoàn thiện UI/UX:
   - Dashboard chi tiết
   - Lịch sử kiểm tra
@@ -174,7 +174,7 @@ pre : " <b> 2. </b> "
   - Browser extension (cảnh báo website)
 - Tối ưu API response & trải nghiệm người dùng
 
-* **Step 5:** Kiểm thử, Bảo mật & Tối ưu
+**Step 5:** Kiểm thử, Bảo mật & Tối ưu
 - Kiểm thử:
   - Unit test, integration test
   - Load testing
