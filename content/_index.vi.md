@@ -15,12 +15,12 @@ chapter : false
 <p><strong>Trường:</strong> Đại Học FPT TP.HCM</p>
 <p><strong>Ngành:</strong> Kỹ Thuật Phần Mềm</p>
 <p><strong>Mã Số Sinh Viên:</strong> SE193130</p>
-<p><strong>Công Ty Thực Tập:</strong> Công ty TNHH Amazon Web Services Vietnam</p>
+<p><strong>Công Ty Thực Tập:</strong> Bootcamp - First Cloud AI Journey @ AWS Study Group</p>
 <p><strong>Vị Trí Thực Tập:</strong> FCJ Cloud Intern</p>
 <p><strong>Thời Gian Thực Tập:</strong> Từ 05/01/2026 đến 18/04/2026</p>  
 </div>
 
-![ConnectPrivate](images/aws_report.jpg?width=15rem) 
+![ConnectPrivate](/AWS_Intern-Report/images/aws_report.jpg?width=15rem) 
 
 ### Nội Dung Báo Cáo
  1. [Workblog](1-introduce/)

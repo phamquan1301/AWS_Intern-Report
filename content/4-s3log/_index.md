@@ -9,22 +9,22 @@ pre : " <b> 3. </b> "
 During my internship, I participated in five events. Each one was a memorable experience that provided new, interesting, and useful knowledge, along with gifts and wonderful moments.
 
 ### [Event 1](4.1-Event1/)  
-&emsp;**Event Name:**  AWS re:Invent Recap HCMC - Track 2: Analytics/ML/AI & Innovation  
+&emsp;**Event Name:**  AWS re:Invent Recap HCMC - Track 2: Analytics/ML/AI & Innovation 
 
 &emsp;**Date & Time:** 09:00, January 29, 2026
 
-&emsp;**Location:** 26th Floor, Bitexco Tower, 02 Hai Trieu Street, Saigon Ward, Ho Chi Minh City  
+&emsp;**Location:** 26th Floor, Bitexco Financial Tower, 02 Hai Trieu Street, Saigon Ward, Ho Chi Minh City  
 
 &emsp;**Role:** Attendee  
 
 ---
 
 ### [Event 2](4.2-Event2/)  
-&emsp;**Event Name:** Cloud Mastery 2026 #1 - AI From Scratch. 
+&emsp;**Event Name:** Cloud Mastery 2026 - #1 AI From Scratch. 
 
 &emsp;**Date & Time:** 09:00, March 14, 2026
 
-&emsp;**Location:** 26th Floor, Bitexco Tower, 02 Hai Trieu Street, Saigon Ward, Ho Chi Minh City  
+&emsp;**Location:** Amazon Q - 26th Floor, Bitexco Financial Tower, 02 Hai Trieu Street, Saigon Ward, Ho Chi Minh City  
 
 &emsp;**Role:** Attendee  
 
@@ -34,7 +34,7 @@ During my internship, I participated in five events. Each one was a memorable ex
 
 &emsp;**Date & Time:** 09:00, March 21, 2026  
 
-&emsp;**Location:** 26th Floor, Bitexco Tower, 02 Hai Trieu Street, Saigon Ward, Ho Chi Minh City  
+&emsp;**Location:** 26th Floor, Bitexco Financial Tower, 02 Hai Trieu Street, Saigon Ward, Ho Chi Minh City  
 
 &emsp;**Role:** Attendee  
 

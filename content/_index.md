@@ -15,12 +15,12 @@ chapter : false
 <p><strong>University:</strong> FPT University HCMC</p>
 <p><strong>Major:</strong> Software Engineering</p>
 <p><strong>Student ID:</strong> SE193130</p>
-<p><strong>Internship Company:</strong> Amazon Web Services VietNam Co., Ltd.</p>
+<p><strong>Internship Company:</strong> Bootcamp - First Cloud AI Journey @ AWS Study Group</p>
 <p><strong>Internship Position:</strong> FCJ Cloud Intern</p>
 <p><strong>Internship Duration:</strong> From 05/01/2026 to 18/04/2026</p>  
 </div>
 
-![ConnectPrivate](images/aws_report.jpg?width=15rem) 
+![ConnectPrivate](/AWS_Intern-Report/images/aws_report.jpg?width=15rem) 
 
 ### Report Content
  1. [Workblog](1-introduce/)
