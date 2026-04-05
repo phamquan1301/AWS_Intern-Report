@@ -7,177 +7,225 @@ pre : " <b> 2. </b> "
 ---
 
 ## 1. Executive Summary
-
-**AnTiScaQ** is an integrated threat intelligence platform designed to protect users by verifying the reputation and risk level of phone numbers, emails, and domains. The system automates the entire OSINT (Open Source Intelligence) workflow from data scraping, crowdsourced reporting, threat scoring. This is an **in-house project** developed by the team, focusing on an **MVP with optimized costs under $50/month** in the initial phase, utilizing Lambda, API Gateway, and DynamoDB to ensure high performance during traffic spikes and keep operating costs minimal.
+**AnTiScaQ** is an online scam risk-checking system that helps users early detect signs of scams through various input data types such as **phone numbers, domains, and email contents** by verifying credibility and alerting based on risk levels. The system does not provide legal conclusions but serves as a warning, explanation, and prevention guide. The system collects data, receives community reports, and scores risks.
 
 ## 2. Problem Statement
 
-**Current Issues**
-* Users rely on manual Google searches or fragmented databases to check suspicious numbers or links, causing time waste and high exposure to fraud.
-* Threat intelligence data gathering is **not integrated** and highly manual.
-* No **automated verification workflows** to cross-check reported scams.
-* High costs for enterprise threat intelligence feeds (e.g., Recorded Future, VirusTotal).
-* Weak reporting mechanisms, **not real-time** when new phishing campaigns launch.
+#### Current Issues
+* Online scams are rapidly increasing and becoming more sophisticated, causing significant damage to users and businesses.
+* Lack of a reliable system, making it easy to make wrong decisions.
+* Users often have to manually search via browsers (Google, Microsoft Edge, ...) or use fragmented databases to check suspicious phone numbers/links, causing time waste and risks.
+* Current tools often lack **contextual content analysis**.
+  - Lack of data **from the user community**.
+  - Do not provide **clear explanations of risk levels**.
+* Extremely high costs to purchase APIs from enterprise Threat Intel platforms (like Recorded Future, VirusTotal).
+* Incomplete reporting, **not real-time** when new phishing campaigns break out.
 
-**Proposed Solution**
-The system uses **AWS Serverless Architecture** to optimize costs and handle variable traffic:
-* **Compute:** AWS Lambda (pay-per-use, utilizing Python for scraping and Node.js for APIs).
-* **API:** API Gateway REST API.
-* **Database:** DynamoDB (on-demand billing for lightning-fast lookups).
-* **Cache:** ElastiCache Redis (cache.t3.micro) - optional for phase 2 to cache popular scam domains.
-* **Authentication:** AWS Cognito (free tier <50K MAU) for API key management and admin access.
-* **Storage:** S3 for scraping logs and evidence, CloudFront CDN.
-* **CI/CD:** GitHub Actions for automated deployment.
-* **Monitoring:** CloudWatch (free tier).
-* **Security:** Route 53, WAF (cost-optimized rules to prevent API abuse), IAM Roles.
+#### Proposed Solution
 
-**Key Features**
-* **Single Sign-On** (Google, Microsoft 365) for admins and contributors.
-* **Detailed RBAC** (Admin, Moderator, API Consumer, Public User).
-* **Real-time lookup API** for domains, emails, and phone numbers.
-* **Approval workflows** for user-submitted scam reports to prevent false positives.
-* **Web portal** (Next.js) for public search and crowdsourced reporting.
+To solve the growing online scam issues and the lack of a reliable verification system, AnTiScaQ proposes a platform based on a **Hybrid Cloud-Native** architecture with the following main directions:
+
+- **Automated risk detection:** Multi-source analysis (phone, domain, URL, email content) combining rule-based and AI to detect early scam signs.
+
+- **AI Contextual Analysis:** Using Amazon Bedrock to understand content and provide clear explanations of risk levels, helping users make decisions easily.
+
+- **Leveraging community power:** Building a reporting and reputation scoring system based on user contributions, keeping data updated and reflecting reality.
+
+- **Cost & Scalability Optimization:** Applying a Hybrid architecture:
+  - Elastic Beanstalk (Docker) for the main backend 
+  - Lambda for AI & flexible processing 
+  → Reduces costs compared to traditional enterprise systems.
+
+- **AWS Ecosystem Integration:** Using Cognito, RDS, DynamoDB, S3, CloudFront, WAF… to ensure security, performance, and scalability.
+
+- **Simple User Experience:** Providing a single platform replacing manual searches, enabling fast and accurate checks.
 
 **Benefits**
-* Save **70%** of manual checking and data aggregation time.
-* Reduce **90%** of false positive threat classifications.
-* Cost only **below $50/month** for initial scale (90% cheaper than commercial Threat Intel feeds).
-* **In-house development** - no external data licensing or outsourcing costs.
+- Early detection of scam signs from multiple data sources (phone, domain, content).
+- Provide clear, easy-to-understand risk alerts.
+- Save time through automated checking.
+- Leverage community data to increase accuracy.
+- Protect users while browsing the web.
+- Raise awareness and scam prevention skills.
+- Improve security: Through continuous monitoring and real-time alerts.
 
 ## 3. Solution Architecture
 
+![ConnectPrivate](/AWS_Intern-Report/images/aws_architecture.drawio.png?width=60rem) 
+
 **AWS Services Used**
-* **AWS Lambda:** Backend API logic (Node.js 20.x) & automated web scrapers (Python).
-* **API Gateway:** REST API endpoints, request validation, rate limiting.
-* **Amazon DynamoDB:** NoSQL database (on-demand billing) for threat records.
-* **AWS Cognito:** Authentication, SSO, API Keys, JWT tokens.
-* **Amazon S3:** Raw data storage (scraping logs, screenshot evidence).
-* **CloudFront:** CDN for static Next.js assets and S3.
-* **Route 53:** DNS management.
-* **AWS WAF** (optional Phase 2): API protection against botnets.
-* **CloudWatch:** Logs, monitoring (free tier).
-* **Secrets Manager:** API keys for third-party integrations and proxy credentials.
 
-**Component Design**
-* **Authentication Layer:** Cognito User Pools with JWT (RS256); Lambda authorizer for API Gateway to validate API keys.
-* **API Layer:** AWS Lambda functions deployed via GitHub Actions; API Gateway REST API with rate limiting (e.g., 10 requests/second per free tier user).
-* **Business Logic (Lambda Functions):** * Threat lookups (Read from DynamoDB/Cache).
-    * Data Aggregation (Python scrapers pulling from public blacklists).
-    * Report management (CRUD for user-submitted scams).
-    * Email notifications (SES free tier for threat alerts).
-* **Data Layer - DynamoDB Tables:**
-    * `Users` - GSI on email
-    * `ThreatIntel` - GSI on `indicator_type` (phone/email/domain) + `risk_score`
-    * `ScamReports` - GSI on `target_indicator` + `date`
-    * `ScrapingLogs` - GSI on `source` + `status`
-* **Storage Layer:** S3 Standard for evidence (<30 days); S3 Lifecycle → Glacier Deep Archive (>90 days) for historical logs.
-* **Frontend:** Next.js 14 (React 18) + TypeScript - Static export; Material-UI components; Hosted on CloudFront + S3.
-* **CI/CD Pipeline:** GitHub Actions workflow to build Lambda packages, deploy via AWS CLI, and sync frontend to S3.
+| AWS Service | Main Function |
+| :--- | :--- |
+| **AWS Elastic Beanstalk** | Deploy and manage the backend application (Spring Boot) as Docker containers |
+| **Amazon RDS for MySQL** | Relational database, storing structured data (user, report, domain, history, ...) |
+| **AWS Lambda** | Process serverless tasks (AI chatbot, content analysis, asynchronous processing) |
+| **Amazon API Gateway** | Manage and expose APIs, handle request routing, validation, and endpoint security |
+| **Amazon DynamoDB** | NoSQL database, storing temporary/real-time data (OTP) |
+| **AWS Cognito** | User authentication and authorization (Authentication & Authorization, supports Google SSO) |
+| **Amazon S3** | File storage (images, documents, static assets) |
+| **Amazon CloudFront** | CDN for content delivery (frontend, files from S3), reducing latency and speeding up load times |
+| **Amazon Route 53** | DNS management, mapping domains to the system |
+| **AWS WAF** | Protect APIs from attacks (rate limiting, anti-bot, anti-abuse) |
+| **Amazon CloudWatch** | System monitoring, logs, metrics, and alerts |
+| **Amazon SNS** | Send notifications (email, SMS) to the system and users |
+| **Amazon Bedrock** | Provide AI/LLM for chatbot and scam content analysis |
+| **AWS Secrets Manager** | Manage sensitive security information (API keys, credentials) |
+| **AWS CodePipeline** | Automate CI/CD pipeline (build → test → deploy) |
+| **AWS CodeBuild** | Build and test service in the CI/CD pipeline |
 
-## 4. Technical Implementation
+#### Component Design
 
-**Phase 1: MVP Core (Month 1-2)**
-* **Month 1:** AWS setup (Cognito, DynamoDB, S3, Lambda). Authentication UI. Threat CRUD APIs and admin dashboard.
-* **Month 2:** Public lookup APIs. Next.js web portal MVP. Manual report submission workflow. Basic trending dashboard.
+**1. Data Collection & Detection Layer**
+* **Data Sources:** Collect data from multiple sources including user input (phone, domain, email content), community data (reports, feedback), and external APIs (WHOIS domain).
+* **Ingestion:** The backend (Spring Boot on Elastic Beanstalk) receives and standardizes data, automatically triggering analysis tasks when new data arrives.
 
-**Phase 2: Automation & Data Aggregation (Month 3-4)**
-* **Month 3:** Python web scraping engine (Lambda) to automate blacklist data collection. Reputation scoring logic.
-* **Month 4:** Email notifications (SES) for subscribed alerts. Audit logging. Evidence upload to S3.
+**2. Event Processing Layer**
+* **Routing & Logic:** API Gateway receives client requests and routes them to the backend, which handles validation, business logic, and request classification.
+* **Async & Events:** Asynchronous tasks (AI analysis, content processing) are pushed to AWS Lambda, with event-driven processing handled via SNS (notifications) or internal services.
 
-**Phase 3: Advanced Features (Month 5-6)**
-* AI/ML Risk Scoring module (predictive analysis based on patterns).
-* Advanced threat analytics dashboard.
-* Security hardening (WAF integration).
-* Load testing for high-volume lookup queries.
-* Public API documentation launch.
+**3. Orchestration & Business Logic Layer**
+* **Core Orchestration:** The backend acts as the main orchestrator, seamlessly managing the processing flow from input → analysis → result delivery.
+* **Processing Tasks:** It aggregates data from multiple sources (RDS, DynamoDB, external APIs), calls Lambda to analyze content/violations via AI, calculates risk scores, and classifies risk levels.
 
-**Tech Stack**
-* **Backend:** Node.js 20.x, Python 3.11 (Scraping), AWS Lambda.
-* **Database:** DynamoDB (single-table design pattern).
-* **Frontend:** Next.js 14, React 18, TypeScript, Material-UI v5.
-* **Infrastructure as Code:** AWS SAM / Serverless Framework.
-* **CI/CD:** GitHub Actions.
+**4. Data Processing & Storage Layer**
+* **Data Storage:** Utilize Amazon RDS (MySQL) for primary data (user, report, domain, history), Amazon DynamoDB for fast data (OTP), and Amazon S3 for file storage (images, documents).
+* **Processing Support:** AWS Lambda supports supplementary data processing, including light ETL and preprocessing for AI.
+
+**5. AI & Analysis Layer**
+* **AI Capabilities:** Amazon Bedrock provides robust AI models to analyze email content, phone numbers, and domain names, explain risk levels, and power a chatbot for scam prevention consulting.
+* **Integration:** AWS Lambda acts as the secure intermediary to call Bedrock and process its analytical results.
+
+**6. Presentation & User Interaction Layer**
+* **User Interface:** The Frontend (React) is deployed via S3 + CloudFront, communicating securely with the backend via API Gateway.
+* **Access Control:** User authentication and sessions are managed via AWS Cognito (JWT).
+
+**7. Security & Monitoring Layer**
+* **Security & Access:** Implement Authentication via AWS Cognito (SSO, JWT) and manage overall security using AWS WAF, IAM, ACM (SSL), and Route 53 (DNS).
+* **Operations:** System monitoring is handled by Amazon CloudWatch (logs, metrics) and SNS (alerts), while credentials are encrypted and managed by AWS Secrets Manager.
+
+## 4. Technical Deployment Roadmap
+
+**Step 1: Infrastructure & Platform Setup**
+* **Network & Security:** Setup VPC (Public Subnet for LB/Internet, Private Subnet for RDS), configure Internet Gateway, and set up Security Groups (Beanstalk: HTTP/HTTPS, RDS: Backend access only).
+* **Core Deployment:** Deploy Spring Boot Backend as Docker containers on AWS Elastic Beanstalk. Provision Amazon RDS (MySQL) for main data, DynamoDB for OTP, and S3 for file/image storage.
+* **Base Services:** Setup AWS Cognito (Authentication + Google SSO), build basic APIs (Auth, Threat CRUD, Report), and build Admin Dashboard APIs.
+
+**Step 2: APIs & Web Portal MVP**
+* **Public Services:** Build Public Lookup APIs (Check phone, domain, content).
+* **Frontend:** Deploy React.js application on Amazon S3 + CloudFront.
+* **Features & Routing:** Build scam reporting workflow, basic statistical dashboard, and configure Route 53 for domain mapping.
+
+**Step 3: Data Processing & Core Logic**
+* **Logic Systems:** Integrate WHOIS API for domain checking. Build systems for Risk scoring (rule-based + community) and Risk level classification.
+* **AI & Async:** Integrate AWS Lambda + Amazon Bedrock to handle Email content analysis, Consulting Chatbot, and Asynchronous processing.
+
+**Step 4: System Finalization & Advanced Frontend**
+* **UI/UX Refinement:** Refine the Detailed Dashboard and Check history interfaces.
+* **Integrations:** Develop and integrate a Browser extension for real-time website warnings.
+* **Enhancements:** Optimize API responses and overall user experience.
+
+**Step 5: Testing, Security & Optimization**
+* **Testing:** Execute Unit tests, Integration tests, and Load testing.
+* **Security:** Implement AWS WAF to prevent API abuse, configure IAM Roles for strict authorization, and provision AWS ACM for SSL/TLS certificates.
+* **Optimization:** Enable Auto Scaling for Elastic Beanstalk, configure CloudFront caching, and perform Query optimization on RDS.
+
+#### Technical Requirements
+
+| Component | Description |
+| :--- | :--- |
+| **Frontend & Dashboard** | The interface uses the Next.js framework, hosted statically on Amazon S3 and distributed globally at high speed via the CloudFront CDN network. |
+| **Backend & Logic Processing** | Core logic is programmed in Python 3.12 running on the AWS Lambda platform and routed through Amazon API Gateway. |
+| **Data & Storage** | System data uses Amazon DynamoDB to ensure lightning-fast query speeds, combined with Amazon S3 to securely store evidence files. |
+| **Infrastructure (IaC)** | All AWS infrastructure resources are defined and managed entirely as code via the AWS Cloud Development Kit (CDK). |
+| **Security & Monitoring** | The system applies AWS Cognito multi-factor authentication, strictly manages permissions via IAM, and is continuously monitored and logged by Amazon CloudWatch. |
+| **CI/CD** | AWS CodePipeline (automated pipeline), AWS CodeBuild (build & test) |
 
 ## 5. Roadmap & Milestones
 
-| Month | Phase | Key Deliverables |
-| :--- | :--- | :--- |
-| 1-2 | MVP Core | Auth, Threat Database, Public Search Portal, Manual Reporting |
-| 3-4 | Automation | Python Scraping Engine, API Keys, Alert Notifications |
-| 5-6 | Advanced & Launch | AI Scoring, Advanced Analytics, Security Hardening, API Go-Live |
+| Week | Phase | Key Activities | Deliverables |
+| :--- | :--- | :--- | :--- |
+| **1-2** | Platform (MVP Core) | AWS setup (VPC, Subnet, Security Group), deploy Beanstalk + RDS, configure Cognito, build basic APIs | Auth, Threat API, Report completed, backend successfully deployed |
+| **3-4** | APIs & Automation | Build lookup APIs (phone, domain, URL), integrate WHOIS, configure notifications (SNS), setup CI/CD | Lookup APIs operational, Web portal MVP, CI/CD pipeline |
+| **5-6** | AI & Advanced | Integrate Lambda + Bedrock, content analysis, AI risk scoring, asynchronous processing | AI Chatbot, content analysis, advanced risk scoring |
+| **7-8** | Dashboard & Integration | Build admin dashboard, statistics API, refine frontend, extension integration | Admin dashboard, completed interface |
+| **9-10** | System Optimization | Performance optimization (Auto Scaling, CloudFront), database query optimization, API improvements | Stable system, improved performance |
+| **11** | Security | Configure WAF, IAM, SSL (ACM), logging with CloudWatch, security testing | Fully secured system |
+| **12** | Testing | Unit test, integration test, load test, end-to-end testing, bug fixing | Test reports, stable system |
+| **13** | Handover | Write documentation (APIs, architecture), system demo, GitHub standardization | Complete documentation, demo, project handover |
 
 ## 6. Budget Estimation
 
-**Monthly AWS Costs (Phase 1: ~5,000 API lookups/day)**
-*Serverless Architecture - Cost Optimized*
+**Monthly AWS Costs**
+*Serverless Architecture - Cost Optimization*
 
-* **AWS Lambda:** 150K invocations -> $0 (Within free tier)
-* **API Gateway:** 150K requests -> $0.15
-* **DynamoDB:** On-demand, 5GB storage, 1M reads, 500K writes -> $3.50
-* **S3 Storage & Requests:** 20GB data -> $0.60
-* **S3 Glacier (archive):** 10GB logs -> $0.10
-* **CloudFront:** 10GB transfer, 200K requests -> $1.00
-* **Route 53:** 1 hosted zone -> $0.90
-* **CloudWatch & Cognito:** -> $0 (Within free tier)
-* **Secrets Manager & SES:** -> $0.85
-* **Data Transfer & Contingency:** -> $1.20
-* **TOTAL AWS/MONTH (Phase 1): ~$8.30**
+| Service | Configuration | Cost/Month |
+| :--- | :--- | :--- |
+| **AWS Lambda** | 15K invocations, 512MB, 4000ms avg | $0 *(Free tier)* |
+↳ Free tier: 1M requests + 400K GB-seconds/month
+| **API Gateway** | 15K REST API requests | $0 |
+| **DynamoDB** | On-demand, 5GB storage, 1M reads, 0.5M write | $0.5 |
+| **S3 Vector Bucket** | 2GB data, PUT/GET | $0.60 |
+| **Bedrock** | Model: Claude Haiku 3, Input Token: 6GB, Output Token: 4GB | $6.5 |
+| **CloudFront** | 10GB transfer, 200K requests | $1.00 |
+| **Route 53** | 1 hosted zone | $0.90 |
+| **CloudWatch**| Basic logs and Auth | $0 *(Free tier)* |
+| **Secrets Manager**| Proxy key management | $0.4 |
+| **Elastic Beanstalk (EC2)** | t3.micro | $11.68 |
+| **Cognito** | 1000 MAU | $0 |
+↳ Free tier: < 50K MAU
+| **RDS my SQL** | Buffer | $5.85 |
+| **WAF** | Buffer | $0 |
+| | **TOTAL AWS/MONTH** | **~$27.43** |
 
-**Costs When Scaling to Phase 2 (Automation + Caching)**
-* **Lambda + API Gateway:** 300K requests -> $0.30
-* **DynamoDB:** 10GB, 2M reads -> $9.50
-* **S3 + CloudFront:** 40GB storage -> $2.50
-* **ElastiCache Redis (optional):** cache.t3.micro -> $12.50
-* **AWS WAF (optional):** Basic protection -> $7.00
-* **Misc + Contingency:** -> $5.60
-* **TOTAL (Phase 2, with cache/WAF): ~$37.40** *(~$17.90 without cache/WAF)*
-
-**Costs When Scaling to Phase 3 (High Volume APIs)**
-* **TOTAL (Phase 3 - 750k+ lookups, larger cache, WAF rules): ~$87.50 / month**
-
-**ROI Analysis (In-house project)**
-* **Initial Investment:** Setup & Dev tools (~$42) + AWS Dev environment (~$30) = **~$72**
-* **First Year Operating Costs:** Phase 1 (6 months) + Phase 2 (6 months) = **~$210**
-* **Total Year 1 Cost:** **~$282**
-* **Savings:** Commercial Threat Intel APIs easily cost $10,000 - $30,000/year. Building this aggregator in-house saves thousands of dollars annually while providing a proprietary dataset.
 
 ## 7. Risk Assessment & Mitigation
 
-| Risk | Impact | Probability | Mitigation |
-| :--- | :--- | :--- | :--- |
-| **Scraper IP Blocking** | High | High | Use rotating proxy pools (Secrets Manager) and randomize scraping intervals. |
-| **False Positives** | High | Medium | Implement multi-source validation and manual approval workflows for high-profile domains. |
-| **DynamoDB costs spike** | Medium | Low | On-demand billing, CloudWatch alarms at $30 threshold. Batch writes via SQS. |
-| **Lambda time limits** | Low | Medium | Break heavy Python scraping jobs into smaller chunks; optimize bundle sizes. |
+| Risk | Impact | Mitigation |
+| :--- | :--- | :--- |
+| **Backend & RDS Overload (Spike traffic)** | High | Configure Auto Scaling for Elastic Beanstalk based on CPU/Network. Use Connection Pooling (like HikariCP) for Spring Boot to avoid crashing RDS. |
+| **Sudden Spike in Amazon Bedrock (AI) Costs** | High | Set strict Rate Limiting at API Gateway/WAF. Limit `max_tokens` for the model. Cache duplicate content analysis results to avoid calling the AI API repeatedly. |
+| **False Positives (Incorrect community reports)** | High | Apply a reputation scoring system (Trust score) for users. Require cross-verification from multiple sources (WHOIS, Rule-based) before AI issues official warnings. |
+| **Scraper / WHOIS API IP Block or Rate Limit** | Medium | Use rotating proxy pools (proxy info securely stored in AWS Secrets Manager) and establish a Retry mechanism (Exponential Backoff) when calling external APIs. |
+| **Lambda Timeout during AI/Async processing** | Low | Decouple heavy Bedrock calls from the synchronous API flow. Communicate via Amazon SNS for Lambda to process in the background (async) and return results later. Optimize Lambda bundle size. |
+
+
+#### Best practices for Cost & Performance Optimization
+
+* **Elastic Beanstalk & RDS:** With a `t3.micro` instance, you need to optimize MySQL queries (proper indexing, avoid N+1 issues). Limit the number of connections from Spring Boot to RDS to optimize memory.
+* **Lambda & Bedrock:** Keep the deployment file (bundle size) small. Initialize connections (HTTP clients, DB connections) outside the *handler function* to leverage reuse mechanisms, avoiding *cold starts*. Closely monitor Bedrock costs via AWS Budgets.
+* **DynamoDB:** Since you use DynamoDB primarily to store OTPs, configure the **TTL (Time to Live)** feature so the system automatically deletes expired OTP codes, saving maximum storage capacity. Using On-demand billing is reasonable for the MVP.
+* **S3 & CloudFront:** Set up *Lifecycle policies* on S3 to automatically transition older evidence images or log files to cheaper storage classes (Glacier). Enable caching on CloudFront to reduce the number of direct requests to S3.
+* **API Gateway & WAF:** Enable Response caching (30-60s) for public lookup APIs (Phone, Domain check) to reduce the backend load. It is mandatory to set up Throttling and WAF Rate-based rules to block bot spam or DDoS attacks from exhausting resources.
 
 ## 8. Expected Outcomes
 
-**Technical Improvements**
-* **90%** of OSINT data collection automated via Python scrapers.
-* Real-time threat dashboard with data < 5 seconds old.
-* **< 1s** API lookup response time (P95) with DynamoDB/Redis.
-* Infinite scalability during widespread phishing campaigns (traffic spikes).
+#### Technical Improvements
+* **Automation & High Speed:** Completely replaces the cumbersome manual lookup process. The system detects, analyzes, and responds to results almost instantly (real-time).
+* **AI Breakthroughs:** Successfully applies Amazon Bedrock to "understand" the complex context of phishing content, vastly outperforming traditional rule-based keyword filters.
+* **Flexible & Resilient Infrastructure:** The Hybrid Cloud-Native architecture (combining Beanstalk and Lambda) allows the system to seamlessly Auto Scale during traffic spikes without crashing or creating bottlenecks.
+* **High Accuracy:** Minimizes False Positives thanks to multi-source cross-verification mechanisms and a community reputation scoring system.
 
-**Business Value**
-* Security team reduces **60%** manual investigation workload.
-* Community protection increases with easy self-service lookups.
-* **100%** audit trail for reported indicators.
-* Cost savings of **$10,000+/year** vs commercial alternatives.
-* Operating cost only **$8-12/month** for initial scale.
+#### Business Value
+* **Breakthrough Cost Optimization:** Operates the entire system at an ultra-low cost (under $30/month), creating an absolute competitive advantage over purchasing expensive APIs from enterprise Threat Intel platforms.
+* **Practical User Protection:** Promptly prevents financial damage and personal data leaks through clear, easy-to-understand warnings.
+* **Time-Saving:** Saves thousands of lookup hours for the community thanks to an "All-in-one" checking platform.
+* **Self-Sustaining Ecosystem:** Attracts and builds an active community of users reporting threats, helping data to be continuously enriched automatically with zero collection costs.
 
-**Long-term Vision**
-* Scale to handle millions of queries per month.
-* Integrate AI/ML (AWS Bedrock) for predictive domain generation algorithm (DGA) detection.
-* Potential SaaS product offering API keys to B2B clients.
+#### Long-term Vision 
+* **Comprehensive Security Ecosystem:** Expands coverage from the Web Portal to Browser Extensions and AI Chatbots, protecting users at every touchpoint in cyberspace.
+* **Exclusive Threat Intelligence Database:** Owns a highly specific and fastest-updating scam identification database, opening up B2B commercialization opportunities by providing APIs back to financial institutions and banks.
+* **Predictive Artificial Intelligence:** Upgrades the AI model from "Detection" to "Prediction", capable of identifying sophisticated phishing campaigns from the moment they begin to form.
 
 ## 9. Conclusion
 
-The **AnTiScaQ** Platform with **Serverless Architecture** provides:
-* ✅ **Ultra-low cost:** Only $8-12/month for Phase 1.
-* ✅ **No upfront cost:** ~$72 setup, leveraging existing in-house team.
-* ✅ **Massive ROI:** Eliminates the need for expensive third-party Threat Intel feeds.
-* ✅ **Scalable:** Pay-as-you-go, automatically handles massive traffic spikes when new scams go viral.
-* ✅ **Zero maintenance:** Serverless = no server management.
-* ✅ **Fast development:** 6 months MVP → production.
+The **AnTiScaQ** system with a **Hybrid Cloud-Native** architecture provides:
 
-This is an **ideal solution** for building a robust, high-performance cybersecurity tool without massive upfront infrastructure investments.
+* **Ultra-Optimized Costs:** Extremely economical operation, only about **~$27.43/month** for the entire system.
+* **No upfront cost:** Maximizes AWS Free Tier and in-house team resources, requiring absolutely zero initial hardware investment.
+* **Massive ROI:** Completely eliminates the dependence and high costs of purchasing APIs from enterprise Threat Intel platforms.
+* **Scalable:** Flexible Auto Scaling capabilities (Beanstalk) combined with Serverless (Lambda), seamlessly handling traffic explosions caused by phishing campaigns.
+* **Operational Optimization:** Leverages the power of Managed Services and Serverless from the AWS ecosystem, minimizing the server administration burden.
+* **Fast development:** Rapid deployment roadmap, taking only about **13 weeks (~3 months)** from building to finalizing, testing, and handover.
+
+This is an **ideal, groundbreaking, and practical** solution to build an automated cybersecurity alert platform, harnessing community power and AI without requiring a massive infrastructure budget.
