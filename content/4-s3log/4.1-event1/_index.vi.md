@@ -18,7 +18,7 @@ Cập nhật những thông tin mới nhất từ AWS re:Invent 2025 ngay tại 
 
 Các lập trình viên, lãnh đạo doanh nghiệp và chuyên gia kỹ thuật đã cùng nhau hội tụ trong một ngày trọn vẹn với các workshop thực hành, phiên thảo luận kỹ thuật và giao lưu cộng đồng. Sự kiện giúp trang bị kiến thức và mở rộng kết nối để thúc đẩy các dự án, triển khai chiến lược AI và tạo ra sự đổi mới cùng AWS.
 
-![Networking Session](/AWS_Intern-Report/images/z7672271327499_b4b87423defc5349a8fb40e04a1d16d5.jpg)
+![Networking Session](/AWS_Intern-Report/images/z7692652025613_df460d2702d161108e46423bf3932f9a.jpg)
 
 ---
 

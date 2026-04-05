@@ -18,7 +18,7 @@ Get the latest updates from AWS re:Invent 2025 right at our local shores! The Ho
 
 Builders, business leaders, and technical professionals gathered for a full day of hands-on workshops, technical sessions, and networking. The event equipped the community with the knowledge and connections to accelerate projects, explore strategic AI implementations, and drive innovation with AWS.
 
-![Networking Session](/AWS_Intern-Report/images/z7672271327499_b4b87423defc5349a8fb40e04a1d16d5.jpg)
+![Networking Session](/AWS_Intern-Report/images/z7692652025613_df460d2702d161108e46423bf3932f9a.jpg)
 
 ---
 
