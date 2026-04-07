@@ -18,18 +18,25 @@ In the root directory of application, create a file named Dockerfile
 Next, we have to build an jar file, using this command: 
 - mvn clean package -DskipTests
 
-You can see it in **target/**:
+You can see the jar file in **target/**:
 ![Deploy Session](/AWS_Intern-Report/images/buildjarfile.png)
 
 
-Then, we can test our app at local with commands:
+Then, we can test the app at local before deploy with commands:
 - docker build -t my-app .
 - docker run -p 8080:8080 my-app
 
-Access **http://localhost:8080** to see your application
+Access **http://localhost:8080** to view your application
 
-## Build & Push on Amazon ECR
-First, we will create a repository to host and manage Docker container images
-Get into the AWS Console, search for ECR:
 
-![Deploy Session](/AWS_Intern-Report/images/searchecr.png)
+
+
+
+
+
+
+
+
+
+
+
