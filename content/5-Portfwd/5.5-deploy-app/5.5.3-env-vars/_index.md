@@ -31,7 +31,7 @@ For configuration, choose as the images demonstrate
 
 ![Deploy Session](/AWS_Intern-Report/images/configelb3.png)
 
-Choose **Upload your code**, -> local file, upload file **Dockerrun.aws.json.zip** that we have zipped before
+Choose **Upload your code**, -> Local file, upload file **Dockerrun.aws.json.zip** that we have zipped before
 
 ![Deploy Session](/AWS_Intern-Report/images/configelb4.png)
 

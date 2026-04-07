@@ -11,7 +11,7 @@ Get into the AWS Console, search for ECR:
 
 ![Deploy Session](/AWS_Intern-Report/images/searchecr.png)
 
-You can see the console of ECR, click create
+You can see the console of ECR, click **Create**
 
 ![Deploy Session](/AWS_Intern-Report/images/createecr.png)
 
@@ -25,7 +25,7 @@ For Encrytion configuration, choose **AES-256**, then click create repository
 
 After created, we can see new private repository on console, with an **URI**
 
-# Login Docker into AWS
+## Login Docker into AWS
 In order to login docker into aws, we have to an iam user with attach policy **AmazonEC2ContainerRegistryFullAccess**
 
 ![Deploy Session](/AWS_Intern-Report/images/searchiam.png)
