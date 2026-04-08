@@ -7,9 +7,9 @@ pre: " <b> 4.7.1. </b> "
 
 ## Monitor with SNS & CloudWatch
 
-## Create SNS Topic:
+### Create SNS Topic:
 
-In AWS Management console, search for sns:
+In AWS Management console, search for **SNS**:
 
 ![Monitor Session](/AWS_Intern-Report/images/searchsns.png)
 
@@ -19,7 +19,7 @@ Choose type **Standard**, type name **Application-alerts**, click **Create topic
 
 ![Monitor Session](/AWS_Intern-Report/images/configsns1.png)
 
-## Create Subcription
+### Create Subcription
 
 Click **Create subscription**, select **Protocol** is Email, type in your email to receive notification from SNS
 
@@ -29,7 +29,7 @@ After created, please go to your mail to confirm your email.
 
 ![Monitor Session](/AWS_Intern-Report/images/confirmsns.png)
 
-## Create CPU Alarm
+### Create CPU Alarm
 
 Go to **CloudWatch** > **Alarms** > **Create alarm**
 

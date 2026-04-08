@@ -7,7 +7,7 @@ pre: " <b> 4.8.1. </b> "
 
 ## Monitor với SNS & CloudWatch
 
-## Tạo SNS Topic:
+### Tạo SNS Topic:
 
 Trong AWS Management Console, tìm **SNS**:
 
@@ -19,7 +19,7 @@ Chọn loại **Standard**, nhập tên **Application-alerts**, sau đó nhấn 
 
 ![Monitor Session](/AWS_Intern-Report/images/configsns1.png)
 
-## Tạo Subscription
+### Tạo Subscription
 
 Chọn **Create subscription**, tại **Protocol** chọn **Email**, nhập email của bạn để nhận thông báo từ SNS
 
@@ -29,7 +29,7 @@ Sau khi tạo xong, vào mail để xác nhận email.
 
 ![Monitor Session](/AWS_Intern-Report/images/confirmsns.png)
 
-## Tạo CPU Alarm
+### Tạo CPU Alarm
 
 Truy cập **CloudWatch** > **Alarms** > **Create alarm**
 
