@@ -167,7 +167,7 @@ To solve the growing online scam issues and the lack of a reliable verification 
 | **Amazon DynamoDB** | On-demand, 5GB storage, 1M reads, 0.5M write | $0.5 |
 | **Amazon S3 Vectors** | 2GB data, PUT/GET | $0.60 |
 | **Amazon Bedrock** | Model: Claude Haiku 3, Input Token: 6GB, Output Token: 4GB | $6.5 |
-| **Amazon CloudFront** | 10GB transfer, 200K requests | $1.00 |
+| **Amazon CloudFront** | 100GB transfer, 1M requests | $0 |
 | **Amazon Route 53** | 1 hosted zone | $0.90 |
 | **Amazon CloudWatch**| Basic logs and Auth | $0 *(Free tier)* |
 | **AWS Secrets Manager**| Proxy key management | $0.4 |
@@ -175,7 +175,7 @@ To solve the growing online scam issues and the lack of a reliable verification 
 | **Amazon Cognito** | 1000 MAU | $0 |
 ↳ Free tier: < 50K MAU
 | **Amazon RDS for MySQL** | instance db.t4g.micro, gp3 | $21.01 |
-| | **TOTAL AWS/MONTH** | **~$42.59** |
+| | **TOTAL AWS/MONTH** | **~$41.59** |
 
 
 ## 7. Risk Assessment & Mitigation

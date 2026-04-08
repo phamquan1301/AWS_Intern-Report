@@ -167,7 +167,7 @@ pre : " <b> 2. </b> "
 | **Amazon DynamoDB** | On-demand, 5GB storage, 1M reads, 0.5M write | $0.5 |
 | **Amazon S3 Vectors** | 2GB data, PUT/GET | $0.60 |
 | **Amazon Bedrock** | Model: Claude Haiku 3, Input Token: 6GB, Output Token: 4GB | $6.5 |
-| **Amazon CloudFront** | 10GB transfer, 200K requests | $1.00 |
+| **Amazon CloudFront** | 100GB transfer, 1M requests | $0 |
 | **Amazon Route 53** | 1 hosted zone | $0.90 |
 | **Amazon CloudWatch**| Log và Auth cơ bản | $0 *(Free tier)* |
 | **AWS Secrets Manager**| Quản lý key proxy | $0.4 |
@@ -175,7 +175,7 @@ pre : " <b> 2. </b> "
 | **Amazon Cognito** | 1000 MAU | $0 |
 ↳ Free tier: < 50K MAU
 | **Amazon RDS for MySQL** | instance db.t4g.micro, gp3 | $21.01 |
-| | **TỔNG AWS/THÁNG** | **~$42.59** |
+| | **TỔNG AWS/THÁNG** | **~$41.59** |
 
 
 ## 7. Đánh giá rủi ro & Giảm thiểu
