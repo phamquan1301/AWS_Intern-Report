@@ -6,7 +6,7 @@ pre: " <b> 4.6.1. </b> "
 ---
 
 ## Configure S3 bucket for frontend
-First, run this command to build your React project to static files: **npm run build**
+First, run this command to build your React project to static files: **npm run build**.
 A **.dist** folder will appear, containing all the deploy files (HTML, CSS, JS).
 
 Go to AWS Management Console, search for **S3**, click **Create Bucket**
